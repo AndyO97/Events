@@ -28,9 +28,9 @@ function getEventsFetch(){
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
                 console.log(responseJSON[i].pictures.length);
-                //for(let j=0; i<responseJSON[i].pictures.length; j++){
-                  //  results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j} of event ${i}"/> </div>`;
-                //}
+                for(let j=0; i<responseJSON[i].pictures.length; j++){
+                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j} of event ${i}"/>`;
+                }
                 console.log("For Tags:")
                 console.log(responseJSON[i].tags.length);
                 results.innerHTML += `<div> Tags: ${responseJSON[i].tags} </div>`;

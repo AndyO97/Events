@@ -41,12 +41,10 @@ app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
     Events
         .getEventsByTitle( title )
         .then( event => {
-
             if( !event ){
                 res.statusMessage = `There are no events with the provided 'title=${title}'.`;
                 return res.status( 404 ).end();
             }
-
             return res.status( 200 ).json( event );
         })
         .catch( err => {
