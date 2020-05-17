@@ -21,9 +21,10 @@ function getEventsFetch(){
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
+            console.log(responseJSON.length);
             for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML = "";
-                results.innerHTML += `<div> Event: </div>`;
+                results.innerHTML += `<div> Event ${i+1}: </div>`;
                 results.innerHTML += `<div> Title: ${responseJSON[i].title} </div>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
                 results.innerHTML += `<div> Tags: ${responseJSON[i].tags} </div>`;
