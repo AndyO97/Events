@@ -8,8 +8,8 @@ function getEventsFetchTitle( title ){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`
-            //'Content-Type' : 'application/json'
+            Authorization : `Bearer ${API_TOKEN}`,
+            'Content-Type' : 'application/json'
         },
 
     }
@@ -46,8 +46,8 @@ function getEventsFetchTag( tag ){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`
-            //'Content-Type' : 'application/json'
+            Authorization : `Bearer ${API_TOKEN}`,
+            'Content-Type' : 'application/json'
         },
 
     }
