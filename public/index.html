@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Event Manager</title>
+        <link href="./css/index.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <h1>Search an Event:</h1>
+        <form class="event-form">
+            <label>
+                Keyword
+            </label>
+             <input type="text" id="keyword" />
+            <button id="submit-btn" type="submit">
+                Search
+            </button>
+        </form>
+        <h1>Advanced search:</h1>
+        <form class="title-event-form">
+            <label for="eventTitle">
+                Title:
+            </label>
+            <input type="text" id="eventTitle" />
+            <button type="submit">
+                Search
+            </button>
+        </form>    
+        <form class="tag-event-form">
+            <label for="eventTag">
+                Tag:
+            </label>
+            <input type="text" id="eventTag" />
+            <button type="submit">
+                Search
+            </button>
+        </form>
+        <form class="date-event-form">
+            <label for="eventDate">
+                Date(day/month/year):
+            </label>
+            <input type="text" id="eventDay" />
+            <input type="text" id="eventMonth" />
+            <input type="text" id="eventYear" />
+            <button type="submit">
+                Search
+            </button>
+        </form>
+        <form class="proximity-event-form">
+            <label for="eventProximity">
+                Distance (in meters)
+             </label>
+             <input type="number" id="eventDistance" />
+             <button type="submit">
+                Search
+            </button>
+        </form>
+
+        <section class="results">
+
+        </section>
+        <script src="./js/index.js"></script>
+    </body>
+</html>
