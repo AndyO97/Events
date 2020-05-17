@@ -29,7 +29,7 @@ function getEventsFetch(){
                 results.innerHTML += `<div> Tags: ${responseJSON[i].tags} </div>`;
                 results.innerHTML += `<div> Date: ${responseJSON[i].date} </div>`;
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
-                results.innerHTML += `<div> Participants: ${responseJSON[i].participants[0].username} </div>`;
+                //results.innerHTML += `<div> Participants: ${responseJSON[i].participants[0].username} </div>`;
             }
         })
         .catch( err => {
@@ -71,7 +71,7 @@ function getEventsFetchTitle( title ){
                 results.innerHTML += `<div> Tags: ${responseJSON[0].tags} </div>`;
                 results.innerHTML += `<div> Date: ${responseJSON[0].date} </div>`;
                 results.innerHTML += `<div> Creator: ${responseJSON[0].creator.username} </div>`;
-                results.innerHTML += `<div> Participants: ${responseJSON[0].participants[0].username} </div>`;
+                //results.innerHTML += `<div> Participants: ${responseJSON[0].participants[0].username} </div>`;
         })
         .catch( err => {
             console.log("Reached the catch");
@@ -109,7 +109,7 @@ function getEventsFetchTag( tag ){
                 results.innerHTML += `<div> Description: ${responseJSON[0].description} </div>`;
                 results.innerHTML += `<div> Date: ${responseJSON[0].date} </div>`;
                 results.innerHTML += `<div> Creator: ${responseJSON[0].creator.username} </div>`;
-                results.innerHTML += `<div> Participants: ${responseJSON[0].participants[0].username} </div>`;
+                //results.innerHTML += `<div> Participants: ${responseJSON[0].participants[0].username} </div>`;
         })
         .catch( err => {
             console.log("Reached the catch");
