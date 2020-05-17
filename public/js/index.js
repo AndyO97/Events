@@ -4,7 +4,7 @@ const API_TOKEN = '2abbf7c3-245b-404f-9473-ade729ed4653';
 function getEventsFetchTitle( title ){
     //let url = `http://localhost:8080/event-manager/events-by-title/${title}`;
     let url = `/event-manager/events-by-title/${title}`;
-
+    console.log(url);
     let settings = {
         method : 'GET',
         headers : {
@@ -25,6 +25,7 @@ function getEventsFetchTitle( title ){
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
+                console.log("Reached then")
                 results.innerHTML = "";
                 results.innerHTML += `<div> Event: </div>`;
                 results.innerHTML += `<div> Title: ${responseJSON[0].title} </div>`;
