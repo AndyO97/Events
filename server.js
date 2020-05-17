@@ -1,13 +1,13 @@
 const express = require( 'express' );
-const mongoose = require( 'mongoose' );
-const morgan = require( 'morgan' );
 const bodyParser = require( 'body-parser' );
+const morgan = require( 'morgan' );
+const mongoose = require( 'mongoose' );
 const validateToken = require('./middleware/validateToken.js');
 const cors = require( './middleware/cors' );
-const { DATABASE_URL, PORT } = require( './config' );
 const { Users } = require( './models/users-model' );
 const { Comments } = require( './models/comments-model' );
 const { Events } = require( './models/events-model' );
+const { DATABASE_URL, PORT } = require( './config' );
 
 
 const app = express();
@@ -344,7 +344,6 @@ app.listen( PORT, () =>{
     console.log( "This server is running on port 8080" );
 
     new Promise( ( resolve, reject ) => {
-
         const settings = {
             useNewUrlParser: true, 
             useUnifiedTopology: true, 
