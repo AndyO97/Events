@@ -82,9 +82,9 @@ function getEventsFetchTag( tag ){
 
 
 function watchGetEventsTitleForm(){
-    let bookmarksForm = document.querySelector( '.title-event-form' );
+    let eventsForm = document.querySelector( '.title-event-form' );
 
-    bookmarksForm.addEventListener( 'submit' , ( event ) => {
+    eventsForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
         let title = document.getElementById( 'eventTitle' ).value;
         
@@ -93,9 +93,9 @@ function watchGetEventsTitleForm(){
 }
 
 function watchGetEventsTagForm(){
-    let bookmarksForm = document.querySelector( '.tag-event-form' );
+    let eventsForm = document.querySelector( '.tag-event-form' );
 
-    bookmarksForm.addEventListener( 'submit' , ( event ) => {
+    eventsForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
         let tag = document.getElementById( 'eventTag' ).value;
         
