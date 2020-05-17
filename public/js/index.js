@@ -22,14 +22,18 @@ function getEventsFetch(){
         })
         .then( responseJSON => {
             console.log(responseJSON.length);
+            results.innerHTML = "";
             for(let i=0; i<responseJSON.length; i++){
-                results.innerHTML = "";
-                results.innerHTML += `<div> Event ${i+1}: </div>`;
-                results.innerHTML += `<div> Title: ${responseJSON[i].title} </div>`;
+                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
+                results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
+                for(let j=0; i<responseJSON[i].pictures.length; j++){
+                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j} of event ${i}"/> </div>`;
+                }
                 results.innerHTML += `<div> Tags: ${responseJSON[i].tags} </div>`;
                 results.innerHTML += `<div> Date: ${responseJSON[i].date} </div>`;
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
+                
                 //results.innerHTML += `<div> Participants: ${responseJSON[i].participants[0].username} </div>`;
             }
         })
@@ -52,7 +56,6 @@ function getEventsFetchTitle( title ){
     }
 
     let results = document.querySelector( '.results' );
-
     fetch( url, settings )
         .then( response => {
             console.log(response);
