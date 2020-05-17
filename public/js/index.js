@@ -2,7 +2,8 @@ const API_TOKEN = '2abbf7c3-245b-404f-9473-ade729ed4653';
 
 
 function getEventsFetchTitle( title ){
-    let url = `http://localhost:8080/event-manager/events-by-title/${title}`;
+    //let url = `http://localhost:8080/event-manager/events-by-title/${title}`;
+    let url = `/event-manager/events-by-title/${title}`;
 
     let settings = {
         method : 'GET',
@@ -39,7 +40,8 @@ function getEventsFetchTitle( title ){
 }
 
 function getEventsFetchTag( tag ){
-    let url = `http://localhost:8080/event-manager/events-by-title/${tag}`;
+    //let url = `http://localhost:8080/event-manager/events-by-title/${tag}`;
+    let url = `/event-manager/events-by-title/${tag}`;
 
     let settings = {
         method : 'GET',
