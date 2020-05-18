@@ -178,9 +178,8 @@ function getEventsFetchTitle(title){
         });
 }
 
-function getEventsFetchTag( tag ){
-    //let url = `http://localhost:8080/event-manager/events-by-title/${tag}`;
-    let url = `/event-manager/events-by-title/${tag}`;
+function getEventsFetchTag(tag){
+    let url = `/event-manager/events-by-tag/${tag}`;
 
     let settings = {
         method : 'GET',
@@ -188,33 +187,66 @@ function getEventsFetchTag( tag ){
             Authorization : `Bearer ${API_TOKEN}`,
             'Content-Type' : 'application/json'
         },
-
     }
-
     let results = document.querySelector( '.results' );
 
     fetch( url, settings )
         .then( response => {
             if( response.ok ){
-                console.log(response.json());
                 return response.json();
             }
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
-                results.innerHTML = "";
-                results.innerHTML += `<div> Event: </div>`;
-                results.innerHTML += `<div> Title: ${responseJSON[0].title} </div>`;
-                results.innerHTML += `<div> Description: ${responseJSON[0].description} </div>`;
-                results.innerHTML += `<div> Date: ${responseJSON[0].date} </div>`;
-                results.innerHTML += `<div> Creator: ${responseJSON[0].creator.username} </div>`;
-                //results.innerHTML += `<div> Participants: ${responseJSON[0].participants[0].username} </div>`;
+            results.innerHTML = "";
+            infoWindows = [];
+            for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
+                results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
+                results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
+                for(let j=0; j<responseJSON[i].pictures.length; j++){
+                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
+                }
+                results.innerHTML += `<div> Tags:`;
+                for(let k=0; k<responseJSON[i].tags.length; k++){
+                    results.innerHTML += `${responseJSON[i].tags[k]},`;
+                }
+                results.innerHTML += `</div>`;
+                var date = new Date(responseJSON[i].date);
+                results.innerHTML += `<div> Date: ${date} </div>`;
+
+                infoWindows[i] = new google.maps.InfoWindow;
+
+                var position = {
+                    lat: responseJSON[i].location.coordinates[0],
+                    lng: responseJSON[i].location.coordinates[1]
+                  };
+        
+                  infoWindows[i].setPosition(position);
+                  infoWindows[i].setContent(responseJSON[i].title);
+                  infoWindows[i].open(map);
+
+                results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
+                for(let l=0; l<responseJSON[i].participants.length; l++){
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                }
+                
+                for(let m=0; m<responseJSON[i].comments.length; m++){
+                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    var date2 = new Date(responseJSON[i].comments[m].date);
+                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                }
+            }
         })
         .catch( err => {
-            console.log("Reached the catch");
             results.innerHTML = `<div> ${err.message} </div>`;
         });
 }
+
+
 function watchGetEventsForm(){
     let eventsForm = document.querySelector( '.all-event-form' );
 
