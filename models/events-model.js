@@ -160,7 +160,7 @@ const Events = {
                     location:
                       { $near:
                          {
-                           $geometry: { type: "Point",  coordinates: {lat, lng} },
+                           $location: { type: "Point",  coordinates: [lat, lng] },
                            $minDistance: 0,
                            $maxDistance: dist
                          }
