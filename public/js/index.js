@@ -63,6 +63,7 @@ function getEventsFetch(){
         .then( responseJSON => {
             console.log(responseJSON.length);
             results.innerHTML = "";
+            infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
@@ -78,21 +79,25 @@ function getEventsFetch(){
                 var date = new Date(responseJSON[i].date);
                 results.innerHTML += `<div> Date: ${date} </div>`;
 
-                //For the map:
-                //results.innerHTML += `<div id="map-${i}"></div>`;
+                infoWindows[i] = new google.maps.InfoWindow;
+
+                var position = {
+                    lat: responseJSON[i].location.coordinates[0],
+                    lng: responseJSON[i].location.coordinates[1]
+                  };
+        
+                  infoWindows[i].setPosition(position);
+                  infoWindows[i].setContent(responseJSON[i].title);
+                  infoWindows[i].open(map);
+
                 /*
                 function initMap() {
-                    // The location
                     var location = {lat: responseJSON[i].location.coordinates[0], lng: responseJSON[i].location.coordinates[1]};
-                    // The map, centered at location
                     var map = new google.maps.Map(document.getElementById(`map-${i}`), {
                         zoom: 4, center: location, mapTypeId: google.maps.mapTypeId.HYBRID});
-                    // The marker, positioned at location
                     var marker = new google.maps.Marker({position: location, map: map});
                 }*/
-                //results.innerHTML += `<script async defer
-                //src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
-                //</script>`;
+                
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
