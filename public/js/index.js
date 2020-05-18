@@ -1,5 +1,14 @@
 const API_TOKEN = '2abbf7c3-245b-404f-9473-ade729ed4653';
 
+function initMap() {
+    // The location
+    var location = {lat: 2.8, lng: -187.3};
+    // The map, centered at location
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 4, center: location, mapTypeId: google.maps.mapTypeId.HYBRID});
+    // The marker, positioned at location
+    var marker = new google.maps.Marker({position: location, map: map});
+}
 
 function getEventsFetch(){
     let url = `/event-manager/events`;
@@ -39,9 +48,8 @@ function getEventsFetch(){
                 results.innerHTML += `<div> Date: ${date} </div>`;
 
                 //For the map:
-                results.innerHTML += `<div id="map-${i}"></div>`;
-
-
+                //results.innerHTML += `<div id="map-${i}"></div>`;
+                /*
                 function initMap() {
                     // The location
                     var location = {lat: responseJSON[i].location.coordinates[0], lng: responseJSON[i].location.coordinates[1]};
@@ -50,7 +58,7 @@ function getEventsFetch(){
                         zoom: 4, center: location, mapTypeId: google.maps.mapTypeId.HYBRID});
                     // The marker, positioned at location
                     var marker = new google.maps.Marker({position: location, map: map});
-                }
+                }*/
                 //results.innerHTML += `<script async defer
                 //src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
                 //</script>`;
