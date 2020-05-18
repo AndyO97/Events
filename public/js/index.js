@@ -246,6 +246,73 @@ function getEventsFetchTag(tag){
         });
 }
 
+function getEventsFetchDates(date1, date2 ){
+    let url = `/event-manager/events-by-dates?date1=${date1}&date2=${date2}`;
+
+    let settings = {
+        method : 'GET',
+        headers : {
+            Authorization : `Bearer ${API_TOKEN}`,
+            'Content-Type' : 'application/json'
+        },
+    }
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            results.innerHTML = "";
+            infoWindows = [];
+            for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
+                results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
+                results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
+                for(let j=0; j<responseJSON[i].pictures.length; j++){
+                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
+                }
+                results.innerHTML += `<div> Tags:`;
+                for(let k=0; k<responseJSON[i].tags.length; k++){
+                    results.innerHTML += `${responseJSON[i].tags[k]},`;
+                }
+                results.innerHTML += `</div>`;
+                var date = new Date(responseJSON[i].date);
+                results.innerHTML += `<div> Date: ${date} </div>`;
+
+                infoWindows[i] = new google.maps.InfoWindow;
+
+                var position = {
+                    lat: responseJSON[i].location.coordinates[0],
+                    lng: responseJSON[i].location.coordinates[1]
+                  };
+        
+                  infoWindows[i].setPosition(position);
+                  infoWindows[i].setContent(responseJSON[i].title);
+                  infoWindows[i].open(map);
+
+                results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
+                for(let l=0; l<responseJSON[i].participants.length; l++){
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                }
+                
+                for(let m=0; m<responseJSON[i].comments.length; m++){
+                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    var date2 = new Date(responseJSON[i].comments[m].date);
+                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                }
+            }
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
 
 function watchGetEventsForm(){
     let eventsForm = document.querySelector( '.all-event-form' );
@@ -276,6 +343,34 @@ function watchGetEventsTagForm(){
         let tag = document.getElementById( 'eventTag' ).value;
         
         getEventsFetchTag( tag );
+    })
+}
+
+function watchGetEventsTagForm(){
+    let eventsForm = document.querySelector( '.date-event-form' );
+
+    eventsForm.addEventListener( 'submit' , ( event ) => {
+        event.preventDefault();
+        let day1 = document.getElementById( 'eventDayBeg' ).value;
+        let month1 = document.getElementById( 'eventMonthBeg' ).value;
+        let year1 = document.getElementById( 'eventYearBeg' ).value;
+        let day2 = document.getElementById( 'eventDayEnd' ).value;
+        let month2 = document.getElementById( 'eventMonthEnd' ).value;
+        let year2 = document.getElementById( 'eventYearEnd' ).value;
+
+        if( !day1 || !month1 || !year1 || !day2 || !month2 || !year2){
+            results.innerHTML = "";
+            results.innerHTML += `<div> One of the elements on the dates is missing </div>`;
+        }
+        else{
+            
+            let date1 = new Date(year1, month1, day1);
+            let date2 = new Date(year2, month2, day2);
+            console.log("dates:");
+            console.log(date1);
+            console.log(date2);
+            getEventsFetchDates(date1, date2);
+        }
     })
 }
 
