@@ -363,7 +363,8 @@ function watchGetEventsTagForm(){
             results.innerHTML += `<div> One of the elements on the dates is missing </div>`;
         }
         else{
-            
+            month1--;
+            month2--;
             let date1 = new Date(year1, month1, day1);
             let date2 = new Date(year2, month2, day2);
             console.log("dates:");

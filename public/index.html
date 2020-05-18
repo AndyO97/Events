@@ -49,14 +49,14 @@
             <label for="eventDateBeg">
                 Beginning date(day/month/year):
             </label>
-            <input type="number" id="eventDayBeg" min="0" max=31 oninput="validity.valid||(value='');"/>
-            <input type="number" id="eventMonthBeg" min="0" max=12 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventDayBeg" min="1" max=31 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventMonthBeg" min="1" max=12 oninput="validity.valid||(value='');"/>
             <input type="number" id="eventYearBeg" min="0" oninput="validity.valid||(value='');"/>
             <label for="eventDateEnd">
                 Ending date(day/month/year):
             </label>
-            <input type="number" id="eventDayEnd" min="0" max=31 oninput="validity.valid||(value='');"/>
-            <input type="number" id="eventMonthEnd" min="0" max=12 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventDayEnd" min="1" max=31 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventMonthEnd" min="1" max=12 oninput="validity.valid||(value='');"/>
             <input type="number" id="eventYearEnd" min="0" oninput="validity.valid||(value='');"/>
             <button type="submit">
                 Search
