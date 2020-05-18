@@ -3,15 +3,15 @@ var map, infoWindow;
 
 function initMap() {
     var options = {
-        center : {lat: 43, lng: -80},
-        zoom: 10
+        center : {lat: 0, lng: 0},
+        zoom: 4
     };
     
     map = new google.maps.Map(document.getElementById('map'), options);
 
     //var marker = new google.maps.Marker({position: location, map: map});
 
-    infoWindow = new google.maps.infoWindow;
+    infoWindow = new google.maps.InfoWindow;
 
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
