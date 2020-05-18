@@ -120,10 +120,9 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
         return res.status( 406 ).end();
     }
     
-    var location = [lat, lng];
 
     Events
-        .getEventsByProximity( location, dist )
+        .getEventsByProximity( lat, lng, dist )
         .then( event => {
 
             if( !event ){

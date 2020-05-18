@@ -153,14 +153,14 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
-    getEventsByProximity : function( location, dist ){
+    getEventsByProximity : function( lat, lng, dist ){
         return eventModel
                 //.find( { lat : {$gte: (lat-dist), $lt: (lat+dist) }, lng : {$gte: (lng-dist), $lt: (lng+dist)}} )
                 .find({
                     location:
                       { $near:
                          {
-                           $geometry: { type: "Point",  coordinates: location },
+                           $geometry: { type: "Point",  coordinates: {lat, long} },
                            $minDistance: 0,
                            $maxDistance: dist
                          }
