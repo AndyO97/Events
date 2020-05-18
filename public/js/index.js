@@ -32,14 +32,21 @@ function getEventsFetch(){
                 }
                 results.innerHTML += `<div> Tags:`;
                 for(let k=0; k<responseJSON[i].tags.length; k++){
-                    results.innerHTML += ` ${responseJSON[i].tags[k]},`;
+                    results.innerHTML += `${responseJSON[i].tags[k]},`;
                 }
                 results.innerHTML += `</div>`;
                 results.innerHTML += `<div> Date: ${responseJSON[i].date} </div>`;
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
-                console.log("For Participants:")
-                console.log(responseJSON[i].participants.length);
-                //results.innerHTML += `<div> Participants: ${responseJSON[i].participants[0].username} </div>`;
+                for(let l=0; l<responseJSON[i].participants.length; l++){
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                }
+                for(let m=0; m<responseJSON[i].comments.length; m++){
+                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].date} </div>`;
+                }
             }
         })
         .catch( err => {
