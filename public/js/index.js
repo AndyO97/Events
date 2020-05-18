@@ -35,7 +35,8 @@ function getEventsFetch(){
                     results.innerHTML += `${responseJSON[i].tags[k]},`;
                 }
                 results.innerHTML += `</div>`;
-                results.innerHTML += `<div> Date: ${responseJSON[i].date} </div>`;
+                var date = new Date(responseJSON[i].date);
+                results.innerHTML += `<div> Date: ${date} </div>`;
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
                     results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
