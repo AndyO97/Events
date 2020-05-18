@@ -106,6 +106,10 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
     let lng = req.query.lng;
     let dist = req.query.dist;
 
+    if( !dist ){
+        res.statusMessage = "Please send the 'distance' as parameter.";
+        return res.status( 406 ).end();
+    }
     if( !lat ){
         res.statusMessage = "Please send the 'latitude' as parameter.";
         return res.status( 406 ).end();
@@ -114,11 +118,7 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
         res.statusMessage = "Please send the 'longitude' as parameter.";
         return res.status( 406 ).end();
     }
-    if( !dist ){
-        res.statusMessage = "Please send the 'distance' as parameter.";
-        return res.status( 406 ).end();
-    }
-
+    
     var location = [lat, lng];
 
     Events
