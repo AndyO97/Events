@@ -370,6 +370,12 @@ function watchGetEventsTagForm(){
             console.log("dates:");
             console.log(date1);
             console.log(date2);
+            /*
+            var isActualDate = function (month, day, year) {
+                var tempDate = new Date(year, --month, day);
+                return month === tempDate.getMonth();
+            };
+            */
             getEventsFetchDates(date1, date2);
         }
     })

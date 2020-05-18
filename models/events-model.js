@@ -140,6 +140,19 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
+    getEventsByKeyword : function( keyword ){
+        return eventModel
+                .find( {$or:[{title: keyword},{tag: keyword}]} )
+                .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                .populate('comments', ['title', 'content','user'] )
+                .then( events => {
+                    return events;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                });
+    },
     getEventsByProximity : function( location, dist ){
         return eventModel
                 //.find( { lat : {$gte: (lat-dist), $lt: (lat+dist) }, lng : {$gte: (lng-dist), $lt: (lng+dist)}} )

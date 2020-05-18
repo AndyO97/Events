@@ -30,6 +30,29 @@ app.get( '/event-manager/events', ( req, res ) => {
         });
 });
 
+app.get( '/event-manager/events-by-keyword/:keyword', ( req, res ) => {
+    const keyword = req.params.keyword;
+
+    if( !keyword ){
+        res.statusMessage = "Please send the 'keyword' as parameter.";
+        return res.status( 406 ).end();
+    }
+
+    Events
+        .getEventsByKeyword( keyword )
+        .then( event => {
+            if( !event ){
+                res.statusMessage = `There are no events with the provided 'keyword=${keyword}'.`;
+                return res.status( 404 ).end();
+            }
+            return res.status( 200 ).json( event );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+});
+
 app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
     const title = req.params.title;
 
