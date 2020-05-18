@@ -78,6 +78,36 @@ app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
         });
 });
 
+app.get( '/event-manager/events-by-dates', ( req, res ) => {
+    let date1 = req.query.date1;
+    let date2 = req.query.date2;
+
+    if( !date1 ){
+        res.statusMessage = "Please send the 'date1' as parameter.";
+        return res.status( 406 ).end();
+    }
+    if( !date2 ){
+        res.statusMessage = "Please send the 'date2' as parameter.";
+        return res.status( 406 ).end();
+    }
+
+    Events
+        .getEventsBetweenDates( date1, date2 )
+        .then( event => {
+
+            if( !event ){
+                res.statusMessage = `There are no events between the provided dates.`;
+                return res.status( 404 ).end();
+            }
+
+            return res.status( 200 ).json( event );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+});
+
 app.get( '/blog-post/events-by-user/:username', ( req, res ) => {
     const username = req.params.username;
 
