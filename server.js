@@ -102,20 +102,13 @@ app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
 });
 
 app.get( '/event-manager/events-by-proximity', ( req, res ) => {
+
     let lat = req.query.lat;
     let lng = req.query.lng;
     let dist = req.query.dist;
 
-    if( !dist ){
-        res.statusMessage = "Please send the 'distance' as parameter.";
-        return res.status( 406 ).end();
-    }
-    if( !lat ){
-        res.statusMessage = "Please send the 'latitude' as parameter.";
-        return res.status( 406 ).end();
-    }
-    if( !lng ){
-        res.statusMessage = "Please send the 'longitude' as parameter.";
+    if( !dist || !lat ||!lng ){
+        res.statusMessage = "Please send the ''latitude', 'longitude'  and 'distance' as parameters.";
         return res.status( 406 ).end();
     }
     
