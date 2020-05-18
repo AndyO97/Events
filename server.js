@@ -101,6 +101,43 @@ app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
         });
 });
 
+app.get( '/event-manager/events-by-proximity', ( req, res ) => {
+    let lat = req.query.lat;
+    let lng = req.query.lng;
+    let dist = req.query.dist;
+
+    if( !lat ){
+        res.statusMessage = "Please send the 'latitude' as parameter.";
+        return res.status( 406 ).end();
+    }
+    if( !lng ){
+        res.statusMessage = "Please send the 'longitude' as parameter.";
+        return res.status( 406 ).end();
+    }
+    if( !dist ){
+        res.statusMessage = "Please send the 'distance' as parameter.";
+        return res.status( 406 ).end();
+    }
+
+    var location = [lat, lng];
+
+    Events
+        .getEventsByProximity( location, dist )
+        .then( event => {
+
+            if( !event ){
+                res.statusMessage = `There are no events with the provided location'.`;
+                return res.status( 404 ).end();
+            }
+
+            return res.status( 200 ).json( event );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+});
+
 app.get( '/event-manager/events-by-dates', ( req, res ) => {
     let date1 = req.query.date1;
     let date2 = req.query.date2;
