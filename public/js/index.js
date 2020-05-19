@@ -321,7 +321,7 @@ function getEventsFetchTag(tag){
 }
 
 function getEventsFetchProximity(lat, lng, dist){
-    let url = `/event-manager/events-by-proximity?lat=${lat}&lng=${lng}&lng=${dist}`;
+    let url = `/event-manager/events-by-proximity?lat=${lat}&lng=${lng}&dist=${dist}`;
 
     let settings = {
         method : 'GET',
