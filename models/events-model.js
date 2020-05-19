@@ -157,7 +157,7 @@ const Events = {
         return eventModel
                 //.find( { 'location.coordinates[0]' : {$gte: (lat-dist), $lt: (lat+dist) }, 'location.coordinates[1]' : {$gte: (lng-dist), $lt: (lng+dist)}} )
                 //.find( { 'location.coordinates[0]' : lat, 'location.coordinates[1]' : long} )
-                .find( { "location.coordinates[0]" : lat })
+                .find( { "location.coordinates[0]" : Number(lat) })
                 /*.find({
                     location:
                       { $near:
