@@ -1,5 +1,6 @@
 const API_TOKEN = '2abbf7c3-245b-404f-9473-ade729ed4653';
 var map, infoWindow;
+var userlat, userlng;
 
 function initMap() {
     var options = {
@@ -20,6 +21,11 @@ function initMap() {
             lng: position.coords.longitude
           };
 
+          userlat = position.coords.latitude;
+          userlng = position.coords.longitude;
+          console.log("Your coordinates are:");
+          console.log(userlat);
+          console.log(userlng);
           infoWindow.setPosition(pos);
           infoWindow.setContent('Your location.');
           infoWindow.open(map);
@@ -314,6 +320,75 @@ function getEventsFetchTag(tag){
         });
 }
 
+function getEventsFetchProximity(lat, lng, dist){
+    let url = `/event-manager/events-by-proximity?lat=${lat}&lng=${lng}&lng=${dist}`;
+
+    let settings = {
+        method : 'GET',
+        headers : {
+            Authorization : `Bearer ${API_TOKEN}`,
+            'Content-Type' : 'application/json'
+        },
+    }
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            results.innerHTML = "";
+            infoWindows = [];
+            for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
+                results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
+                results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
+                for(let j=0; j<responseJSON[i].pictures.length; j++){
+                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
+                }
+                results.innerHTML += `<div> Tags:`;
+                for(let k=0; k<responseJSON[i].tags.length; k++){
+                    results.innerHTML += `${responseJSON[i].tags[k]},`;
+                }
+                results.innerHTML += `</div>`;
+                var date = new Date(responseJSON[i].date);
+                results.innerHTML += `<div> Date: ${date} </div>`;
+
+                infoWindows[i] = new google.maps.InfoWindow;
+
+                var position = {
+                    lat: responseJSON[i].location.coordinates[0],
+                    lng: responseJSON[i].location.coordinates[1]
+                  };
+        
+                  infoWindows[i].setPosition(position);
+                  infoWindows[i].setContent(responseJSON[i].title);
+                  infoWindows[i].open(map);
+
+                results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
+                for(let l=0; l<responseJSON[i].participants.length; l++){
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                }
+                
+                for(let m=0; m<responseJSON[i].comments.length; m++){
+                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    var date2 = new Date(responseJSON[i].comments[m].date);
+                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                }
+            }
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
+
+
 function getEventsFetchDates(date1, date2 ){
     let url = `/event-manager/events-by-dates?date1=${date1}&date2=${date2}`;
 
@@ -414,6 +489,19 @@ function watchGetEventsKeywordForm(){
     })
 }
 
+function watchGetEventsProximityForm(){
+    let eventsForm = document.querySelector( '.proximity-event-form' );
+
+    eventsForm.addEventListener( 'submit' , ( event ) => {
+        event.preventDefault();
+        let dist = document.getElementById( 'eventDistance' ).value;
+        
+        if(userlat && userlng){
+            getEventsFetchProximity(userlat, userlng, dist);
+        }
+    })
+}
+
 function watchGetEventsTagForm(){
     let eventsForm = document.querySelector( '.tag-event-form' );
 
@@ -466,6 +554,7 @@ function init(){
     watchGetEventsTagForm();
     watchGetEventsDatesForm();
     watchGetEventsForm();
+    watchGetEventsProximityForm()
 }
 
 init();

@@ -156,7 +156,7 @@ const Events = {
     getEventsByProximity : function( lat, lng, dist ){
         lat = Number(lat);
         lng = Number(lng);
-        dist = Number(dist);
+        dist = Number(dist)/111; //an aprox number
         let coordinates1 = [lat+dist, lng+dist];
         let coordinates2 = [lat, lng+dist];
         let coordinates3 = [lat+dist, lng];
