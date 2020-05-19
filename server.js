@@ -2,12 +2,14 @@ const express = require( 'express' );
 const bodyParser = require( 'body-parser' );
 const morgan = require( 'morgan' );
 const mongoose = require( 'mongoose' );
+const bcrypt = require ( 'bcryptjs' );
+const jsonwebtoken = require( 'jsonwebtoken' );
 const validateToken = require('./middleware/validateToken.js');
 const cors = require( './middleware/cors' );
 const { Users } = require( './models/users-model' );
 const { Comments } = require( './models/comments-model' );
 const { Events } = require( './models/events-model' );
-const { DATABASE_URL, PORT } = require( './config' );
+const { DATABASE_URL, PORT, TOKEN } = require( './config' );
 
 
 const app = express();
@@ -17,6 +19,8 @@ app.use( cors );
 app.use( express.static( "public" ) );
 app.use( morgan( 'dev' ) );
 app.use( validateToken );
+
+//For events:
 
 app.get( '/event-manager/events', ( req, res ) => {
     Events
@@ -259,7 +263,150 @@ app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
         });
 });
 
+//For users:
 
+app.get( '/event-manager/validate-user', ( req, res ) => {
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+
+        return res.status( 200 ).json( decoded );
+    });
+});
+
+
+app.post( '/event-manager/users/login', jsonParser, ( req, res ) => {
+    let { email, password } = req.body;
+
+    if( !email || !password ){
+        res.statusMessage = "Parameter missing in the body of the request.";
+        return res.status( 406 ).end();
+    }
+
+    Users
+        .getUserByUsernameOrEmail( username, email )
+        .then( user => {
+
+            if( user ){
+                bcrypt.compare( password, user.password )
+                    .then( result => {
+                        if( result ){
+                            let userData = {
+                                username : user.username,
+                                email : user.email,
+                                firstName : user.firstName,
+                                lastName : user.lastName,
+                                age : user.age,
+                                tags : user.tags,
+                                location : user.location,
+                                eventsOwned : user.eventsOwned,
+                                favorites : user.favorites
+                            };
+
+                            jsonwebtoken.sign( userData, TOKEN, { expiresIn : '15m' }, ( err, token ) => {
+                                if( err ){
+                                    res.statusMessage = "Something went wrong with generating the token.";
+                                    return res.status( 400 ).end();
+                                }
+                                return res.status( 200 ).json( { token } );
+                            });
+                        }
+                        else{
+                            throw new Error( "Invalid credentials" );
+                        }
+                    })
+                    .catch( err => {
+                        res.statusMessage = err.message;
+                        return res.status( 400 ).end();
+                    });
+            }
+            else{
+                throw new Error( "User doesn't exists!" );
+            }
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+});
+
+app.post( '/event-manager/register', jsonParser, ( req, res ) => {
+    var { username, password, email, firstName, lastName, age, tags, location, eventsOwned, eventsInvited, favorites } = req.body;
+
+    if( !username || !password || !email || !tags || !location){
+        res.statusMessage = "One of these parameters is missing in the request: 'username', 'password', 'email', 'tags' or 'location'.";
+        return res.status( 406 ).end();
+    }
+
+    if((!age)&&( typeof(age) !== 'number' )){
+        res.statusMessage = "The 'age' MUST be a number.";
+        return res.status( 409 ).end();
+    }
+
+    if( (typeof(location.coordinates[0]) !== 'number') && (typeof(location.coordinates[1]) !== 'number') ){
+        res.statusMessage = "The coordinates for the location MUST be numbers.";
+        return res.status( 409 ).end();
+    }
+
+    if( location.type !== 'Point' ){
+        res.statusMessage = "The type of the location MUST be 'Point'.";
+        return res.status( 409 ).end();
+    }
+
+
+    if(!firstName){
+        firstName = "";
+    }
+    if(!lastName){
+        lastName = "";
+    }
+    if(!age){
+        age = 0;
+    }
+    if(!eventsOwned){
+        eventsOwned = [];
+    }
+    if(!eventsInvited){
+        eventsInvited = [];
+    }
+    if(!favorites){
+        favorites =[];
+    }
+    
+    bcrypt.hash( password, 10 )
+        .then( hashedPassword => {
+            let newUser = {
+                username,
+                password, 
+                email, 
+                firstName, 
+                lastName, 
+                age, 
+                tags, 
+                location,
+                eventsOwned, 
+                eventsInvited,
+                favorites
+            };
+            Users
+                .createUser( newUser )
+                .then( result => {
+                    return res.status( 201 ).json( result ); 
+                })
+                .catch( err => {
+                    res.statusMessage = err.message;
+                    return res.status( 400 ).end();
+                });
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+});
 
 app.post( '/event-manager/add-user', jsonParser, ( req, res ) => {
     var { username, password, email, firstName, lastName, age, tags, location, eventsOwned, eventsInvited, favorites } = req.body;
@@ -341,6 +488,8 @@ app.get( '/event-manager/users', ( req, res ) => {
             return res.status( 400 ).end();
         });
 });
+
+//For comments:
 
 app.post( '/event-manager/add-comment', jsonParser, ( req, res ) => {
     var { title, content, username, event, date} = req.body;

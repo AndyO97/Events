@@ -60,6 +60,46 @@ const Comments = {
                     throw new Error( err.message );
                 });
     },
+    deleteCommentById : function(id){
+        return commentModel
+            .findOneAndDelete({_id : id})
+            .then( comment => {
+                return comment;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    deleteCommentByUserId : function(id){
+        return commentModel
+            .deleteMany({user : id})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    deleteCommentByEventId : function(id){
+        return commentModel
+            .deleteMany({event : id})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    updateCommentById : function(id){
+        return commentModel
+            .findOne({_id : id})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    }
 }
 
 module.exports = {

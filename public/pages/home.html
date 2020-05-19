@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Event Manager</title>
+        <link href="./../css/home.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <h1>Get all Events</h1>
+        <form class="all-event-form">
+            <label>
+                Get Events
+            </label>
+            <button id="submit-btn" type="submit">
+                Search
+            </button>
+        </form>
+        <h1>Search an Event:</h1>
+        <form class="event-form">
+            <label>
+                Keyword
+            </label>
+             <input type="text" id="keyword" />
+            <button id="submit-btn" type="submit">
+                Search
+            </button>
+        </form>
+        <h1>Advanced search:</h1>
+        <form class="title-event-form">
+            <label for="eventTitle">
+                Title:
+            </label>
+            <input type="text" id="eventTitle" />
+            <button type="submit">
+                Search
+            </button>
+        </form>    
+        <form class="tag-event-form">
+            <label for="eventTag">
+                Tag:
+            </label>
+            <input type="text" id="eventTag" />
+            <button type="submit">
+                Search
+            </button>
+        </form>
+        <form class="date-event-form">
+            <label for="eventDateBeg">
+                Beginning date(day/month/year):
+            </label>
+            <input type="number" id="eventDayBeg" min="1" max=31 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventMonthBeg" min="1" max=12 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventYearBeg" min="0" oninput="validity.valid||(value='');"/>
+            <label for="eventDateEnd">
+                Ending date(day/month/year):
+            </label>
+            <input type="number" id="eventDayEnd" min="1" max=31 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventMonthEnd" min="1" max=12 oninput="validity.valid||(value='');"/>
+            <input type="number" id="eventYearEnd" min="0" oninput="validity.valid||(value='');"/>
+            <button type="submit">
+                Search
+            </button>
+        </form>
+        <form class="proximity-event-form">
+            <label for="eventProximity">
+                Distance (in km)
+             </label>
+             <input type="number" id="eventDistance" />
+             <button type="submit">
+                Search
+            </button>
+        </form>
+        <div id="map"></div>
+        <section class="results">
+
+        </section>
+        <script src="./../js/home.js"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
+        ></script>
+    </body>
+</html>

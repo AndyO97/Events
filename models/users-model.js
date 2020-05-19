@@ -86,6 +86,16 @@ const Users = {
                     throw new Error( err.message );
                 }); 
     },
+    getUserByUsernameOrEmail : function( email ){
+        return userModel
+                .findOne( { $or:[ {username : email }, { email : email} ]} )
+                .then( user => {
+                    return user;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                }); 
+    },
     getUserById : function( id ){
         return userModel
                 .findOne( { id } )
@@ -95,7 +105,48 @@ const Users = {
                 .catch( err => {
                     throw new Error( err.message );
                 }); 
+    },
+    deleteUserByUsername : function(username){
+        return userModel
+            .findOneAndDelete({username : username})
+            .then( user => {
+                return user;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    deleteUserById : function(id){
+        return userModel
+            .findOneAndDelete({_id : id})
+            .then( user => {
+                return user;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    updateUserByUsername : function(username){
+        return userModel
+            .findOne({username : username})
+            .then( user => {
+                return user;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    updateUserById : function(id){
+        return userModel
+            .findOne({_id : id})
+            .then( user => {
+                return user;
+            })
+            .catch( err => {
+                return err;
+            });
     }
+
 }
 
 module.exports = {

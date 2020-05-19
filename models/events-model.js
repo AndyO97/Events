@@ -40,7 +40,7 @@ const eventSchema = mongoose.Schema({
     },
     participants : [{
         type : mongoose.Schema.Types.ObjectId,
-        ref : 'users',
+        ref : 'users'
     }],
     comments : [{
         type : mongoose.Schema.Types.ObjectId,
@@ -176,6 +176,56 @@ const Events = {
                 .catch( err => {
                     throw new Error( err.message );
                 });
+    },
+    deleteEventByTitle : function(title){
+        return eventModel
+            .findOneAndDelete({title : title})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    deleteEventById : function(id){
+        return eventModel
+            .findOneAndDelete({_id : id})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    deleteEventByCreatorId : function(id){
+        return eventModel
+            .deleteMany({creator : id})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    updateEventByTitle : function(title){
+        return eventModel
+            .findOne({title : title})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    updateEventById : function(id){
+        return eventModel
+            .findOne({_id : id})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
     }
 }
 
