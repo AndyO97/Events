@@ -157,12 +157,15 @@ const Events = {
         lat = Number(lat);
         lng = Number(lng);
         dist = Number(dist);
-        let coordinates = [lat+dist, lng+dist];
+        let coordinates1 = [lat+dist, lng+dist];
+        let coordinates2 = [lat, lng+dist];
+        let coordinates3 = [lat+dist, lng];
+        let coordinates4 = [lat-dist, lng-dist];
 
         return eventModel
                 //.find( { 'location.coordinates[0]' : {$gte: (lat-dist), $lt: (lat+dist) }, 'location.coordinates[1]' : {$gte: (lng-dist), $lt: (lng+dist)}} )
                 //.find( { 'location.coordinates[0]' : lat, 'location.coordinates[1]' : long} )
-                .find( { "location.coordinates" : {$lt: coordinates} })
+                .find( { "location.coordinates" : {$lt: coordinates1, $lt: coordinates2, $lt: coordinates3, $gte: coordinates4} })
                 
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
