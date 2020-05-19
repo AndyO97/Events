@@ -156,12 +156,13 @@ const Events = {
     getEventsByProximity : function( lat, lng, dist ){
         lat = Number(lat);
         lng = Number(lng);
-        let coordinates = [lat, lng];
+        dist = Number(dist);
+        let coordinates = [lat+dist, lng+dist];
 
         return eventModel
                 //.find( { 'location.coordinates[0]' : {$gte: (lat-dist), $lt: (lat+dist) }, 'location.coordinates[1]' : {$gte: (lng-dist), $lt: (lng+dist)}} )
                 //.find( { 'location.coordinates[0]' : lat, 'location.coordinates[1]' : long} )
-                .find( { "location.coordinates[0]" : lat})
+                .find( { "location.coordinates" : {$lt: coordinates} })
                 
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
