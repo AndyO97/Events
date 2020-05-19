@@ -155,7 +155,9 @@ const Events = {
     },
     getEventsByProximity : function( lat, lng, dist ){
         return eventModel
-                .find( { 'location.coordinates[0]' : {$gte: (lat-dist), $lt: (lat+dist) }, 'location.coordinates[1]' : {$gte: (lng-dist), $lt: (lng+dist)}} )
+                //.find( { 'location.coordinates[0]' : {$gte: (lat-dist), $lt: (lat+dist) }, 'location.coordinates[1]' : {$gte: (lng-dist), $lt: (lng+dist)}} )
+                //.find( { 'location.coordinates[0]' : lat, 'location.coordinates[1]' : long} )
+                .find( { 'location.coordinates[0]' : lat })
                 /*.find({
                     location:
                       { $near:
@@ -166,13 +168,6 @@ const Events = {
                          }
                       }
                   })*/
-                /*
-                .geoNear({type: "Point", coordinates: [lat, long]}, {
-                    spherical: true, 
-                    maxDistance: dist / 6378137, 
-                    distanceMultiplier: 6378137
-                })
-                */
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content','user'] )
