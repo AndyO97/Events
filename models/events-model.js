@@ -157,17 +157,8 @@ const Events = {
         return eventModel
                 //.find( { 'location.coordinates[0]' : {$gte: (lat-dist), $lt: (lat+dist) }, 'location.coordinates[1]' : {$gte: (lng-dist), $lt: (lng+dist)}} )
                 //.find( { 'location.coordinates[0]' : lat, 'location.coordinates[1]' : long} )
-                .find( { "location.coordinates[0]" : Number(lat) })
-                /*.find({
-                    location:
-                      { $near:
-                         {
-                           $geometry: { type: "Point",  coordinates: [lat, lng] },
-                           $minDistance: 0,
-                           $maxDistance: dist
-                         }
-                      }
-                  })*/
+                .find( { location : [Number(lat), Number(lng) })
+                
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content','user'] )
