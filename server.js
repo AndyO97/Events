@@ -299,11 +299,11 @@ app.post( '/event-manager/users/login', jsonParser, ( req, res ) => {
                                 email : user.email,
                                 firstName : user.firstName,
                                 lastName : user.lastName,
-                                age : user.age
-                                //tags : user.tags,
-                                //location : user.location,
-                                //eventsOwned : user.eventsOwned,
-                                //favorites : user.favorites
+                                age : user.age,
+                                tags : user.tags,
+                                location : user.location,
+                                eventsOwned : user.eventsOwned,
+                                favorites : user.favorites
                             };
 
                             jsonwebtoken.sign( userData, TOKEN, { expiresIn : '15m' }, ( err, token ) => {

@@ -88,8 +88,8 @@ const Users = {
     },
     getUserByUsernameOrEmail : function( email ){
         return userModel
-                //.findOne( { $or:[ {username : email }, { email : email} ]} )
-                .findOne( {username : email } )
+                .findOne( { $or:[ {username : email }, { email : email} ]} )
+                //.findOne( {username : email } )
                 .then( user => {
                     return user;
                 })
