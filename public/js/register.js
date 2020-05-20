@@ -82,37 +82,13 @@ function watchRegisterForm(){
                 console.log("Created user");
             }, error);
           }
-
-        /*
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(function(position) {
-            userlat = position.coords.latitude;
-            userlng = position.coords.longitude;
-            console.log("Your coordinates are:");
-            console.log(userlat);
-            console.log(userlng);
-            },function() {
-                console.log("Your other coordinates are:");
-                console.log(userlat);
-                console.log(userlng);
-                if( userlat && userlng){
-                    userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
-                }
-                else{
-                    results.innerHTML = `<div> Could not get your location </div>`;
-                }
-            });
-        }
-        */
         console.log("Your other coordinates are:");
         console.log(userlat);
         console.log(userlng);
-        //if( userlat && userlng){
-        //userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
-        //}
     })
 }
 
+/*
 function watchLoginForm(){
     let loginForm = document.querySelector( '.login-form' );
 
@@ -121,9 +97,10 @@ function watchLoginForm(){
         window.location.href = "/index.html";
     })
 }
+*/
 
 function init(){
-    watchLoginForm();
+    //watchLoginForm();
     watchRegisterForm();
 }
 
