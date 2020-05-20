@@ -49,6 +49,7 @@ function userRegisterFetch( username, password, email, firstName, lastName, age,
 
 function watchRegisterForm(){
     let registerForm = document.querySelector( '.register-form' );
+    let results = document.querySelector( '.results' );
 
     registerForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
