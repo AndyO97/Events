@@ -53,6 +53,10 @@ function success(position) {
     console.log("Your coordinates are:");
     console.log(userlat);
     console.log(userlng);
+    if( userlat && userlng){
+        userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
+    }
+    console.log("Created user");
 }
 
 function error() {
@@ -105,9 +109,9 @@ function watchRegisterForm(){
         console.log("Your other coordinates are:");
         console.log(userlat);
         console.log(userlng);
-        if( userlat && userlng){
-        userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
-        }
+        //if( userlat && userlng){
+        //userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
+        //}
     })
 }
 
