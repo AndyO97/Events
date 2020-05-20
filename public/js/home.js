@@ -51,17 +51,27 @@ function initMap() {
 
 //for the menu
 
-function myFunction() {
-    document.getElementById("myDropdown").classList.toggle("show");
+function myFunctionEvents() {
+    document.getElementById("myDropdownEvents").classList.toggle("show");
+}
+
+function myFunctionAccount() {
+    document.getElementById("myDropdownAccount").classList.toggle("show");
 }
 
 window.onclick = function(e) {
-    if (!e.target.matches('.dropbtn')) {
-    var myDropdown = document.getElementById("myDropdown");
+    if (!e.target.matches('.dropbtn-Events')) {
+    var myDropdown = document.getElementById("myDropdownEvents");
       if (myDropdown.classList.contains('show')) {
         myDropdown.classList.remove('show');
       }
     }
+    if (!e.target.matches('.dropbtn-Account')) {
+        var myDropdown = document.getElementById("myDropdownAccount");
+          if (myDropdown.classList.contains('show')) {
+            myDropdown.classList.remove('show');
+          }
+        }
 }
 
 //for events

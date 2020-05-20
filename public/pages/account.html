@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>My account</title>
+        <link href="./../css/account.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="navbar">
+            <a href="/pages/home.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#Contact">Contact Us</a>
+            <a href="#Events">Events</a>
+            <div class="dropdown">
+            <button class="dropbtn" onclick="myFunction()">Account
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdown">
+              <a href="/pages/account.html">View my account</a>
+              <a href="#">Change my information</a>
+              <a href="#">Sign Out</a>
+              <a href="#">Delete my account</a>
+            </div>
+            </div> 
+          </div>
+        <h1>My profile</h1>
+        <p>This is the information that we have in our database</p>
+        <div id="map"></div>
+        <section class="results">
+
+        </section>
+        <script src="./../js/account.js"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
+        ></script>
+    </body>
+</html>

@@ -8,19 +8,30 @@
     </head>
     <body>
         <div class="navbar">
-            <a href="#home">Home</a>
+            <a href="/pages/home.html">Home</a>
             <a href="#about">About</a>
-            <a href="#ContactUs">Contact Us</a>
-            <a href="#Events">Events</a>
+            <a href="#Contact">Contact Us</a>
             <div class="dropdown">
-            <button class="dropbtn" onclick="myFunction()">Account
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content" id="myDropdown">
-              <a href="#">View my account</a>
-              <a href="#">Change my information</a>
-              <a href="#">Delete my account</a>
+                <button class="dropbtn-Events" onclick="myFunctionEvents()">Events
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdownEvents">
+                    <a href="#">View my events</a>
+                    <a href="#">View my favorites</a>
+                    <a href="#">Modify an event</a>
+                    <a href="#">Delete an event</a>
+                </div>
             </div>
+            <div class="dropdown">
+                <button class="dropbtn-Account" onclick="myFunctionAccount()">Account
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdownAccount">
+                    <a href="/pages/account.html">View my account</a>
+                    <a href="#">Change my information</a>
+                    <a href="#">Sign Out</a>
+                    <a href="#">Delete my account</a>
+                </div>
             </div> 
           </div>
         <h1>Get all Events</h1>
