@@ -1,4 +1,62 @@
 <!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Events App</title>
+<link rel="stylesheet" type="text/css" href="./../css/register.css" />
+</head>
+<body>
+<div class="container">
+    <section id="content">
+        <form action="register" class="register-form">
+            <h1>Register Form</h1>
+            <div>
+                <input type="text" placeholder="Username" required="" id="userUsername" />
+            </div>
+            <div>
+                <input type="password" placeholder="Password" required="" id="userPassword" />
+            </div>
+            <div>
+                <input type="text" placeholder="Email" required="" id="userEmail" />
+            </div>
+            <div>
+                <input type="text" placeholder="First name" required="" id="userFirstName" />
+            </div>
+            <div>
+                <input type="text" placeholder="Last name" required="" id="userLastName" />
+            </div>
+            <div>
+                <input type="number" placeholder="age" required="" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
+            </div>
+            <div>
+                <input type="text" placeholder="One tag that you like (you can add more later)" required="" id="userTags" />
+            </div>
+            <div>
+                <button type="submit">
+                Register
+                </button>
+                <!--a href="#">Lost your password?</a-->
+                <a href="./../index.html">Already have an account?</a>
+            </div>
+        </form><!-- form -->
+        
+    </section><!-- content -->
+</div><!-- container -->
+<section class="results">
+            
+</section>
+<script src="./../js/register.js"></script>
+</body>
+</html>
+
+
+
+
+
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="utf-8">
