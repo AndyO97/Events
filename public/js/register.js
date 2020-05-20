@@ -60,27 +60,6 @@ function watchRegisterForm(){
         let lastName = document.getElementById( 'userLastName' ).value;
         let age = document.getElementById( 'userAge' ).value;
         let tags = document.getElementById( 'userTags' ).value;
-
-        /*
-        if (navigator.geolocation) {
-            var location_timeout = setTimeout("geolocFail()", 10000);
-        
-            navigator.geolocation.getCurrentPosition(function(position) {
-                clearTimeout(location_timeout);
-        
-                userlat = position.coords.latitude;
-                userlng = position.coords.longitude;
-        
-                //geocodeLatLng(lat, lng);
-            }, function(error) {
-                clearTimeout(location_timeout);
-                geolocFail();
-            });
-        } else {
-            // Fallback for no geolocation
-            geolocFail();
-        }
-        */
         
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
@@ -89,19 +68,18 @@ function watchRegisterForm(){
             console.log("Your coordinates are:");
             console.log(userlat);
             console.log(userlng);
+            },function() {
+                console.log("Your other coordinates are:");
+                console.log(userlat);
+                console.log(userlng);
+                if( userlat && userlng){
+                    userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
+                }
+                else{
+                    results.innerHTML = `<div> Could not get your location </div>`;
+                }
             });
-        }
-        
-        console.log("Your other coordinates are:");
-        console.log(userlat);
-        console.log(userlng);
-        if( userlat && userlng){
-            userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
-        }
-        else{
-            results.innerHTML = `<div> Could not get your location </div>`;
-        }
-        
+        } 
     })
 }
 
