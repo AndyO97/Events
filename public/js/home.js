@@ -2,6 +2,7 @@ const API_TOKEN = '2abbf7c3-245b-404f-9473-ade729ed4653';
 var map, infoWindow;
 var userlat, userlng;
 
+//For the map and the location
 function initMap() {
     var options = {
         center : {lat: 0, lng: 0},
@@ -48,6 +49,22 @@ function initMap() {
       infoWindow.open(map);
     }
 
+//for the menu
+
+function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+}
+
+window.onclick = function(e) {
+    if (!e.target.matches('.dropbtn')) {
+    var myDropdown = document.getElementById("myDropdown");
+      if (myDropdown.classList.contains('show')) {
+        myDropdown.classList.remove('show');
+      }
+    }
+}
+
+//for events
 
 function getEventsFetch(){
     let url = `/event-manager/events`;
