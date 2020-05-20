@@ -47,18 +47,6 @@ function userRegisterFetch( username, password, email, firstName, lastName, age,
         });
 }
 
-function success(position) {
-    userlat  = position.coords.latitude;
-    userlng = position.coords.longitude;
-    console.log("Your coordinates are:");
-    console.log(userlat);
-    console.log(userlng);
-    if( userlat && userlng){
-        userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
-    }
-    console.log("Created user");
-}
-
 function error() {
     let results = document.querySelector( '.results' );
     results.innerHTML = "Unable to retrieve your location";
@@ -82,7 +70,17 @@ function watchRegisterForm(){
             results.innerHTML = "Geolocation is not supported by your browser";
           } else {
             console.log("Locating…");
-            navigator.geolocation.getCurrentPosition(success, error);
+            navigator.geolocation.getCurrentPosition(function(position) {
+                userlat  = position.coords.latitude;
+                userlng = position.coords.longitude;
+                console.log("Your coordinates are:");
+                console.log(userlat);
+                console.log(userlng);
+                if( userlat && userlng){
+                    userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
+                }
+                console.log("Created user");
+            }, error);
           }
 
         /*
