@@ -62,6 +62,26 @@ function watchRegisterForm(){
         let tags = document.getElementById( 'userTags' ).value;
 
         if (navigator.geolocation) {
+            var location_timeout = setTimeout("geolocFail()", 10000);
+        
+            navigator.geolocation.getCurrentPosition(function(position) {
+                clearTimeout(location_timeout);
+        
+                userlat = position.coords.latitude;
+                userlng = position.coords.longitude;
+        
+                geocodeLatLng(lat, lng);
+            }, function(error) {
+                clearTimeout(location_timeout);
+                geolocFail();
+            });
+        } else {
+            // Fallback for no geolocation
+            geolocFail();
+        }
+
+        /*
+        if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
             userlat = position.coords.latitude;
             userlng = position.coords.longitude;
@@ -72,8 +92,9 @@ function watchRegisterForm(){
               console.log("Creating account");
               //handleLocationError(true, infoWindow, map.getCenter());
             });
-        } 
-        console.log("Your coordinates out of the function are:");
+        }
+        */ 
+        console.log("Your coordinates are:");
         console.log(userlat);
         console.log(userlng);
         if( userlat && userlng){
