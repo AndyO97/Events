@@ -70,7 +70,7 @@ function watchRegisterForm(){
                 userlat = position.coords.latitude;
                 userlng = position.coords.longitude;
         
-                geocodeLatLng(lat, lng);
+                //geocodeLatLng(lat, lng);
             }, function(error) {
                 clearTimeout(location_timeout);
                 geolocFail();
