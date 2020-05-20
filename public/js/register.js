@@ -50,6 +50,9 @@ function userRegisterFetch( username, password, email, firstName, lastName, age,
 function success(position) {
     userlat  = position.coords.latitude;
     userlng = position.coords.longitude;
+    console.log("Your coordinates are:");
+    console.log(userlat);
+    console.log(userlng);
 }
 
 function error() {
@@ -99,7 +102,7 @@ function watchRegisterForm(){
             });
         }
         */
-        console.log("Your coordinates are:");
+        console.log("Your other coordinates are:");
         console.log(userlat);
         console.log(userlng);
         if( userlat && userlng){
