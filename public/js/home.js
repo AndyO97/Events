@@ -362,11 +362,11 @@ function getEventsFetchProximity(lat, lng, dist){
                 var position = {
                     lat: responseJSON[i].location.coordinates[0],
                     lng: responseJSON[i].location.coordinates[1]
-                  };
+                };
         
-                  infoWindows[i].setPosition(position);
-                  infoWindows[i].setContent(responseJSON[i].title);
-                  infoWindows[i].open(map);
+                infoWindows[i].setPosition(position);
+                infoWindows[i].setContent(responseJSON[i].title);
+                infoWindows[i].open(map);
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
