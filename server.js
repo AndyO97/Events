@@ -381,7 +381,7 @@ app.post( '/event-manager/register', jsonParser, ( req, res ) => {
         .then( hashedPassword => {
             let newUser = {
                 username,
-                password, 
+                password : hashedPassword,
                 email, 
                 firstName, 
                 lastName, 
