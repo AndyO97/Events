@@ -7,27 +7,33 @@
         <link href="./css/index.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <form class="login-form">
-            <label for="userEmail">
-                Email or Username:
-            </label>
-            <input type="text" id="userEmail" />
-            <label for="userPassword">
-                Password:
-            </label>
-            <input type="password" id="userPassword" />
-            <button type="submit">
-                Login
-            </button>
-        </form>
-        <form class="register-form">
-            <label for="register">
-                Don't have an account?
-            </label>
-            <button type="submit">
-                Register
-            </button>
-        </form>
+        <div class="main-container">
+            <div class="left-side">
+                <form class="login-form">
+                    <label for="userEmail">
+                        Email or Username:
+                    </label>
+                    <input type="text" id="userEmail" class="formElement" />
+                    <label for="userPassword">
+                        Password:
+                    </label>
+                    <input type="password" id="userPassword" class="formElement"/>
+                    <button type="submit">
+                        Login
+                    </button>
+                </form>
+            </div>
+            <div class="right-side">
+                <form class="register-form">
+                    <label for="register">
+                        Don't have an account?
+                    </label>
+                    <button type="submit" class="formElement">
+                        Register
+                    </button>
+                </form>
+            </div>
+        </div>
         <section class="results">
             
         </section>
