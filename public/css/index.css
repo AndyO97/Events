@@ -6,7 +6,7 @@ body {
     font-family: "Roboto", sans-serif;
     margin: 0;
     padding: 0;
-    color : blue;
+    background-color: blue;
     text-align: center;
   }
 
@@ -14,7 +14,7 @@ div{
     border: 1px solid black;
     padding: 5px;
     text-align: center;
-    width: 100%;
+    width: 80%;
 }
 
 .main-container{
@@ -59,12 +59,13 @@ div{
     }
     
     .leftSide{
-        width: 30%;
+        width: 40%;
+        flex-direction: row;
     }
       
     .rightSide{
-        display: unset;
-        width: 30%; 
+        width: 40%;
+        flex-direction: row; 
     }
 }
 
