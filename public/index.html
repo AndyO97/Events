@@ -1,47 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width">
-        <title>Events App</title>
-        <link href="./css/index.css" rel="stylesheet" type="text/css" />
-    </head>
-    <body>
-        <h1>Login Page</h1>
-        <h3>Welcome to the event manager page!</h3>
-        <p>Please enter the information of your account or create one to start sharing your
-            great events and ideas with friends!
-        </p>
-        <div class="main-container">
-            <div class="left-side">
-                <form class="login-form">
-                    <label for="userEmail">
-                        Email or Username:
-                    </label>
-                    <input type="text" id="userEmail" class="formElement" />
-                    <label for="userPassword">
-                        Password:
-                    </label>
-                    <input type="password" id="userPassword" class="formElement"/>
-                    <button type="submit">
-                        Login
-                    </button>
-                </form>
+<!--[if lt IE 7 ]> <html lang="en" class="ie6 ielt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="ie7 ielt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="ie8"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Events App</title>
+<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+<div class="container">
+    <section id="content">
+        <form action="login" class="login-form">
+            <h1>Login Form</h1>
+            <div>
+                <input type="text" placeholder="Username" required="" id="userEmail" />
             </div>
-            <div class="right-side">
-                <form class="register-form">
-                    <label for="register">
-                        Don't have an account?
-                    </label>
-                    <button type="submit" class="formElement">
-                        Register
-                    </button>
-                </form>
+            <div>
+                <input type="password" placeholder="Password" required="" id="userPassword" />
             </div>
-        </div>
-        <section class="results">
+            <div>
+                <button type="submit">
+                Log in
+                </button>
+                <a href="#">Lost your password?</a>
+                <a href="#">Register</a>
+            </div>
+        </form><!-- form -->
+        
+    </section><!-- content -->
+</div><!-- container -->
+<section class="results">
             
-        </section>
-        <script src="./js/index.js"></script>
-    </body>
+</section>
+<script src="./js/index.js"></script>
+</body>
 </html>
+

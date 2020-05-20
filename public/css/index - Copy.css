@@ -1,0 +1,76 @@
+*{
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: blue;
+    text-align: center;
+  }
+
+div{
+    border: 1px solid black;
+    padding: 5px;
+    text-align: center;
+    width: 80%;
+}
+
+.main-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.leftSide{
+    flex-direction: column;
+}
+
+.rightSide{
+    flex-direction: column;
+}
+
+@media (min-width:600px) and (max-width:990px){
+    .maincontainer{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .leftSide{
+        flex-direction: column;
+      }
+      .rightSide{
+        flex-direction: column;
+      }
+}
+
+@media (min-width:991px){
+    .mainContainer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .leftSide{
+        width: 40%;
+        flex-direction: row;
+    }
+      
+    .rightSide{
+        width: 40%;
+        flex-direction: row; 
+    }
+}
+
+
+.formElement{
+    padding: 5px 10px;
+    width: 200px;
+}
