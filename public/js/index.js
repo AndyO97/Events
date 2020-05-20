@@ -44,8 +44,18 @@ function watchLoginForm(){
     })
 }
 
+function watchRegisterForm(){
+    let loginForm = document.querySelector( '.register-form' );
+
+    loginForm.addEventListener( 'submit' , ( event ) => {
+        event.preventDefault();
+        window.location.href = "/pages/register.html";
+    })
+}
+
 function init(){
     watchLoginForm();
+    watchRegisterForm();
 }
 
 init();

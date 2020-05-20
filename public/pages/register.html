@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Register your account</title>
+        <link href="./css/register.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <form class="register-form">
+            <label for="username">
+                Username:
+            </label>
+            <input type="text" id="userUsername" />
+            <label for="userPassword">
+                Password:
+            </label>
+            <input type="password" id="userPassword" />
+            <label for="userEmail">
+                Email:
+            </label>
+            <input type="text" id="userEmail" />
+            <label for="firstName">
+                First name:
+            </label>
+            <input type="text" id="userFirstName" />
+            <label for="LastName">
+                Last name:
+            </label>
+            <input type="text" id="userLastName" />
+            <label for="age">
+                age:
+            </label>
+            <input type="number" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
+            <label for="Tags">
+                Tags that you like (you can add more later):
+            </label>
+            <input type="text" id="userTags" />
+            <button type="submit">
+                Register
+            </button>
+        </form>
+        <section class="results">
+            
+        </section>
+        <script src="./js/register.js"></script>
+    </body>
+</html>
