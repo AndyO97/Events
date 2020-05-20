@@ -73,6 +73,9 @@ function watchRegisterForm(){
               //handleLocationError(true, infoWindow, map.getCenter());
             });
         } 
+        console.log("Your coordinates out of the function are:");
+        console.log(userlat);
+        console.log(userlng);
         if( userlat && userlng){
             userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
         }
