@@ -33,11 +33,12 @@ function initMap() {
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
-      } else {
+    } 
+    else {
         // Browser doesn't support Geolocation
         handleLocationError(false, infoWindow, map.getCenter());
-      }
     }
+}
 
     function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       infoWindow.setPosition(pos);
@@ -46,6 +47,7 @@ function initMap() {
                             'Error: Your browser doesn\'t support geolocation.');
       infoWindow.open(map);
     }
+
 
 function getEventsFetch(){
     let url = `/event-manager/events`;
