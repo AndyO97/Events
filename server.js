@@ -278,7 +278,6 @@ app.get( '/event-manager/validate-user', ( req, res ) => {
     });
 });
 
-
 app.post( '/event-manager/users/login', jsonParser, ( req, res ) => {
     let { email, password } = req.body;
 
@@ -288,7 +287,7 @@ app.post( '/event-manager/users/login', jsonParser, ( req, res ) => {
     }
 
     Users
-        .getUserByUsernameOrEmail( username, email )
+        .getUserByUsernameOrEmail( email )
         .then( user => {
 
             if( user ){
@@ -333,6 +332,7 @@ app.post( '/event-manager/users/login', jsonParser, ( req, res ) => {
             return res.status( 400 ).end();
         });
 });
+
 
 app.post( '/event-manager/register', jsonParser, ( req, res ) => {
     var { username, password, email, firstName, lastName, age, tags, location, eventsOwned, eventsInvited, favorites } = req.body;
