@@ -177,7 +177,7 @@ form:after {
 }
 #userEmail { background-position: 10px 10px !important }
 #userPassword { background-position: 10px -53px !important }
-#content form input[type="submit"] {
+#content form button[type="submit"] {
     background: rgb(254,231,154);
     background: -moz-linear-gradient(top,  rgba(254,231,154,1) 0%, rgba(254,193,81,1) 100%);
     background: -webkit-linear-gradient(top,  rgba(254,231,154,1) 0%,rgba(254,193,81,1) 100%);
