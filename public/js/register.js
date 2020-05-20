@@ -1,7 +1,7 @@
 var userlat, userlng;
 
 function userRegisterFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng ){
-    let url = '/event-manager/users/login';
+    let url = '/event-manager/register';
 
     let data = {
         username,
