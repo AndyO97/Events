@@ -61,6 +61,7 @@ function watchRegisterForm(){
         let age = document.getElementById( 'userAge' ).value;
         let tags = document.getElementById( 'userTags' ).value;
 
+        /*
         if (navigator.geolocation) {
             var location_timeout = setTimeout("geolocFail()", 10000);
         
@@ -79,8 +80,8 @@ function watchRegisterForm(){
             // Fallback for no geolocation
             geolocFail();
         }
-
-        /*
+        */
+        
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position) {
             userlat = position.coords.latitude;
@@ -88,13 +89,10 @@ function watchRegisterForm(){
             console.log("Your coordinates are:");
             console.log(userlat);
             console.log(userlng);
-            }, function() {
-              console.log("Creating account");
-              //handleLocationError(true, infoWindow, map.getCenter());
             });
         }
-        */ 
-        console.log("Your coordinates are:");
+        
+        console.log("Your other coordinates are:");
         console.log(userlat);
         console.log(userlng);
         if( userlat && userlng){
