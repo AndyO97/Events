@@ -18,7 +18,7 @@ const jsonParser = bodyParser.json();
 app.use( cors );
 app.use( express.static( "public" ) );
 app.use( morgan( 'dev' ) );
-app.use( validateToken );
+//app.use( validateToken );
 
 //For events:
 
