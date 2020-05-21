@@ -100,7 +100,6 @@ function getUserData(user){
         })
         .then( responseJSON => {
             results.innerHTML = "";
-            infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<div> Username: ${responseJSON[i].username} </div>`;
                 results.innerHTML += `<div> email: ${responseJSON[i].email} </div>`;
@@ -125,14 +124,8 @@ function getUserData(user){
 
 
 function watchGetUserDataForm(){
-    let eventsForm = document.querySelector( '.title-event-form' );
-
-    eventsForm.addEventListener( 'submit' , ( event ) => {
-        event.preventDefault();
-        let user = localStorage.getItem( 'username' );
-        
-        getUserData(user);
-    })
+    let user = localStorage.getItem( 'username' );
+    getUserData(user);
 }
 
 
