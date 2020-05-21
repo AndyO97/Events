@@ -442,7 +442,7 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
             return res.status( 400 ).end();
         }
 
-        if( username || password || email || firstName || lastName || age ||tags || location || eventsOwned || eventsInvited || favorites ){
+        if( !(username || password || email || firstName || lastName || age ||tags || location || eventsOwned || eventsInvited || favorites) ){
             res.statusMessage = "At least an element should be send to be modified.";
             return res.status( 406 ).end();
         }
