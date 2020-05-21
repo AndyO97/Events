@@ -123,8 +123,10 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
             localStorage.removeItem( 'username' );
             localStorage.setItem( 'token', responseJSON.token );
             localStorage.setItem( 'username', responseJSON.username );
-            console.log("El json:");
-            console.log(responseJSON);
+            //console.log("El json:");
+            //console.log(responseJSON);
+
+            /*
             results.innerHTML = "";
             
             //for(let i=0; i<responseJSON.length; i++){
@@ -149,7 +151,7 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
                   infoWindow2.setPosition(position);
                   infoWindow2.setContent("Updated position");
                   infoWindow2.open(map);
-            //}
+            //}*/
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
@@ -188,6 +190,12 @@ function watchUpdateForm(){
                 console.log(userlng);
                 if( userlat && userlng){
                     userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng );
+                    if(username){
+                        getUserData(username);
+                    }
+                    else{
+                        getUserData(username2);
+                    }
                 }
                 console.log("User Updated");
             }, error);
@@ -195,6 +203,50 @@ function watchUpdateForm(){
     })
 }
 
+function getUserData(user){
+    let url = `/event-manager/user-info/${user}`;
+
+    let settings = {
+        method : 'GET',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+    }
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            console.log("El json:");
+            console.log(responseJSON);
+            results.innerHTML = "";
+            for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div> Username: ${responseJSON[i].username} </div>`;
+                results.innerHTML += `<div> email: ${responseJSON[i].email} </div>`;
+                results.innerHTML += `<div> First name: ${responseJSON[i].firstName} </div>`;
+                results.innerHTML += `<div> Last name: ${responseJSON[i].lastName} </div>`;
+                results.innerHTML += `<div> Age: ${responseJSON[i].age} </div>`;
+                results.innerHTML += `<div> Tags:`;
+                for(let j=0; j<responseJSON[i].tags.length; j++){
+                    results.innerHTML += `${responseJSON[i].tags[j]},`;
+                }
+                results.innerHTML += `</div>`;
+
+                userlat = responseJSON[i].location.coordinates[0];
+                userlng = responseJSON[i].location.coordinates[1];
+                
+            }
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
 
 function init(){
     watchUpdateForm();
