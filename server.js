@@ -552,6 +552,11 @@ app.delete( '/event-manager/delete-user/:username', ( req, res ) => {
         return res.status( 406 ).end();
     }
 
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
         Users
             .deleteUserByUsername( username )
             .then( result => {
@@ -567,6 +572,7 @@ app.delete( '/event-manager/delete-user/:username', ( req, res ) => {
                 res.statusMessage = "Something is wrong with the Database. Try again later";
                 return res.status( 500 ).end();
             });
+    });
 });
 
 app.post( '/event-manager/add-user', jsonParser, ( req, res ) => {

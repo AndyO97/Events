@@ -28,33 +28,16 @@ window.onclick = function(e) {
 
 
 
-function userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng ){
+function userDeleteFetch( username  ){
     let url = `/event-manager/update-user/${username2}`;
 
-    let data = {
-        username,
-        password,
-        email,
-        firstName,
-        lastName,
-        age,
-        tags,
-        location : {
-            type : "Point",
-            coordinates : [
-                userlat,
-                userlng
-            ]
-        }
-    }
-
     let settings = {
-        method : 'PATCH',
+        method : 'DELETE',
         headers : {
             sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
-        body : JSON.stringify( data )
+        //body : JSON.stringify( data )
     }
 
     let results = document.querySelector( '.results' );
@@ -67,70 +50,32 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
-            
-            if(username){
-                localStorage.setItem( 'username', username );
-            }
-            else{
-                localStorage.setItem( 'username', username2 );
-            }
-
-            localStorage.setItem( 'token', responseJSON.token );
-            
             console.log("El json:");
             console.log(responseJSON);
-            //return res.status( 200 ).json( responseJSON );
+
+            //delete owned events
+
+            localStorage.removeItem( 'token');
+            localStorage.removeItem( 'username');
+            localStorage.removeItem( 'id');
+            window.location.href = "./../index.html";
+            
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
         });
 }
 
-function error() {
-    let results = document.querySelector( '.results' );
-    results.innerHTML = "Unable to retrieve your location";
-}
 
 function watchUpdateForm(){
     let registerForm = document.querySelector( '.register-form' );
-    let results = document.querySelector( '.results' );
+    //let results = document.querySelector( '.results' );
 
     registerForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
-        let username2 = localStorage.getItem( 'username' );
-        let username = document.getElementById( 'userUsername' ).value;
-        let password = document.getElementById( 'userPassword' ).value;
-        let email = document.getElementById( 'userEmail' ).value;
-        let firstName = document.getElementById( 'userFirstName' ).value;
-        let lastName = document.getElementById( 'userLastName' ).value;
-        let age = document.getElementById( 'userAge' ).value;
-        let tags = document.getElementById( 'userTags' ).value;
+        let username = localStorage.getItem( 'username' );
         
-        if(!navigator.geolocation) {
-            results.innerHTML = "Geolocation is not supported by your browser";
-          } else {
-            console.log("Locating…");
-            navigator.geolocation.getCurrentPosition(function(position) {
-                userlat  = position.coords.latitude;
-                userlng = position.coords.longitude;
-                console.log("Your coordinates are:");
-                console.log(userlat);
-                console.log(userlng);
-            }, error);
-        }
-        userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng )
-                //.then(result => {
-                    console.log("Dentro de la 2da funcion");
-                    //console.log(result);
-                    if(username){
-                        getUserData(username);
-                    }
-                    else{
-                        getUserData(username2);
-                    }
-                //});    
-        console.log("User Updated");
-        //results.innerHTML += `<div> Your information is being updated... </div>`;
+        userDeleteFetch( username);
     })
 }
 

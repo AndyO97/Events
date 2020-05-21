@@ -197,7 +197,7 @@ function watchUpdateForm(){
                 console.log(userlng);
             }, error);
         }
-        userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng )
+        userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng );
                 //.then(result => {
                     console.log("Dentro de la 2da funcion");
                     //console.log(result);
