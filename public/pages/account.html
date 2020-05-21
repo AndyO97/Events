@@ -29,7 +29,7 @@
             </button>
             <div class="dropdown-content" id="myDropdownAccount">
                 <a href="/pages/account.html">View my account</a>
-                <a href="#">Change my information</a>
+                <a href="/pages/updateAccount.html">Change my information</a>
                 <a href="#">Sign Out</a>
                 <a href="#">Delete my account</a>
             </div>
@@ -37,10 +37,11 @@
       </div>
         <h1>My profile</h1>
         <p>This is the information that we have in our database</p>
-        <div id="map"></div>
         <section class="results">
 
         </section>
+        <p>The location stored is: </p>
+        <div id="map"></div>
         <script src="./../js/account.js"></script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"

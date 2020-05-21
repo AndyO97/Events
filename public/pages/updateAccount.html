@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>My account</title>
+        <link href="./../css/updateAccount.css" rel="stylesheet" type="text/css" />
+        <script src ="./../js/general.js"></script>
+    </head>
+    <body onload="watchGetUserDataForm()">
+      <div class="navbar">
+        <a href="/pages/home.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#Contact">Contact Us</a>
+        <div class="dropdown">
+            <button class="dropbtn-Events" onclick="myFunctionEvents()">Events
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdownEvents">
+                <a href="#">View my events</a>
+                <a href="#">View my favorites</a>
+                <a href="#">Modify an event</a>
+                <a href="#">Delete an event</a>
+            </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn-Account" onclick="myFunctionAccount()">Account
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdownAccount">
+                <a href="/pages/account.html">View my account</a>
+                <a href="/pages/updateAccount.html">Change my information</a>
+                <a href="#">Sign Out</a>
+                <a href="#">Delete my account</a>
+            </div>
+        </div> 
+      </div>
+        <h1>Update your profile</h1>
+        <p>Only add the information that you want to update.</p>
+        <div class="container">
+            <section id="content">
+                <form action="register" class="register-form">
+                    <h1>Register Form</h1>
+                    <div>
+                        <input type="text" placeholder="Username" required="" id="userUsername" />
+                    </div>
+                    <div>
+                        <input type="password" placeholder="Password" required="" id="userPassword" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Email" required="" id="userEmail" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="First name" required="" id="userFirstName" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Last name" required="" id="userLastName" />
+                    </div>
+                    <div>
+                        <input type="number" placeholder="age" required="" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="One tag that you like (you can add more later)" required="" id="userTags" />
+                    </div>
+                    <div>
+                        <button type="submit">
+                        Register
+                        </button>
+                        <!--a href="#">Lost your password?</a-->
+                        <a href="./../index.html">Already have an account?</a>
+                    </div>
+                </form><!-- form -->
+                
+            </section><!-- content -->
+        </div><!-- container -->
+        <p>The updated information is the following: </p>
+        <section class="results">
+
+        </section>
+        <p>The location stored is: </p>
+        <div id="map"></div>
+        <script src="./../js/updateAccount.js"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
+        ></script>
+    </body>
+</html>
