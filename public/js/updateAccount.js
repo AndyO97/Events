@@ -169,6 +169,7 @@ function watchUpdateForm(){
 
     registerForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
+        let username2 = localStorage.getItem( 'username' );
         let username = document.getElementById( 'userUsername' ).value;
         let password = document.getElementById( 'userPassword' ).value;
         let email = document.getElementById( 'userEmail' ).value;
@@ -188,11 +189,11 @@ function watchUpdateForm(){
                 console.log(userlat);
                 console.log(userlng);
                 if( userlat && userlng){
-                    userUpdateFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
+                    userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng );
                 }
-                console.log("Created user");
+                console.log("User Updated");
             }, error);
-          }
+        }
     })
 }
 
