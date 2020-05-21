@@ -7,23 +7,33 @@
         <link href="./../css/account.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-        <div class="navbar">
-            <a href="/pages/home.html">Home</a>
-            <a href="#about">About</a>
-            <a href="#Contact">Contact Us</a>
-            <a href="#Events">Events</a>
-            <div class="dropdown">
-            <button class="dropbtn" onclick="myFunction()">Account
-              <i class="fa fa-caret-down"></i>
+      <div class="navbar">
+        <a href="/pages/home.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#Contact">Contact Us</a>
+        <div class="dropdown">
+            <button class="dropbtn-Events" onclick="myFunctionEvents()">Events
+                <i class="fa fa-caret-down"></i>
             </button>
-            <div class="dropdown-content" id="myDropdown">
-              <a href="/pages/account.html">View my account</a>
-              <a href="#">Change my information</a>
-              <a href="#">Sign Out</a>
-              <a href="#">Delete my account</a>
+            <div class="dropdown-content" id="myDropdownEvents">
+                <a href="#">View my events</a>
+                <a href="#">View my favorites</a>
+                <a href="#">Modify an event</a>
+                <a href="#">Delete an event</a>
             </div>
-            </div> 
-          </div>
+        </div>
+        <div class="dropdown">
+            <button class="dropbtn-Account" onclick="myFunctionAccount()">Account
+                <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content" id="myDropdownAccount">
+                <a href="/pages/account.html">View my account</a>
+                <a href="#">Change my information</a>
+                <a href="#">Sign Out</a>
+                <a href="#">Delete my account</a>
+            </div>
+        </div> 
+      </div>
         <h1>My profile</h1>
         <p>This is the information that we have in our database</p>
         <div id="map"></div>
