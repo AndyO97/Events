@@ -417,7 +417,13 @@ app.post( '/event-manager/register', jsonParser, ( req, res ) => {
             Users
                 .createUser( newUser )
                 .then( result => {
-                    return res.status( 201 ).json( result ); 
+                    jsonwebtoken.sign( result, TOKEN, { expiresIn : '15m' }, ( err, token ) => {
+                        if( err ){
+                            res.statusMessage = "Something went wrong with generating the token.";
+                            return res.status( 400 ).end();
+                        }
+                        return res.status( 200 ).json( { token } );
+                    }); 
                 })
                 .catch( err => {
                     res.statusMessage = err.message;
@@ -500,10 +506,6 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
                     if(IsPassword){
                         result.password = password;
                     }
-                    console.log("The JSON before saving");
-                    console.log(result);
-                    result.save();
-                    console.log("The updated JSON");
                     console.log(result);
                     return res.status( 202 ).json( result );
                 })
