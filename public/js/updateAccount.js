@@ -196,6 +196,8 @@ function watchUpdateForm(){
                 console.log(userlng);
                 if( userlat && userlng){
                     userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng, function(){
+                        console.log("Dentro de la 2da funcion");
+                        console.log(username, username2);
                         if(username){
                             getUserData(username);
                         }
