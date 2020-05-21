@@ -141,9 +141,9 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
                 results.innerHTML += `<div> Last name: ${responseJSON.lastName} </div>`;
                 results.innerHTML += `<div> Age: ${responseJSON.age} </div>`;
                 results.innerHTML += `<div> Tags:`;
-                for(let j=0; j<responseJSON.tags.length; j++){
-                    results.innerHTML += `${responseJSON.tags[j]},`;
-                }
+                //for(let j=0; j<responseJSON.tags.length; j++){
+                //    results.innerHTML += `${responseJSON.tags[j]},`;
+                //}
                 results.innerHTML += `</div>`;
 
                 let infoWindow2 = new google.maps.InfoWindow;
