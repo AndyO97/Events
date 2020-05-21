@@ -79,8 +79,6 @@ window.onclick = function(e) {
         }
 }
 
-var userlat, userlng;
-
 function userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng ){
     let url = `/event-manager/update-user/${username2}`;
 
