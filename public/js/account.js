@@ -99,6 +99,8 @@ function getUserData(user){
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
+            console.log("El json:");
+            console.log(responseJSON);
             results.innerHTML = "";
             for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<div> Username: ${responseJSON[i].username} </div>`;
@@ -125,6 +127,7 @@ function getUserData(user){
 
 function watchGetUserDataForm(){
     let user = localStorage.getItem( 'username' );
+    console.log("Starting to fetch your data");
     getUserData(user);
 }
 
