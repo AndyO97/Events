@@ -207,14 +207,9 @@ function watchUpdateForm(){
                     else{
                         getUserData(username2);
                     }
-                    if(username){
-                        getUserData(username);
-                    }
-                    else{
-                        getUserData(username2);
-                    }
                 //});    
         console.log("User Updated");
+        results.innerHTML += `<div> Your information is being updated... </div>`;
     })
 }
 
