@@ -131,7 +131,7 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
             //console.log("El json:");
             //console.log(responseJSON);
 
-            /*
+            
             results.innerHTML = "";
             
             //for(let i=0; i<responseJSON.length; i++){
@@ -195,12 +195,14 @@ function watchUpdateForm(){
                 console.log(userlng);
                 if( userlat && userlng){
                     userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng );
+                    /*
                     if(username){
                         getUserData(username);
                     }
                     else{
                         getUserData(username2);
                     }
+                    */
                 }
                 console.log("User Updated");
             }, error);
