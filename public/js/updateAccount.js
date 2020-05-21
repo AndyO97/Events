@@ -198,7 +198,7 @@ function watchUpdateForm(){
             }, error);
         }
         userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng )
-                .then(result => {
+                //.then(result => {
                     console.log("Dentro de la 2da funcion");
                     console.log(result);
                     if(username){
@@ -207,7 +207,13 @@ function watchUpdateForm(){
                     else{
                         getUserData(username2);
                     }
-                });    
+                    if(username){
+                        getUserData(username);
+                    }
+                    else{
+                        getUserData(username2);
+                    }
+                //});    
         console.log("User Updated");
     })
 }
