@@ -4,7 +4,8 @@ let settings = {
     method : 'GET',
     headers : {
         sessiontoken : localStorage.getItem( 'token' )
-    }
+    },
+    async : false
 };
 
 fetch( url, settings )
