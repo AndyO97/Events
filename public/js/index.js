@@ -43,7 +43,7 @@ function watchLoginForm(){
         userLoginFetch( email, password );
     })
 }
-
+/*
 function watchRegisterForm(){
     let loginForm = document.querySelector( '.register-form' );
 
@@ -52,7 +52,7 @@ function watchRegisterForm(){
         window.location.href = "/pages/register.html";
     })
 }
-
+*/
 function init(){
     watchLoginForm();
     watchRegisterForm();
