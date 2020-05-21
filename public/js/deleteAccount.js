@@ -28,8 +28,8 @@ window.onclick = function(e) {
 
 
 
-function userDeleteFetch( username  ){
-    let url = `/event-manager/update-user/${username}`;
+function userDeleteFetch( username ){
+    let url = `/event-manager/delete-user/${username}`;
 
     let settings = {
         method : 'DELETE',
@@ -67,11 +67,11 @@ function userDeleteFetch( username  ){
 }
 
 
-function watchUpdateForm(){
-    let registerForm = document.querySelector( '.register-form' );
+function watchDeleteForm(){
+    let deleteForm = document.querySelector( '.register-form' );
     //let results = document.querySelector( '.results' );
 
-    registerForm.addEventListener( 'submit' , ( event ) => {
+    deleteForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
         let username = localStorage.getItem( 'username' );
         
@@ -79,54 +79,8 @@ function watchUpdateForm(){
     })
 }
 
-
-function getUserData(user){
-    let url = `/event-manager/user-info/${user}`;
-
-    let settings = {
-        method : 'GET',
-        headers : {
-            sessiontoken : localStorage.getItem( 'token' ),
-            'Content-Type' : 'application/json'
-        },
-    }
-    let results = document.querySelector( '.results' );
-
-    fetch( url, settings )
-        .then( response => {
-            if( response.ok ){
-                return response.json();
-            }
-            throw new Error( response.statusText );
-        })
-        .then( responseJSON => {
-            console.log("El json:");
-            console.log(responseJSON);
-            results.innerHTML = "";
-            for(let i=0; i<responseJSON.length; i++){
-                results.innerHTML += `<div> Username: ${responseJSON[i].username} </div>`;
-                results.innerHTML += `<div> email: ${responseJSON[i].email} </div>`;
-                results.innerHTML += `<div> First name: ${responseJSON[i].firstName} </div>`;
-                results.innerHTML += `<div> Last name: ${responseJSON[i].lastName} </div>`;
-                results.innerHTML += `<div> Age: ${responseJSON[i].age} </div>`;
-                results.innerHTML += `<div> Tags:`;
-                for(let j=0; j<responseJSON[i].tags.length; j++){
-                    results.innerHTML += `${responseJSON[i].tags[j]},`;
-                }
-                results.innerHTML += `</div>`;
-
-                userlat = responseJSON[i].location.coordinates[0];
-                userlng = responseJSON[i].location.coordinates[1];
-                
-            }
-        })
-        .catch( err => {
-            results.innerHTML = `<div> ${err.message} </div>`;
-        });
-}
-
 function init(){
-    watchUpdateForm();
+    watchDeleteForm();
 }
 
 init();
