@@ -505,7 +505,7 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
 
                 })
                 .catch( err => {
-                    res.statusMessage = `There are no users with the provided 'username=${username2}'.`;
+                    res.statusMessage = err.message;
                     return res.status( 404 ).end();
                 })    
 
