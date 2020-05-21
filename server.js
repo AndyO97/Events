@@ -417,7 +417,7 @@ app.post( '/event-manager/register', jsonParser, ( req, res ) => {
             Users
                 .createUser( newUser )
                 .then( result => {
-                    jsonwebtoken.sign( result, TOKEN, { expiresIn : '15m' }, ( err, token ) => {
+                    jsonwebtoken.sign( newUser, TOKEN, { expiresIn : '15m' }, ( err, token ) => {
                         if( err ){
                             res.statusMessage = "Something went wrong with generating the token.";
                             return res.status( 400 ).end();
