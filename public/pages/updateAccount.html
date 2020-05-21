@@ -7,7 +7,7 @@
         <link href="./../css/updateAccount.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
     </head>
-    <body onload="watchGetUserDataForm()">
+    <body>
       <div class="navbar">
         <a href="/pages/home.html">Home</a>
         <a href="#about">About</a>
@@ -42,29 +42,29 @@
                 <form action="register" class="register-form">
                     <h1>Update Profile Form</h1>
                     <div>
-                        <input type="text" placeholder="Username" required="" id="userUsername" />
+                        <input type="text" placeholder="Username" id="userUsername" />
                     </div>
                     <div>
-                        <input type="password" placeholder="Password" required="" id="userPassword" />
+                        <input type="password" placeholder="Password" id="userPassword" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Email" required="" id="userEmail" />
+                        <input type="text" placeholder="Email" id="userEmail" />
                     </div>
                     <div>
-                        <input type="text" placeholder="First name" required="" id="userFirstName" />
+                        <input type="text" placeholder="First name" id="userFirstName" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Last name" required="" id="userLastName" />
+                        <input type="text" placeholder="Last name" id="userLastName" />
                     </div>
                     <div>
-                        <input type="number" placeholder="age" required="" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
+                        <input type="number" placeholder="age" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
                     </div>
                     <div>
-                        <input type="text" placeholder="One tag that you like (you can add more later)" required="" id="userTags" />
+                        <input type="text" placeholder="One tag that you like (you can add more later)" id="userTags" />
                     </div>
                     <div>
                         <button type="submit">
-                        Register
+                        Update
                         </button>
                     </div>
                 </form><!-- form -->

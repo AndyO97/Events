@@ -55,7 +55,7 @@ function watchRegisterForm(){
 */
 function init(){
     watchLoginForm();
-    watchRegisterForm();
+    //watchRegisterForm();
 }
 
 init();
