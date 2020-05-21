@@ -447,20 +447,6 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
             return res.status( 406 ).end();
         }
 
-        if((!age)&&( typeof(age) !== 'number' )){
-            res.statusMessage = "The 'age' MUST be a number.";
-            return res.status( 409 ).end();
-        }
-        
-        if( (typeof(location.coordinates[0]) !== 'number') && (typeof(location.coordinates[1]) !== 'number') ){
-            res.statusMessage = "The coordinates for the location MUST be numbers.";
-            return res.status( 409 ).end();
-        }
-    
-        if( location.type !== 'Point' ){
-            res.statusMessage = "The type of the location MUST be 'Point'.";
-            return res.status( 409 ).end();
-        }
 
                 Users
                 .getUserByUsername2( username2 )
