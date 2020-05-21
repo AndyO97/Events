@@ -24,7 +24,7 @@ fetch( url, settings )
             localStorage.setItem( 'username', responseJSON.username );
         }
         if(!localStorage.getItem( 'id')){
-            localStorage.setItem( 'id', responseJSON.id );
+            localStorage.setItem( 'id', responseJSON._id );
         }
     })
     .catch( err => {
