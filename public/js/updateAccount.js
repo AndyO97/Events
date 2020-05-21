@@ -131,7 +131,7 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
             console.log("El json:");
             console.log(responseJSON);
 
-            
+            /*
             results.innerHTML = "";
             
             //for(let i=0; i<responseJSON.length; i++){
@@ -156,7 +156,8 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
                   infoWindow2.setPosition(position);
                   infoWindow2.setContent("Updated position");
                   infoWindow2.open(map);
-            //}*/
+            //}
+            */
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
@@ -194,15 +195,14 @@ function watchUpdateForm(){
                 console.log(userlat);
                 console.log(userlng);
                 if( userlat && userlng){
-                    userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng );
-                    /*
-                    if(username){
-                        getUserData(username);
-                    }
-                    else{
-                        getUserData(username2);
-                    }
-                    */
+                    userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng, function(){
+                        if(username){
+                            getUserData(username);
+                        }
+                        else{
+                            getUserData(username2);
+                        }
+                    });
                 }
                 console.log("User Updated");
             }, error);
