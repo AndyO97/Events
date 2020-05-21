@@ -142,8 +142,8 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
                 let infoWindow2 = new google.maps.InfoWindow;
 
                 var position = {
-                    lat: responseJSON[i].location.coordinates[0],
-                    lng: responseJSON[i].location.coordinates[1]
+                    lat: responseJSON.location.coordinates[0],
+                    lng: responseJSON.location.coordinates[1]
                   };
         
                   infoWindow2.setPosition(position);
