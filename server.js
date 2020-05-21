@@ -545,6 +545,7 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
 
 app.delete( '/event-manager/delete-user/:username', ( req, res ) => {
     
+    const { sessiontoken } = req.headers;
     let username = req.params.username;
 
     if( !username ){

@@ -26,7 +26,7 @@ window.onclick = function(e) {
         }
 }
 
-
+//For deleting
 
 function userDeleteFetch( username ){
     let url = `/event-manager/delete-user/${username}`;
@@ -52,8 +52,7 @@ function userDeleteFetch( username ){
             console.log("El json:");
             console.log(responseJSON);
 
-            //delete owned events
-
+            //Call function to delete events by owner's username
             localStorage.removeItem( 'token');
             localStorage.removeItem( 'username');
             localStorage.removeItem( 'id');
@@ -68,10 +67,10 @@ function userDeleteFetch( username ){
 function watchDeleteForm(){
     let deleteForm = document.querySelector( '.register-form' );
     //let results = document.querySelector( '.results' );
+    let username = localStorage.getItem( 'username' );
 
     deleteForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
-        let username = localStorage.getItem( 'username' );
         
         userDeleteFetch( username);
     })
