@@ -20,6 +20,14 @@ fetch( url, settings )
         console.log(`Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`);
         let greeting = document.querySelector( '.results' );
         greeting.innerHTML = `Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`;
+        if(!localStorage.getItem( 'username')){
+            localStorage.setItem( 'username', responseJSON.username );
+        }
+        if(!localStorage.getItem( 'id')){
+            localStorage.setItem( 'id', responseJSON.username );
+        }
+        
+        localStorage.setItem( 'token', responseJSON.token );
     })
     .catch( err => {
         console.log( err.message );
