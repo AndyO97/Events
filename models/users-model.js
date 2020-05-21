@@ -89,6 +89,16 @@ const Users = {
                     throw new Error( err.message );
                 }); 
     },
+    getUserByUsername2 : function( username ){
+        return userModel
+                .find( { username : username } )
+                .then( user => {
+                    return user;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                }); 
+    },
     getUserByUsernameOrEmail : function( email ){
         return userModel
                 .findOne( { $or:[ {username : email }, { email : email} ]} )

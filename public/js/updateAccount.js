@@ -79,16 +79,37 @@ window.onclick = function(e) {
         }
 }
 
-function getUserData(user){
-    let url = `/event-manager/user-info/${user}`;
+var userlat, userlng;
+
+function userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng ){
+    let url = `/event-manager/update-user/${username2}`;
+
+    let data = {
+        username,
+        password,
+        email,
+        firstName,
+        lastName,
+        age,
+        tags,
+        location : {
+            type : "Point",
+            coordinates : [
+                userlat,
+                userlng
+            ]
+        }
+    }
 
     let settings = {
-        method : 'GET',
+        method : 'PATCH',
         headers : {
             sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
+        body : JSON.stringify( data )
     }
+
     let results = document.querySelector( '.results' );
 
     fetch( url, settings )
@@ -99,36 +120,88 @@ function getUserData(user){
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
+            
+            localStorage.removeItem( 'token' );
+            localStorage.removeItem( 'username' );
+            localStorage.setItem( 'token', responseJSON.token );
+            localStorage.setItem( 'username', responseJSON.username );
             console.log("El json:");
             console.log(responseJSON);
             results.innerHTML = "";
-            for(let i=0; i<responseJSON.length; i++){
-                results.innerHTML += `<div> Username: ${responseJSON[i].username} </div>`;
-                results.innerHTML += `<div> email: ${responseJSON[i].email} </div>`;
-                results.innerHTML += `<div> First name: ${responseJSON[i].firstName} </div>`;
-                results.innerHTML += `<div> Last name: ${responseJSON[i].lastName} </div>`;
-                results.innerHTML += `<div> Age: ${responseJSON[i].age} </div>`;
+            
+            //for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div> Username: ${responseJSON.username} </div>`;
+                results.innerHTML += `<div> email: ${responseJSON.email} </div>`;
+                results.innerHTML += `<div> First name: ${responseJSON.firstName} </div>`;
+                results.innerHTML += `<div> Last name: ${responseJSON.lastName} </div>`;
+                results.innerHTML += `<div> Age: ${responseJSON.age} </div>`;
                 results.innerHTML += `<div> Tags:`;
-                for(let j=0; j<responseJSON[i].tags.length; j++){
-                    results.innerHTML += `${responseJSON[i].tags[j]},`;
+                for(let j=0; j<responseJSON.tags.length; j++){
+                    results.innerHTML += `${responseJSON.tags[j]},`;
                 }
                 results.innerHTML += `</div>`;
 
-                userlat = responseJSON[i].location.coordinates[0];
-                userlng = responseJSON[i].location.coordinates[1];
-                
-            }
+                let infoWindow2 = new google.maps.InfoWindow;
+
+                var position = {
+                    lat: responseJSON[i].location.coordinates[0],
+                    lng: responseJSON[i].location.coordinates[1]
+                  };
+        
+                  infoWindow2.setPosition(position);
+                  infoWindow2.setContent("Updated position");
+                  infoWindow2.open(map);
+            //}
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
         });
 }
 
+function error() {
+    let results = document.querySelector( '.results' );
+    results.innerHTML = "Unable to retrieve your location";
+  }
 
-function watchGetUserDataForm(){
-    let user = localStorage.getItem( 'username' );
-    console.log("Starting to fetch your data");
-    getUserData(user);
+function watchUpdateForm(){
+    let registerForm = document.querySelector( '.register-form' );
+    let results = document.querySelector( '.results' );
+
+    registerForm.addEventListener( 'submit' , ( event ) => {
+        event.preventDefault();
+        let username = document.getElementById( 'userUsername' ).value;
+        let password = document.getElementById( 'userPassword' ).value;
+        let email = document.getElementById( 'userEmail' ).value;
+        let firstName = document.getElementById( 'userFirstName' ).value;
+        let lastName = document.getElementById( 'userLastName' ).value;
+        let age = document.getElementById( 'userAge' ).value;
+        let tags = document.getElementById( 'userTags' ).value;
+        
+        if(!navigator.geolocation) {
+            results.innerHTML = "Geolocation is not supported by your browser";
+          } else {
+            console.log("Locating…");
+            navigator.geolocation.getCurrentPosition(function(position) {
+                userlat  = position.coords.latitude;
+                userlng = position.coords.longitude;
+                console.log("Your coordinates are:");
+                console.log(userlat);
+                console.log(userlng);
+                if( userlat && userlng){
+                    userUpdateFetch( username, password, email, firstName, lastName, age, tags, userlat, userlng );
+                }
+                console.log("Created user");
+            }, error);
+          }
+    })
 }
+
+
+function init(){
+    watchUpdateForm();
+}
+
+init();
+
 
 

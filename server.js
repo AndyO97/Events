@@ -206,7 +206,7 @@ app.get( '/blog-post/events-by-user/:username', ( req, res ) => {
 });
 
 app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
-    var { title, description, pictures, tags, date, recurring, location, creator, participants, comments } = req.body;
+    var { title, description, pictures, tags, date, private, location, creator, participants, comments } = req.body;
 
     if( !title || !description || !date || !location || !creator){
         res.statusMessage = "One of these parameters is missing in the request: 'username', 'email', 'tags' or 'location'.";
@@ -228,8 +228,8 @@ app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
     if(!tags){
         tags = [];
     }
-    if(!recurring){
-        recurring = false;
+    if(!private){
+        private = false;
     }
 
     if(!participants){
@@ -245,7 +245,7 @@ app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
         pictures,
         tags, 
         date, 
-        recurring, 
+        private, 
         location, 
         creator, 
         participants, 
@@ -262,6 +262,8 @@ app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
             return res.status( 400 ).end();
         });
 });
+
+
 
 //For users:
 app.get( '/event-manager/user-info/:username', ( req, res ) => {
@@ -426,6 +428,104 @@ app.post( '/event-manager/register', jsonParser, ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+});
+
+app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
+    var { username, password, email, firstName, lastName, age, tags, location, eventsOwned, eventsInvited, favorites } = req.body;
+    let IsPassword = false;
+    let username2 = req.params.username;
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+
+        if( !username || !password || !email || !firstName || !lastName || !age ||!tags || !location || !eventsOwned || !eventsInvited || !favorites ){
+            res.statusMessage = "At least an element should be send to be modified.";
+            return res.status( 406 ).end();
+        }
+
+        if((!age)&&( typeof(age) !== 'number' )){
+            res.statusMessage = "The 'age' MUST be a number.";
+            return res.status( 409 ).end();
+        }
+        
+        if( (typeof(location.coordinates[0]) !== 'number') && (typeof(location.coordinates[1]) !== 'number') ){
+            res.statusMessage = "The coordinates for the location MUST be numbers.";
+            return res.status( 409 ).end();
+        }
+    
+        if( location.type !== 'Point' ){
+            res.statusMessage = "The type of the location MUST be 'Point'.";
+            return res.status( 409 ).end();
+        }
+
+                Users
+                .getUserByUsername2( username2 )
+                .then( result => {
+                    if( !result){
+                        res.statusMessage = `There are no users with the provided 'username=${username2}'.`+
+                                            result.errmsg;
+                        return res.status( 404 ).end();
+                    }
+                    if(username){
+                        result.username = username
+                    }
+                    if(password){
+                        IsPassword = true;
+                    }
+                    else{
+                        password ="123";
+                    }
+                    if(email){
+                        result.email = email;
+                    }
+                    if(firstName){
+                        result.firstName = firstName;
+                    }
+                    if(lastName){
+                        result.lastName = lastName;
+                    }
+                    if(age){
+                        result.age = age;
+                    }
+                    if(tags){
+                        result.tags.push(tags);
+                    }
+                    if(location){
+                        result.location = location;
+                    }
+                    if(eventsOwned){
+                        result.eventsOwned.push(eventsOwned);
+                    }
+                    if(eventsInvited){
+                        result.eventsInvited.push(eventsInvited);
+                    }
+                    if(favorites){
+                        result.favorites.push(favorites);
+                    }
+                    bcrypt.hash( password, 10 )
+                    .then( hashedPassword => {
+                        let password = hashedPassword;
+                            if(IsPassword){
+                                result.password = password;
+                            }
+                            result.save(); 
+                            return res.status( 202 ).json( result );
+                    })
+                    .catch( err => {
+                        res.statusMessage = err.message;
+                        return res.status( 400 ).end();
+                    });
+                })
+                .catch( err => {
+                    res.statusMessage = `There are no users with the provided 'username=${username2}'.`;
+                    return res.status( 404 ).end();
+                })
+    });
+
 });
 
 app.post( '/event-manager/add-user', jsonParser, ( req, res ) => {
