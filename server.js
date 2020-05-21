@@ -473,7 +473,7 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
                     }
 
                     if(username){
-                        result.username = username
+                        result.username = username;
                     }
                     if(email){
                         result.email = email;

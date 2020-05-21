@@ -128,8 +128,8 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
 
             localStorage.setItem( 'token', responseJSON.token );
             
-            //console.log("El json:");
-            //console.log(responseJSON);
+            console.log("El json:");
+            console.log(responseJSON);
 
             
             results.innerHTML = "";
