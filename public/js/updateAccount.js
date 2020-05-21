@@ -119,9 +119,6 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
         })
         .then( responseJSON => {
             
-            localStorage.removeItem( 'token' );
-            localStorage.removeItem( 'username' );
-
             if(username){
                 localStorage.setItem( 'username', username );
             }
