@@ -502,7 +502,7 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
                     }
                     console.log("The JSON before saving");
                     console.log(result);
-                    result = result.save(callback);
+                    result.save();
                     console.log("The updated JSON");
                     console.log(result);
                     return res.status( 202 ).json( result );

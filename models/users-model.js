@@ -91,7 +91,7 @@ const Users = {
     },
     getUserByUsername2 : function( username ){
         return userModel
-                .find( { username : username } )
+                .findOne( { username : username } )
                 .then( user => {
                     return user;
                 })
