@@ -543,6 +543,32 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
 
 });
 
+app.delete( '/event-manager/delete-user/:username', ( req, res ) => {
+    
+    let username = req.params.username;
+
+    if( !username ){
+        res.statusMessage = "Please send the 'username' to delete a user";
+        return res.status( 406 ).end();
+    }
+
+        Users
+            .deleteUserByUsername( username )
+            .then( result => {
+                if( !result ){
+                    res.statusMessage = `There are no users with the username 'username=${username}'.`+
+                                        result.errmsg;
+                    return res.status( 409 ).end();
+                }
+                
+                return res.status( 200 ).json( result ); 
+            })
+            .catch( err => {
+                res.statusMessage = "Something is wrong with the Database. Try again later";
+                return res.status( 500 ).end();
+            });
+});
+
 app.post( '/event-manager/add-user', jsonParser, ( req, res ) => {
     var { username, password, email, firstName, lastName, age, tags, location, eventsOwned, eventsInvited, favorites } = req.body;
 
