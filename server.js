@@ -447,8 +447,17 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
             return res.status( 406 ).end();
         }
 
+        if(password){
+            IsPassword = true;
+        }
+        else{
+            password ="123";
+        }
 
-                Users
+        bcrypt.hash( password, 10 )
+        .then( hashedPassword => {
+            let password = hashedPassword;
+            Users
                 .getUserByUsername2( username2 )
                 .then( result => {
                     if( !result){
@@ -456,14 +465,9 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
                                             result.errmsg;
                         return res.status( 404 ).end();
                     }
+
                     if(username){
                         result.username = username
-                    }
-                    if(password){
-                        IsPassword = true;
-                    }
-                    else{
-                        password ="123";
                     }
                     if(email){
                         result.email = email;
@@ -492,24 +496,25 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
                     if(favorites){
                         result.favorites.push(favorites);
                     }
-                    bcrypt.hash( password, 10 )
-                    .then( hashedPassword => {
-                        let password = hashedPassword;
-                            if(IsPassword){
-                                result.password = password;
-                            }
-                            result.save(); 
-                            return res.status( 202 ).json( result );
-                    })
-                    .catch( err => {
-                        res.statusMessage = err.message;
-                        return res.status( 400 ).end();
-                    });
+
+                    if(IsPassword){
+                        result.password = password;
+                    }
+                    result.save(); 
+                    return res.status( 202 ).json( result );
+
                 })
                 .catch( err => {
                     res.statusMessage = `There are no users with the provided 'username=${username2}'.`;
                     return res.status( 404 ).end();
-                })
+                })    
+
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });            
+                
     });
 
 });
