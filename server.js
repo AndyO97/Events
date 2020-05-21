@@ -500,7 +500,9 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
                     if(IsPassword){
                         result.password = password;
                     }
-                    result = result.save();
+                    console.log("The JSON before saving");
+                    console.log(result);
+                    result = result.save(callback);
                     console.log("The updated JSON");
                     console.log(result);
                     return res.status( 202 ).json( result );
