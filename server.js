@@ -264,6 +264,26 @@ app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
 });
 
 //For users:
+app.get( '/event-manager/user-info/:username', ( req, res ) => {
+    const { sessiontoken } = req.headers;
+    const username = req.params.username;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+        Users
+        .getUserByUsername(username)
+        .then( user => {
+            return res.status( 200 ).json( user );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+    });
+});
 
 app.get( '/event-manager/validate-user', ( req, res ) => {
     const { sessiontoken } = req.headers;

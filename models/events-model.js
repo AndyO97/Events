@@ -19,7 +19,7 @@ const eventSchema = mongoose.Schema({
         type : Date,
         required : true
    },
-    recurring : {
+    private : {
         type : Boolean
     },
     location: {

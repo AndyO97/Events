@@ -24,10 +24,8 @@ fetch( url, settings )
             localStorage.setItem( 'username', responseJSON.username );
         }
         if(!localStorage.getItem( 'id')){
-            localStorage.setItem( 'id', responseJSON.username );
+            localStorage.setItem( 'id', responseJSON.id );
         }
-        
-        localStorage.setItem( 'token', responseJSON.token );
     })
     .catch( err => {
         console.log( err.message );

@@ -20,17 +20,22 @@ function initMap() {
           var pos = {
             lat: position.coords.latitude,
             lng: position.coords.longitude
-          };
-
-          userlat = position.coords.latitude;
-          userlng = position.coords.longitude;
-          console.log("Your coordinates are:");
-          console.log(userlat);
-          console.log(userlng);
-          infoWindow.setPosition(pos);
-          infoWindow.setContent('Your location.');
-          infoWindow.open(map);
-          map.setCenter(pos);
+        };
+        if(!userlat){
+            userlat = position.coords.latitude;
+        }
+        if(!userlng){
+            userlng = position.coords.longitude;
+        }
+          
+          
+        console.log("Your coordinates are:");
+        console.log(userlat);
+        console.log(userlng);
+        infoWindow.setPosition(pos);
+        infoWindow.setContent('Your location.');
+        infoWindow.open(map);
+        map.setCenter(pos);
         }, function() {
           handleLocationError(true, infoWindow, map.getCenter());
         });
@@ -74,13 +79,13 @@ window.onclick = function(e) {
         }
 }
 
-function getEventsFetchTitle(title){
-    let url = `/event-manager/events-by-title/${title}`;
+function getUserData(user){
+    let url = `/event-manager/user-info/${user}`;
 
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -97,44 +102,20 @@ function getEventsFetchTitle(title){
             results.innerHTML = "";
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
-                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
-                results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
-                results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
-                for(let j=0; j<responseJSON[i].pictures.length; j++){
-                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
-                }
+                results.innerHTML += `<div> Username: ${responseJSON[i].username} </div>`;
+                results.innerHTML += `<div> email: ${responseJSON[i].email} </div>`;
+                results.innerHTML += `<div> First name: ${responseJSON[i].firstName} </div>`;
+                results.innerHTML += `<div> Last name: ${responseJSON[i].lastName} </div>`;
+                results.innerHTML += `<div> Age: ${responseJSON[i].age} </div>`;
                 results.innerHTML += `<div> Tags:`;
-                for(let k=0; k<responseJSON[i].tags.length; k++){
-                    results.innerHTML += `${responseJSON[i].tags[k]},`;
+                for(let j=0; j<responseJSON[i].tags.length; j++){
+                    results.innerHTML += `${responseJSON[i].tags[j]},`;
                 }
                 results.innerHTML += `</div>`;
-                var date = new Date(responseJSON[i].date);
-                results.innerHTML += `<div> Date: ${date} </div>`;
 
-                infoWindows[i] = new google.maps.InfoWindow;
-
-                var position = {
-                    lat: responseJSON[i].location.coordinates[0],
-                    lng: responseJSON[i].location.coordinates[1]
-                  };
-        
-                  infoWindows[i].setPosition(position);
-                  infoWindows[i].setContent(responseJSON[i].title);
-                  infoWindows[i].open(map);
-
-                results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
-                for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
-                }
+                userlat = responseJSON[i].location.coordinates[0];
+                userlng = responseJSON[i].location.coordinates[1];
                 
-                for(let m=0; m<responseJSON[i].comments.length; m++){
-                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
-                    var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
-                }
             }
         })
         .catch( err => {
@@ -143,21 +124,15 @@ function getEventsFetchTitle(title){
 }
 
 
-function watchGetEventsTitleForm(){
+function watchGetUserDataForm(){
     let eventsForm = document.querySelector( '.title-event-form' );
 
     eventsForm.addEventListener( 'submit' , ( event ) => {
         event.preventDefault();
-        let title = document.getElementById( 'eventTitle' ).value;
+        let user = localStorage.getItem( 'username' );
         
-        getEventsFetchTitle( title );
+        getUserData(user);
     })
 }
 
 
-
-function init(){
-    watchGetEventsTitleForm();
-}
-
-init();

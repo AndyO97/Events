@@ -79,6 +79,9 @@ const Users = {
     getUserByUsername : function( username ){
         return userModel
                 .findOne( { username : username } )
+                .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .then( user => {
                     return user;
                 })
