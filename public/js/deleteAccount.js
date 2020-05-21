@@ -37,7 +37,6 @@ function userDeleteFetch( username ){
             sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
-        //body : JSON.stringify( data )
     }
 
     let results = document.querySelector( '.results' );
@@ -59,7 +58,6 @@ function userDeleteFetch( username ){
             localStorage.removeItem( 'username');
             localStorage.removeItem( 'id');
             window.location.href = "./../index.html";
-            
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
