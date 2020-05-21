@@ -130,7 +130,7 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
             
             console.log("El json:");
             console.log(responseJSON);
-            return res.status( 200 ).json( responseJSON );
+            //return res.status( 200 ).json( responseJSON );
 
             /*
             results.innerHTML = "";
@@ -209,7 +209,7 @@ function watchUpdateForm(){
                     }
                 //});    
         console.log("User Updated");
-        results.innerHTML += `<div> Your information is being updated... </div>`;
+        //results.innerHTML += `<div> Your information is being updated... </div>`;
     })
 }
 
