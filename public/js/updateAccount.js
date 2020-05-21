@@ -121,8 +121,16 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
             
             localStorage.removeItem( 'token' );
             localStorage.removeItem( 'username' );
+
+            if(username){
+                localStorage.setItem( 'username', username );
+            }
+            else{
+                localStorage.setItem( 'username', username2 );
+            }
+
             localStorage.setItem( 'token', responseJSON.token );
-            localStorage.setItem( 'username', responseJSON.username );
+            
             //console.log("El json:");
             //console.log(responseJSON);
 
@@ -161,7 +169,7 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
 function error() {
     let results = document.querySelector( '.results' );
     results.innerHTML = "Unable to retrieve your location";
-  }
+}
 
 function watchUpdateForm(){
     let registerForm = document.querySelector( '.register-form' );
@@ -201,6 +209,41 @@ function watchUpdateForm(){
             }, error);
         }
     })
+}
+
+function validateUser(){
+    let url = "/event-manager/validate-user";
+let settings = {
+    method : 'GET',
+    headers : {
+        sessiontoken : localStorage.getItem( 'token' )
+    },
+    async : false
+};
+
+fetch( url, settings )
+    .then( response => {
+        if( response.ok ){
+            return response.json();
+        }
+
+        throw new Error( response.statusText );
+    })
+    .then( responseJSON => {
+        console.log(`Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`);
+        let greeting = document.querySelector( '.results' );
+        greeting.innerHTML = `Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`;
+        if(!localStorage.getItem( 'username')){
+            localStorage.setItem( 'username', responseJSON.username );
+        }
+        if(!localStorage.getItem( 'id')){
+            localStorage.setItem( 'id', responseJSON._id );
+        }
+    })
+    .catch( err => {
+        console.log( err.message );
+        window.location.href = "/index.html";
+    });
 }
 
 function getUserData(user){
