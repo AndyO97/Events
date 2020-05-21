@@ -200,7 +200,7 @@ function watchUpdateForm(){
         userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng )
                 //.then(result => {
                     console.log("Dentro de la 2da funcion");
-                    console.log(result);
+                    //console.log(result);
                     if(username){
                         getUserData(username);
                     }
