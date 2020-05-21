@@ -29,7 +29,7 @@ window.onclick = function(e) {
 
 
 function userDeleteFetch( username  ){
-    let url = `/event-manager/update-user/${username2}`;
+    let url = `/event-manager/update-user/${username}`;
 
     let settings = {
         method : 'DELETE',
