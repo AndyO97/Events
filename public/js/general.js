@@ -17,6 +17,7 @@ fetch( url, settings )
         throw new Error( response.statusText );
     })
     .then( responseJSON => {
+        console.log(`Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`);
         let greeting = document.querySelector( '.results' );
         greeting.innerHTML = `Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`;
     })
