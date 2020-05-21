@@ -500,13 +500,19 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
                     if(IsPassword){
                         result.password = password;
                     }
+                    result = await result.save();
+                    console.log("The updated JSON");
+                    console.log(result);
+                    return res.status( 202 ).json( result );
+                    /*
                     result.save(function (err, result){
                         if (err){
                             res.statusMessage = `Saving the updated elements was unsuccesful`+
                                             result.errmsg;
                             return res.status( 202 ).json( result );
                         } 
-                    }); 
+                    });
+                    */ 
                 })
                 .catch( err => {
                     res.statusMessage = err.message;
