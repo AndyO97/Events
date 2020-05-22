@@ -102,6 +102,9 @@ function userCreateFetch( title, description, pictures, tags, date, private, lat
         comments
     }
 
+    console.log("The data being sent:");
+    console.log(data);
+
     let settings = {
         method : 'POST',
         headers : {
@@ -249,7 +252,8 @@ function watchCreateForm(){
         let private = document.getElementById( 'eventPrivate' ).value;
         let latitude = document.getElementById( 'eventLatitude' ).value;
         let longitude = document.getElementById( 'eventLongitude' ).value;
-        
+        console.log("The value of private:");
+        console.log(private);
         let date = new Date(year, month, day, hour);
         //date = ISODate(date);
         let participants = [];
