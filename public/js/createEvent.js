@@ -133,7 +133,8 @@ function userCreateFetch( title, description, pictures, tags, date, private, lat
             results.innerHTML = "";
             
             let infoWindows =[];
-            for(let i=0; i<responseJSON.length; i++){
+            let i = 0;
+            //for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<h2> The Event created: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
@@ -172,7 +173,7 @@ function userCreateFetch( title, description, pictures, tags, date, private, lat
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Participants: ${date2} </div>`;
                 }
-            }
+            //}
 
         })
         .catch( err => {
