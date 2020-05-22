@@ -55,9 +55,9 @@ const Events = {
     addEvent : function( newEvent ){
         return eventModel
                 .create( newEvent )
-                .populate('creator', ['username', 'email','firstName', 'lastName'] )
-                .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                //.populate('creator', ['username', 'email','firstName', 'lastName'] )
+                //.populate('participants', ['username', 'email','firstName', 'lastName'] )
+                //.populate('comments', ['title', 'content','user'] )
                 .then( event => {
                     return event;
                 })
