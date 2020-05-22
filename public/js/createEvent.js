@@ -251,7 +251,7 @@ function watchCreateForm(){
         let longitude = document.getElementById( 'eventLongitude' ).value;
         
         let date = new Date(year, month, day, hour);
-        date = ISODate(date);
+        //date = ISODate(date);
         let participants = [];
         let comments = [];
         if(!navigator.geolocation) {
