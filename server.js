@@ -263,6 +263,74 @@ app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
         });
 });
 
+app.post( '/event-manager/create-event', jsonParser, ( req, res ) => {
+    var { title, description, pictures, tags, date, private, location, creator, participants, comments } = req.body;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+        
+        if( !title || !description || !date || !location || !creator){
+            res.statusMessage = "One of these parameters is missing in the request: 'username', 'email', 'tags' or 'location'.";
+            return res.status( 406 ).end();
+        }
+    
+        if( (typeof(location.coordinates[0]) !== 'number') && (typeof(location.coordinates[1]) !== 'number') ){
+            res.statusMessage = "The coordinates for the location MUST be numbers.";
+            return res.status( 409 ).end();
+        }
+    
+        if( location.type !== 'Point' ){
+            res.statusMessage = "The type of the location MUST be 'Point'.";
+            return res.status( 409 ).end();
+        }
+        if(!pictures){
+            pictures = [];
+        }
+        if(!tags){
+            tags = [];
+        }
+        if(!private){
+            private = false;
+        }
+    
+        if(!participants){
+            participants = [];
+        }
+        if(!comments){
+            comments = [];
+        }
+    
+        const newEvent = {
+            title, 
+            description, 
+            pictures,
+            tags, 
+            date, 
+            private, 
+            location, 
+            creator, 
+            participants, 
+            comments
+        };
+    
+        Events
+            .addEvent( newEvent )
+            .then( event => {
+                return res.status( 201 ).json( event );
+            })
+            .catch( err => {
+                res.statusMessage = err.message;
+                return res.status( 400 ).end();
+            });
+    
+    });
+});
+
 
 
 //For users:
@@ -544,7 +612,7 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
 });
 
 app.delete( '/event-manager/delete-user/:username', ( req, res ) => {
-    
+
     const { sessiontoken } = req.headers;
     let username = req.params.username;
 

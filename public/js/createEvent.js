@@ -79,28 +79,31 @@ window.onclick = function(e) {
         }
 }
 
-function userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng ){
-    let url = `/event-manager/update-user/${username2}`;
+function userCreateFetch( title, description, pictures, tags, date, private, latitude, longitude, creator, participants, comments ){
+    let url = `/event-manager/create-event`;
 
     let data = {
-        username,
-        password,
-        email,
-        firstName,
-        lastName,
-        age,
-        tags,
+
+        title,
+        description, 
+        pictures, 
+        tags, 
+        date, 
+        private, 
         location : {
             type : "Point",
             coordinates : [
-                userlat,
-                userlng
+                latitude,
+                longitude
             ]
-        }
+        },
+        creator, 
+        participants, 
+        comments
     }
 
     let settings = {
-        method : 'PATCH',
+        method : 'POST',
         headers : {
             sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
@@ -119,20 +122,11 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
         })
         .then( responseJSON => {
             
-            if(username){
-                localStorage.setItem( 'username', username );
-            }
-            else{
-                localStorage.setItem( 'username', username2 );
-            }
-
-            localStorage.setItem( 'token', responseJSON.token );
-            
             console.log("El json:");
             console.log(responseJSON);
             //return res.status( 200 ).json( responseJSON );
 
-            /*
+            
             results.innerHTML = "";
             
             //for(let i=0; i<responseJSON.length; i++){
@@ -142,9 +136,9 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
                 results.innerHTML += `<div> Last name: ${responseJSON.lastName} </div>`;
                 results.innerHTML += `<div> Age: ${responseJSON.age} </div>`;
                 results.innerHTML += `<div> Tags:`;
-                //for(let j=0; j<responseJSON.tags.length; j++){
-                //    results.innerHTML += `${responseJSON.tags[j]},`;
-                //}
+                for(let j=0; j<responseJSON.tags.length; j++){
+                    results.innerHTML += `${responseJSON.tags[j]},`;
+                }
                 results.innerHTML += `</div>`;
 
                 let infoWindow2 = new google.maps.InfoWindow;
@@ -155,106 +149,22 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
                   };
         
                   infoWindow2.setPosition(position);
-                  infoWindow2.setContent("Updated position");
+                  infoWindow2.setContent("Position of the event");
                   infoWindow2.open(map);
             //}
-            */
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
         });
 }
 
-function error() {
-    let results = document.querySelector( '.results' );
-    results.innerHTML = "Unable to retrieve your location";
-}
-
-function watchUpdateForm(){
-    let registerForm = document.querySelector( '.register-form' );
-    let results = document.querySelector( '.results' );
-
-    registerForm.addEventListener( 'submit' , ( event ) => {
-        event.preventDefault();
-        let username2 = localStorage.getItem( 'username' );
-        let username = document.getElementById( 'userUsername' ).value;
-        let password = document.getElementById( 'userPassword' ).value;
-        let email = document.getElementById( 'userEmail' ).value;
-        let firstName = document.getElementById( 'userFirstName' ).value;
-        let lastName = document.getElementById( 'userLastName' ).value;
-        let age = document.getElementById( 'userAge' ).value;
-        let tags = document.getElementById( 'userTags' ).value;
-        
-        if(!navigator.geolocation) {
-            results.innerHTML = "Geolocation is not supported by your browser";
-          } else {
-            console.log("Locating…");
-            navigator.geolocation.getCurrentPosition(function(position) {
-                userlat  = position.coords.latitude;
-                userlng = position.coords.longitude;
-                console.log("Your coordinates are:");
-                console.log(userlat);
-                console.log(userlng);
-            }, error);
-        }
-        userUpdateFetch( username2, username, password, email, firstName, lastName, age, tags, userlat, userlng );
-                //.then(result => {
-                    console.log("Dentro de la 2da funcion");
-                    //console.log(result);
-                    if(username){
-                        getUserData(username);
-                    }
-                    else{
-                        getUserData(username2);
-                    }
-                //});    
-        console.log("User Updated");
-        //results.innerHTML += `<div> Your information is being updated... </div>`;
-    })
-}
-
-function validateUser(){
-    let url = "/event-manager/validate-user";
-let settings = {
-    method : 'GET',
-    headers : {
-        sessiontoken : localStorage.getItem( 'token' )
-    },
-    async : false
-};
-
-fetch( url, settings )
-    .then( response => {
-        if( response.ok ){
-            return response.json();
-        }
-
-        throw new Error( response.statusText );
-    })
-    .then( responseJSON => {
-        console.log(`Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`);
-        let greeting = document.querySelector( '.results' );
-        greeting.innerHTML = `Welcome back ${responseJSON.firstName} ${responseJSON.lastName}!`;
-        if(!localStorage.getItem( 'username')){
-            localStorage.setItem( 'username', responseJSON.username );
-        }
-        if(!localStorage.getItem( 'id')){
-            localStorage.setItem( 'id', responseJSON._id );
-        }
-    })
-    .catch( err => {
-        console.log( err.message );
-        window.location.href = "/index.html";
-    });
-}
-
-function getUserData(user){
-    let url = `/event-manager/user-info/${user}`;
+function getEventsFetchTitle(title){
+    let url = `/event-manager/events-by-title/${title}`;
 
     let settings = {
         method : 'GET',
         headers : {
-            sessiontoken : localStorage.getItem( 'token' ),
+            Authorization : `Bearer ${API_TOKEN}`,
             'Content-Type' : 'application/json'
         },
     }
@@ -268,24 +178,47 @@ function getUserData(user){
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
-            console.log("El json:");
-            console.log(responseJSON);
             results.innerHTML = "";
+            infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
-                results.innerHTML += `<div> Username: ${responseJSON[i].username} </div>`;
-                results.innerHTML += `<div> email: ${responseJSON[i].email} </div>`;
-                results.innerHTML += `<div> First name: ${responseJSON[i].firstName} </div>`;
-                results.innerHTML += `<div> Last name: ${responseJSON[i].lastName} </div>`;
-                results.innerHTML += `<div> Age: ${responseJSON[i].age} </div>`;
+                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
+                results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
+                results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
+                for(let j=0; j<responseJSON[i].pictures.length; j++){
+                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
+                }
                 results.innerHTML += `<div> Tags:`;
-                for(let j=0; j<responseJSON[i].tags.length; j++){
-                    results.innerHTML += `${responseJSON[i].tags[j]},`;
+                for(let k=0; k<responseJSON[i].tags.length; k++){
+                    results.innerHTML += `${responseJSON[i].tags[k]},`;
                 }
                 results.innerHTML += `</div>`;
+                var date = new Date(responseJSON[i].date);
+                results.innerHTML += `<div> Date: ${date} </div>`;
 
-                userlat = responseJSON[i].location.coordinates[0];
-                userlng = responseJSON[i].location.coordinates[1];
+                infoWindows[i] = new google.maps.InfoWindow;
+
+                var position = {
+                    lat: responseJSON[i].location.coordinates[0],
+                    lng: responseJSON[i].location.coordinates[1]
+                  };
+        
+                  infoWindows[i].setPosition(position);
+                  infoWindows[i].setContent(responseJSON[i].title);
+                  infoWindows[i].open(map);
+
+                results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
+                for(let l=0; l<responseJSON[i].participants.length; l++){
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                }
                 
+                for(let m=0; m<responseJSON[i].comments.length; m++){
+                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    var date2 = new Date(responseJSON[i].comments[m].date);
+                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                }
             }
         })
         .catch( err => {
@@ -293,8 +226,58 @@ function getUserData(user){
         });
 }
 
+function error() {
+    let results = document.querySelector( '.results' );
+    results.innerHTML = "Unable to retrieve your location";
+}
+
+function watchCreateForm(){
+    let registerForm = document.querySelector( '.register-form' );
+    let results = document.querySelector( '.results' );
+
+    registerForm.addEventListener( 'submit' , ( event ) => {
+        event.preventDefault();
+        let creator = localStorage.getItem( 'id' );
+        let title = document.getElementById( 'eventTitle' ).value;
+        let description = document.getElementById( 'eventDescription' ).value;
+        let pictures = document.getElementById( 'eventPicture' ).value;
+        let tags = document.getElementById( 'eventTags' ).value;
+        let day = document.getElementById( 'eventDay' ).value;
+        let month = document.getElementById( 'eventMonth' ).value;
+        let year = document.getElementById( 'eventYear' ).value;
+        let hour = document.getElementById( 'eventHour' ).value;
+        let private = document.getElementById( 'eventPrivate' ).value;
+        let latitude = document.getElementById( 'eventLatitude' ).value;
+        let longitude = document.getElementById( 'eventLongitude' ).value;
+        
+        let date = new Date(year, month, day, hour);
+        date = ISODate(date);
+        let participants = [];
+        let comments = [];
+        if(!navigator.geolocation) {
+            results.innerHTML = "Geolocation is not supported by your browser";
+          } else {
+            console.log("Locating…");
+            navigator.geolocation.getCurrentPosition(function(position) {
+                userlat  = position.coords.latitude;
+                userlng = position.coords.longitude;
+                console.log("Your coordinates are:");
+                console.log(userlat);
+                console.log(userlng);
+            }, error);
+        }
+        if(!latitude || !longitude){
+            latitude = userlat;
+            longitude = userlng;
+        }
+        
+        userCreateFetch( title, description, pictures, tags, date, private, latitude, longitude, creator, participants, comments );
+           
+    })
+}
+
 function init(){
-    watchUpdateForm();
+    watchCreateForm();
 }
 
 init();
