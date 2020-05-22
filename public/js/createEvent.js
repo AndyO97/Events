@@ -132,45 +132,45 @@ function userCreateFetch( title, description, pictures, tags, date, private, lat
             
             results.innerHTML = "";
             
-            let infoWindows =[];
-            let i = 0;
+            let infoWindow2;
+            //let i = 0;
             //for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<h2> The Event created: </h2>`;
-                results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
-                results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
-                for(let j=0; j<responseJSON[i].pictures.length; j++){
-                    results.innerHTML += `<img src="${responseJSON[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
+                results.innerHTML += `<h3> Title: ${responseJSON.title} </h3>`;
+                results.innerHTML += `<div> Description: ${responseJSON.description} </div>`;
+                for(let j=0; j<responseJSON.pictures.length; j++){
+                    results.innerHTML += `<img src="${responseJSON.pictures[j]}" alt="Picture ${j+1} of event: ${responseJSON.title}"/>`;
                 }
                 results.innerHTML += `<div> Tags:`;
-                for(let k=0; k<responseJSON[i].tags.length; k++){
-                    results.innerHTML += `${responseJSON[i].tags[k]},`;
+                for(let k=0; k<responseJSON.tags.length; k++){
+                    results.innerHTML += `${responseJSON.tags[k]},`;
                 }
                 results.innerHTML += `</div>`;
-                var date = new Date(responseJSON[i].date);
+                var date = new Date(responseJSON.date);
                 results.innerHTML += `<div> Date: ${date} </div>`;
 
-                infoWindows[i] = new google.maps.InfoWindow;
+                infoWindow2 = new google.maps.InfoWindow;
 
                 var position = {
-                    lat: responseJSON[i].location.coordinates[0],
-                    lng: responseJSON[i].location.coordinates[1]
+                    lat: responseJSON.location.coordinates[0],
+                    lng: responseJSON.location.coordinates[1]
                   };
         
-                  infoWindows[i].setPosition(position);
-                  infoWindows[i].setContent(responseJSON[i].title);
-                  infoWindows[i].open(map);
+                  infoWindow2.setPosition(position);
+                  infoWindow2.setContent(responseJSON.title);
+                  infoWindow2.open(map);
 
-                results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
-                for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                results.innerHTML += `<div> Creator: ${responseJSON.creator.username} </div>`;
+                for(let l=0; l<responseJSON.participants.length; l++){
+                    results.innerHTML += `<div> Participants: ${responseJSON.participants[l].username} </div>`;
                 }
                 
-                for(let m=0; m<responseJSON[i].comments.length; m++){
+                for(let m=0; m<responseJSON.comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
-                    var date2 = new Date(responseJSON[i].comments[m].date);
+                    results.innerHTML += `<div> Participants: ${responseJSON.comments[m].title} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON.comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> Participants: ${responseJSON.comments[m].user} </div>`;
+                    var date2 = new Date(responseJSON.comments[m].date);
                     results.innerHTML += `<div> Participants: ${date2} </div>`;
                 }
             //}
@@ -267,6 +267,7 @@ function watchCreateForm(){
         let tags = document.getElementById( 'eventTags' ).value;
         let day = document.getElementById( 'eventDay' ).value;
         let month = document.getElementById( 'eventMonth' ).value;
+        month--;
         let year = document.getElementById( 'eventYear' ).value;
         let hour = document.getElementById( 'eventHour' ).value;
         let private = document.querySelector('.messageCheckbox').checked;
