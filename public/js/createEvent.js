@@ -271,8 +271,8 @@ function watchCreateForm(){
         let year = document.getElementById( 'eventYear' ).value;
         let hour = document.getElementById( 'eventHour' ).value;
         let private = document.querySelector('.messageCheckbox').checked;
-        let latitude = document.getElementById( 'eventLatitude' ).value;
-        let longitude = document.getElementById( 'eventLongitude' ).value;
+        let latitude = Number(document.getElementById( 'eventLatitude' ).value);
+        let longitude = Number(document.getElementById( 'eventLongitude' ).value);
         console.log("The value of private:");
         console.log(private);
         let date = new Date(year, month, day, hour);
