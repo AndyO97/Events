@@ -385,6 +385,7 @@ app.post( '/event-manager/users/login', jsonParser, ( req, res ) => {
                     .then( result => {
                         if( result ){
                             let userData = {
+                                _id : user._id,
                                 username : user.username,
                                 email : user.email,
                                 firstName : user.firstName,
