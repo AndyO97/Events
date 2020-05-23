@@ -499,11 +499,11 @@ app.patch( '/event-manager/update-event/:id', jsonParser, ( req, res ) => {
             if(comments){
                 result.comments.push(comments);
             }
-            
-            //result.save();
-            result.save(function(){})
+            //.save()
+            result.save();
+            //result.save(function(){})
 
-            return res.status( 202 ).json( result );
+            //return res.status( 202 ).json( result );
         })
         .catch( err => {
             res.statusMessage = err.message;
