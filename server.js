@@ -500,7 +500,7 @@ app.patch( '/event-manager/update-event/:id', jsonParser, ( req, res ) => {
                 result.comments.push(comments);
             }
             //.save()
-            //result.save();
+            result.save();
             //result.save(function(){})
 
             return res.status( 202 ).json( result );

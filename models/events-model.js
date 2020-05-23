@@ -94,7 +94,7 @@ const Events = {
     },
     getEventsById : function( id ){
         return eventModel
-                .find( { _id : id } )
+                .findOne( { _id : id } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content','user'] )
