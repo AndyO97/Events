@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>Event Manager</title>
+        <link href="./../css/event.css" rel="stylesheet" type="text/css" />
+        <script src ="./../js/general.js"></script>
+    </head>
+    <body onload="watchGetEventDataForm()">
+        <div class="navbar">
+            <a href="/pages/home.html">Home</a>
+            <a href="#about">About</a>
+            <a href="#Contact">Contact Us</a>
+            <div class="dropdown">
+                <button class="dropbtn-Events" onclick="myFunctionEvents()">Events
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdownEvents">
+                    <a href="#">View my events</a>
+                    <a href="#">View my favorites</a>
+                    <a href="/pages/createEvent.html">Create an event</a>
+                    <a href="#">Modify an event</a>
+                    <a href="/pages/deleteEvent.html">Delete an event</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn-Account" onclick="myFunctionAccount()">Account
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdownAccount">
+                    <a href="/pages/account.html">View my account</a>
+                    <a href="/pages/updateAccount.html">Change my information</a>
+                    <a href="/pages/LoggedOut.html">Sign Out</a>
+                    <a href="/pages/deleteAccount.html">Delete my account</a>
+                </div>
+            </div> 
+          </div>
+        </div>
+        <section class="results">
+
+        </section>
+
+        <div class="container">
+            <section id="content">
+                <form action="register" class="register-form">
+                    <h1>Register Form</h1>
+                    <div>
+                        <input type="text" placeholder="Title" required="" id="commentTitle" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="Content" required="" id="commentContent" />
+                    </div>
+                    <div>
+                        <button type="submit">
+                        Add
+                        </button> 
+                    </div>
+                </form><!-- form -->  
+            </section><!-- content -->
+        </div><!-- container -->
+
+        <div id="map"></div>
+        <script src="./../js/event.js"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
+        ></script>
+    </body>
+</html>

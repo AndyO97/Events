@@ -277,8 +277,14 @@ function getEventsFetchTitle(title){
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Participants: ${date2} </div>`;
                 }
+                if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
+                    owned = true;
+                }
+                else{
+                    owned = false;
+                }
                 
-                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id)">See event</button>`;
+                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
                 results.innerHTML += `</div>`;
             }
         })
@@ -287,22 +293,12 @@ function getEventsFetchTitle(title){
         });
 }
 
-/*
-function getEvent(){
-    let results = document.querySelector( '.results' );
-
-    results.addEventListener('click', (event) => {
-        if( event.target.matches('.event'))
-        console.log("Event clicked");
-        console.log(event);
-        console.log(event.id);
-    });
-}
-*/
-
-function reply_click(clicked_id)
+function reply_click(clicked_id, owned)
 {
     console.log(clicked_id);
+    localStorage.setItem( 'event', clicked_id );
+    localStorage.setItem( 'owned', owned );
+    window.location.href = "/pages/event.html";
 }
 
 function getEventsFetchTag(tag){
@@ -608,7 +604,7 @@ function init(){
     watchGetEventsDatesForm();
     watchGetEventsForm();
     watchGetEventsProximityForm();
-    getEvent();
+    //getEvent();
 }
 
 init();
