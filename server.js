@@ -345,7 +345,7 @@ app.delete( '/event-manager/delete-event', ( req, res ) => {
         }
 
         if( !id ){
-            res.statusMessage = "Please send the creator's 'id' to delete a event";
+            res.statusMessage = "Please send the creator's 'id' to delete an event";
             return res.status( 406 ).end();
         }
     
