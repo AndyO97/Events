@@ -291,7 +291,7 @@ function getEvent(){
     results.addEventListener('click', (event) => {
         if( event.target.matches('.event'))
         console.log("Event clicked");
-        console.log(event.id);
+        console.log(event);
         console.log(event.id);
     });
 }
