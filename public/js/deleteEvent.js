@@ -27,8 +27,6 @@ window.onclick = function(e) {
 function userDeleteFetch( title, id ){
     let url = `/event-manager/delete-event/`;
 
-    console.log("The data being sent:");
-    console.log(data);
 
     let settings = {
         method : 'DELETE',
