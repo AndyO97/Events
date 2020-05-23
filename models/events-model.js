@@ -3,7 +3,8 @@ const mongoose = require( 'mongoose' );
 const eventSchema = mongoose.Schema({
     title : {
         type : String,
-        required : true
+        required : true,
+        unique : true
     },
     description : {
         type : String,
@@ -183,6 +184,16 @@ const Events = {
     deleteEventByTitle : function(title){
         return eventModel
             .findOneAndDelete({title : title})
+            .then( event => {
+                return event;
+            })
+            .catch( err => {
+                return err;
+            });
+    },
+    deleteEventByTitleAndCreatorId : function(title, id){
+        return eventModel
+            .findOneAndDelete({title : title, creator:id })
             .then( event => {
                 return event;
             })

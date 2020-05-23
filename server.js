@@ -331,7 +331,40 @@ app.post( '/event-manager/create-event', jsonParser, ( req, res ) => {
     });
 });
 
+app.delete( '/event-manager/delete-event', ( req, res ) => {
+    
+    let id = req.query.id;
+    let title= req.query.title;
+    
+    if( !id ){
+        res.statusMessage = "Please send the creator's 'id' to delete a event";
+        return res.status( 406 ).end();
+    }
 
+    if( !title ){
+        res.statusMessage = "Please send the 'title' to delete a event";
+        return res.status( 406 ).end();
+    }
+
+    Events
+            .deleteEventByTitleAndCreatorId( title, id )
+            .then( result => {
+                // Handle id no id found error
+                //console.log(result);
+                if( !result ){
+                    res.statusMessage = `There are no events with the provided 'title=${title}'.`+
+                                        result.errmsg;
+                    return res.status( 409 ).end();
+                }
+                return res.status( 202 ).json( result ); 
+            })
+            .catch( err => {
+                res.statusMessage = `There are no events with the provided 'title=${title}'.`;
+                return res.status( 404 ).end();
+                //res.statusMessage = "Something is wrong with the Database. Try again later";
+                //return res.status( 500 ).end();
+            });
+});
 
 //For users:
 app.get( '/event-manager/user-info/:username', ( req, res ) => {

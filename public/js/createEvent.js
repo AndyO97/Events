@@ -160,9 +160,9 @@ function userCreateFetch( title, description, pictures, tags, date, private, lat
                   infoWindow2.setContent(responseJSON.title);
                   infoWindow2.open(map);
 
-                results.innerHTML += `<div> Creator: ${responseJSON.creator.username} </div>`;
+                results.innerHTML += `<div> Creator: ${creator} </div>`;
                 for(let l=0; l<responseJSON.participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON.participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON.participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON.comments.length; m++){
