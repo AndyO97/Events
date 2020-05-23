@@ -176,7 +176,7 @@ function watchCommentForm(){
         e.preventDefault();
         let title = document.getElementById( 'commentTitle' ).value;
         let content = document.getElementById( 'commentContent' ).value;
-        let user = localStorage.getItem( 'username' );
+        let userId = localStorage.getItem( 'id' );
         let event = localStorage.getItem( 'EventId' );
         let date = new Date().now();
     })

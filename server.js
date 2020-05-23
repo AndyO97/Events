@@ -847,30 +847,19 @@ app.get( '/event-manager/users', ( req, res ) => {
 //For comments:
 
 app.post( '/event-manager/add-comment', jsonParser, ( req, res ) => {
-    var { title, content, username, event, date} = req.body;
+    var { title, content, UserId, event, date} = req.body;
 
-    if( !title || !content || !username || !event || !date){
-        res.statusMessage = "One of these parameters is missing in the request: 'title', 'content', 'username', 'event' or 'date'.";
+    if( !title || !content || !id || !UserId || !date){
+        res.statusMessage = "One of these parameters is missing in the request: 'title', 'content', 'UserId', 'event' or 'date'.";
         return res.status( 406 ).end();
     }
-
-    Users
-        .getUserByUsername( username )
-        .then( user => {
-
-            if( !user ){
-                res.statusMessage = `There are no user with the provided 'username=${username}'.`;
-                return res.status( 404 ).end();
-            }
-
             const newComment = {
                 title, 
                 content,
-                user : user._id,
+                user : UserId,
                 event,
                 date
             }
-            
             Comments
                 .addComment( newComment )
                 .then( comment => {
@@ -879,12 +868,7 @@ app.post( '/event-manager/add-comment', jsonParser, ( req, res ) => {
                 .catch( err => {
                     res.statusMessage = err.message;
                     return res.status( 400 ).end();
-                });
-        })
-        .catch( err => {
-            res.statusMessage = err.message;
-            return res.status( 400 ).end();
-        });
+                });     
 });
 
 app.get( '/event-manager/comments', ( req, res ) => {
