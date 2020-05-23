@@ -236,7 +236,7 @@ function getEventsFetchTitle(title){
             console.log(responseJSON.length);
             results.innerHTML = "";
             let i=0;
-            results.innerHTML += `<div class="event" value="${responseJSON[i].title}" >`;
+            results.innerHTML += `<div class="event" id="${responseJSON[i].title}" >`;
             infoWindows = [];
             for(i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
@@ -291,7 +291,8 @@ function getEvent(){
     results.addEventListener('click', (event) => {
         if( event.target.matches('.event'))
         console.log("Event clicked");
-        console.log(event.value);
+        console.log(event.id);
+        console.log(event.id);
     });
 }
 
