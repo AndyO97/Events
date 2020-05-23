@@ -82,7 +82,7 @@ function getEventsFetch(){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -161,7 +161,7 @@ function getEventsFetchKeyword(keyword){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -239,7 +239,7 @@ function getEventsFetchTitle(title){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -327,7 +327,7 @@ function getEventsFetchTag(tag){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -405,7 +405,7 @@ function getEventsFetchProximity(lat, lng, dist){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -483,7 +483,7 @@ function getEventsFetchDates(date1, date2 ){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }

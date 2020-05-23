@@ -83,7 +83,7 @@ function getEventsFetchTitle(title, owned){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -150,6 +150,7 @@ function getEventsFetchTitle(title, owned){
                 
                 //results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
                 results.innerHTML += `</div>`;
+                localStorage.setItem( 'EventId', responseJSON._id );
             }
         })
         .catch( err => {
@@ -167,12 +168,23 @@ function watchGetEventDataForm(){
         getEventsFetchTitle( title, owned );
 }
 
+function watchCommentForm(){
+    let registerForm = document.querySelector( '.register-form' );
+    let results = document.querySelector( '.results' );
 
-
+    registerForm.addEventListener( 'submit' , ( e ) => {
+        e.preventDefault();
+        let title = document.getElementById( 'commentTitle' ).value;
+        let content = document.getElementById( 'commentContent' ).value;
+        let user = localStorage.getItem( 'username' );
+        let event = localStorage.getItem( 'EventId' );
+        let date = new Date().now();
+    })
+}
 
 
 function init(){
-    
+    watchCommentForm()
 }
 
 init();

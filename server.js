@@ -22,7 +22,8 @@ app.use( morgan( 'dev' ) );
 
 //For events:
 
-app.get( '/event-manager/events', ( req, res ) => {
+app.get( '/event-manager/eventss', ( req, res ) => {
+
     Events
         .getAllEvents()
         .then( events => {
@@ -34,13 +35,41 @@ app.get( '/event-manager/events', ( req, res ) => {
         });
 });
 
+app.get( '/event-manager/events', ( req, res ) => {
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+    Events
+        .getAllEvents()
+        .then( events => {
+            return res.status( 200 ).json( events );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+    });
+});
+
 app.get( '/event-manager/events-by-keyword/:keyword', ( req, res ) => {
     const keyword = req.params.keyword;
 
-    if( !keyword ){
-        res.statusMessage = "Please send the 'keyword' as parameter.";
-        return res.status( 406 ).end();
-    }
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+    
+        if( !keyword ){
+            res.statusMessage = "Please send the 'keyword' as parameter.";
+            return res.status( 406 ).end();
+        }
 
     Events
         .getEventsByKeyword( keyword )
@@ -55,15 +84,23 @@ app.get( '/event-manager/events-by-keyword/:keyword', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+    });
 });
 
 app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
     const title = req.params.title;
 
-    if( !title ){
-        res.statusMessage = "Please send the 'title' as parameter.";
-        return res.status( 406 ).end();
-    }
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+        if( !title ){
+            res.statusMessage = "Please send the 'title' as parameter.";
+            return res.status( 406 ).end();
+        }
 
     Events
         .getEventsByTitle( title )
@@ -78,15 +115,24 @@ app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+    });
 });
 
 app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
     const tag = req.params.tag;
 
-    if( !tag ){
-        res.statusMessage = "Please send the 'tag' as parameter.";
-        return res.status( 406 ).end();
-    }
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }    
+
+        if( !tag ){
+            res.statusMessage = "Please send the 'tag' as parameter.";
+            return res.status( 406 ).end();
+        }
 
     Events
         .getEventsByTag( tag )
@@ -103,6 +149,7 @@ app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+    });
 });
 
 app.get( '/event-manager/events-by-proximity', ( req, res ) => {
@@ -110,6 +157,14 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
     let lat = req.query.lat;
     let lng = req.query.lng;
     let dist = req.query.dist;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
 
     if( !dist){
         res.statusMessage = "Please send the 'distance' as parameter.";
@@ -140,11 +195,20 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+    });
 });
 
 app.get( '/event-manager/events-by-dates', ( req, res ) => {
     let date1 = req.query.date1;
     let date2 = req.query.date2;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
 
     if( !date1 ){
         res.statusMessage = "Please send the 'date1' as parameter.";
@@ -170,10 +234,19 @@ app.get( '/event-manager/events-by-dates', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+    });
 });
 
 app.get( '/blog-post/events-by-user/:username', ( req, res ) => {
     const username = req.params.username;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
 
     if( !username ){
         res.statusMessage = "Please send the 'username' as parameter.";
@@ -203,6 +276,7 @@ app.get( '/blog-post/events-by-user/:username', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+    });
 });
 
 app.post( '/event-manager/add-event', jsonParser, ( req, res ) => {
