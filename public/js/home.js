@@ -235,10 +235,10 @@ function getEventsFetchTitle(title){
         .then( responseJSON => {
             console.log(responseJSON.length);
             results.innerHTML = "";
-            let i=0;
-            results.innerHTML += `<div class="event" id="${responseJSON[i].title}" >`;
+            //let i=0;
+            results.innerHTML += `<div class="event" >`;
             infoWindows = [];
-            for(i=0; i<responseJSON.length; i++){
+            for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
@@ -277,6 +277,8 @@ function getEventsFetchTitle(title){
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Participants: ${date2} </div>`;
                 }
+                
+                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id)">See event</button>`;
                 results.innerHTML += `</div>`;
             }
         })
@@ -285,6 +287,7 @@ function getEventsFetchTitle(title){
         });
 }
 
+/*
 function getEvent(){
     let results = document.querySelector( '.results' );
 
@@ -294,6 +297,12 @@ function getEvent(){
         console.log(event);
         console.log(event.id);
     });
+}
+*/
+
+function reply_click(clicked_id)
+{
+    console.log(clicked_id);
 }
 
 function getEventsFetchTag(tag){
