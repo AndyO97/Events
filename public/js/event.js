@@ -206,7 +206,7 @@ function commentCreateFetch(title, content, user, event, date){
             console.log(responseJSON);
             //return res.status( 200 ).json( responseJSON )
             //function to patch event
-            let id = localStorage.getItem( 'id');
+            let id = localStorage.getItem( 'EventId');
             addCommentToEventFetch(id, responseJSON._id)
         })
         .catch( err => {

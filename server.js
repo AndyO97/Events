@@ -452,7 +452,7 @@ app.delete( '/event-manager/delete-event', ( req, res ) => {
 });
 
 app.patch( '/event-manager/update-event/:id', jsonParser, ( req, res ) => {
-    var { title, description, pictures, tags, date, private, location, creator, participants, comments } = req.body;    let IsPassword = false;
+    var { title, description, pictures, tags, date, private, location, creator, participants, comments } = req.body;  
     let id = req.params.id;
     //const { sessiontoken } = req.headers;
 
@@ -464,7 +464,7 @@ app.patch( '/event-manager/update-event/:id', jsonParser, ( req, res ) => {
         .getEventsById( id )
         .then( result => {
             if( !result){
-                res.statusMessage = `There are no users with the provided 'username=${username2}'.`+
+                res.statusMessage = `There are no events with the provided 'id=${id}'.`+
                                     result.errmsg;
                 return res.status( 404 ).end();
             }
