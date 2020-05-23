@@ -451,6 +451,64 @@ app.delete( '/event-manager/delete-event', ( req, res ) => {
     
 });
 
+app.patch( '/event-manager/update-event/:id', jsonParser, ( req, res ) => {
+    var { title, description, pictures, tags, date, private, location, creator, participants, comments } = req.body;    let IsPassword = false;
+    let id = req.params.id;
+    //const { sessiontoken } = req.headers;
+
+        if( !(title ||description ||pictures ||tags ||date ||private ||location ||creator ||participants ||comments) ){
+            res.statusMessage = "At least an element should be send to be modified.";
+            return res.status( 406 ).end();
+        }
+        Events
+        .getEventsById( id )
+        .then( result => {
+            if( !result){
+                res.statusMessage = `There are no users with the provided 'username=${username2}'.`+
+                                    result.errmsg;
+                return res.status( 404 ).end();
+            }
+
+            if(title){
+                result.title = title;
+            }
+            if(description){
+                result.description = description;
+            }
+            if(pictures){
+                result.pictures.push(pictures);
+            }
+            if(tags){
+                result.tags.push(tags);
+            }
+            if(date){
+                result.date = date;
+            }
+            if(private!=null){
+                result.private = private;
+            }
+            if(location){
+                result.location = location;
+            }
+            if(creator){
+                result.creator = creator;
+            }
+            if(participants){
+                result.participants.push(participants);
+            }
+            if(comments){
+                result.comments.push(comments);
+            }
+            
+            result.save();   
+                return res.status( 202 ).json( result );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 404 ).end();
+        })                           
+});
+
 //For users:
 app.get( '/event-manager/user-info/:username', ( req, res ) => {
     const { sessiontoken } = req.headers;
