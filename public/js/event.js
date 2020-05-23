@@ -205,6 +205,50 @@ function commentCreateFetch(title, content, user, event, date){
             console.log("El json:");
             console.log(responseJSON);
             //return res.status( 200 ).json( responseJSON )
+            //function to patch event
+            let id = localStorage.getItem( 'id');
+            addCommentToEventFetch(id, responseJSON._id)
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
+
+function addCommentToEventFetch(id, comments){
+    let url = `/event-manager/update-event/${id}`;
+
+    let data = {
+        comments
+    }
+
+    let settings = {
+        method : 'PATCH',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify( data )
+    }
+
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            
+            console.log("El json actualizado:");
+            console.log(responseJSON);
+            //return res.status( 200 ).json( responseJSON )
+            //function to patch event
+            let title = localStorage.getItem( 'event');
+            let owned = localStorage.getItem( 'owned');
+            getEventsFetchTitle(title, owned);
+
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
