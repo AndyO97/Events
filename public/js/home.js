@@ -589,12 +589,13 @@ function watchGetEventsDatesForm(){
 }
 
 function init(){
-    watchGetEventsKeywordForm()
+    watchGetEventsKeywordForm();
     watchGetEventsTitleForm();
     watchGetEventsTagForm();
     watchGetEventsDatesForm();
     watchGetEventsForm();
-    watchGetEventsProximityForm()
+    watchGetEventsProximityForm();
+    getEvent();
 }
 
 init();
