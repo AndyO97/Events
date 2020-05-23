@@ -221,7 +221,7 @@ function watchCommentForm(){
         let content = document.getElementById( 'commentContent' ).value;
         let userId = localStorage.getItem( 'id' );
         let event = localStorage.getItem( 'EventId' );
-        let date = new Date().now();
+        let date = new Date();
 
         commentCreateFetch(title, content, userId, event, date);
     })
