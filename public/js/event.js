@@ -41,13 +41,13 @@ function initMap() {
     }
 }
 
-    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-      infoWindow.setPosition(pos);
-      infoWindow.setContent(browserHasGeolocation ?
-                            'Error: The Geolocation service failed.' :
-                            'Error: Your browser doesn\'t support geolocation.');
-      infoWindow.open(map);
-    }
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+                          'Error: The Geolocation service failed.' :
+                          'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+}    
 
 //for the menu
 
@@ -150,7 +150,7 @@ function getEventsFetchTitle(title, owned){
                 
                 //results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
                 results.innerHTML += `</div>`;
-                localStorage.setItem( 'EventId', responseJSON._id );
+                localStorage.setItem( 'EventId', responseJSON[i]._id );
             }
         })
         .catch( err => {
@@ -191,7 +191,7 @@ function commentCreateFetch(title, content, user, event, date){
         body : JSON.stringify( data )
     }
 
-    //let results = document.querySelector( '.results' );
+    let results = document.querySelector( '.results' );
 
     fetch( url, settings )
         .then( response => {
