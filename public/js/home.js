@@ -234,6 +234,7 @@ function getEventsFetchTitle(title){
         })
         .then( responseJSON => {
             results.innerHTML = "";
+            results.innerHTML += `<div class="event" value="${responseJSON[i].title}" >`;
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
@@ -274,11 +275,21 @@ function getEventsFetchTitle(title){
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Participants: ${date2} </div>`;
                 }
+                results.innerHTML += `</div>`;
             }
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
         });
+}
+
+function getEvent(){
+    let results = document.querySelector( '.results' );
+
+    results.addEventListener('click', (event) => {
+        if( event.target.matches('.event'))
+        console.log(event.value);
+    });
 }
 
 function getEventsFetchTag(tag){
