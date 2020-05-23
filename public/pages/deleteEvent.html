@@ -3,8 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title>My account</title>
-        <link href="./../css/updateAccount.css" rel="stylesheet" type="text/css" />
+        <title>Delete an event</title>
+        <link href="./../css/deleteEvent.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
     </head>
     <body>
@@ -36,51 +36,30 @@
             </div>
         </div> 
       </div>
-        <h1>Update your profile</h1>
-        <p>Only add the information that you want to update.</p>
+        <h1>Deleting and event</h1>
+        <p>Remember that you can only delete events that you own. 
+            Please fill the title of the event that you want to remove. 
+        </p>
         <div class="container">
             <section id="content">
                 <form action="register" class="register-form">
-                    <h1>Update Profile Form</h1>
+                    <h1>Delete an Event Form</h1>
                     <div>
-                        <input type="text" placeholder="Username" id="userUsername" />
-                    </div>
-                    <div>
-                        <input type="password" placeholder="Password" id="userPassword" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Email" id="userEmail" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="First name" id="userFirstName" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Last name" id="userLastName" />
-                    </div>
-                    <div>
-                        <input type="number" placeholder="age" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="One tag that you like (you can add more later)" id="userTags" />
+                        <input type="text" placeholder="Title" required="" id="eventTitle" />
                     </div>
                     <div>
                         <button type="submit">
-                        Update
+                        Delete
                         </button>
                     </div>
                 </form><!-- form -->
                 
             </section><!-- content -->
         </div><!-- container -->
-        <p>The previous information we had about you is the following: </p>
+        <p>The event that you deleted was: </p>
         <section class="results">
 
         </section>
-        <p>The location stored is: </p>
-        <div id="map"></div>
-        <script src="./../js/updateAccount.js"></script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
-        ></script>
+        <script src="./../js/deleteEvent.js"></script>
     </body>
 </html>

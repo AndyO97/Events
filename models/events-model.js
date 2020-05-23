@@ -194,6 +194,9 @@ const Events = {
     deleteEventByTitleAndCreatorId : function(title, id){
         return eventModel
             .findOneAndDelete({title : title, creator:id })
+            //.populate('creator', ['username', 'email','firstName', 'lastName'] )
+            //.populate('participants', ['username', 'email','firstName', 'lastName'] )
+            //.populate('comments', ['title', 'content','user'] )
             .then( event => {
                 return event;
             })

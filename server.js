@@ -335,35 +335,46 @@ app.delete( '/event-manager/delete-event', ( req, res ) => {
     
     let id = req.query.id;
     let title= req.query.title;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+
+        if( !id ){
+            res.statusMessage = "Please send the creator's 'id' to delete a event";
+            return res.status( 406 ).end();
+        }
     
-    if( !id ){
-        res.statusMessage = "Please send the creator's 'id' to delete a event";
-        return res.status( 406 ).end();
-    }
+        if( !title ){
+            res.statusMessage = "Please send the 'title' to delete a event";
+            return res.status( 406 ).end();
+        }
+    
+        Events
+                .deleteEventByTitleAndCreatorId( title, id )
+                .then( result => {
+                    // Handle id no id found error
+                    //console.log(result);
+                    if( !result ){
+                        res.statusMessage = `There are no events with the provided 'title=${title}'.`+
+                                            result.errmsg;
+                        return res.status( 409 ).end();
+                    }
+                    return res.status( 202 ).json( result ); 
+                })
+                .catch( err => {
+                    res.statusMessage = `There are no events with the provided 'title=${title}'.`;
+                    return res.status( 404 ).end();
+                    //res.statusMessage = "Something is wrong with the Database. Try again later";
+                    //return res.status( 500 ).end();
+                });
 
-    if( !title ){
-        res.statusMessage = "Please send the 'title' to delete a event";
-        return res.status( 406 ).end();
-    }
-
-    Events
-            .deleteEventByTitleAndCreatorId( title, id )
-            .then( result => {
-                // Handle id no id found error
-                //console.log(result);
-                if( !result ){
-                    res.statusMessage = `There are no events with the provided 'title=${title}'.`+
-                                        result.errmsg;
-                    return res.status( 409 ).end();
-                }
-                return res.status( 202 ).json( result ); 
-            })
-            .catch( err => {
-                res.statusMessage = `There are no events with the provided 'title=${title}'.`;
-                return res.status( 404 ).end();
-                //res.statusMessage = "Something is wrong with the Database. Try again later";
-                //return res.status( 500 ).end();
-            });
+    });
+    
 });
 
 //For users:
