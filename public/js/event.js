@@ -103,7 +103,7 @@ function getEventsFetchTitle(title, owned){
             results.innerHTML += `<div class="event" >`;
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
-                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
+                results.innerHTML += `<h2> Event: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
                 for(let j=0; j<responseJSON[i].pictures.length; j++){

@@ -100,6 +100,7 @@ function getEventsFetch(){
             results.innerHTML = "";
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div class="event" >`;
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
@@ -132,12 +133,21 @@ function getEventsFetch(){
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
+                if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
+                    owned = true;
+                }
+                else{
+                    owned = false;
+                }
+                
+                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+                results.innerHTML += `</div>`;
             }
         })
         .catch( err => {
@@ -168,6 +178,7 @@ function getEventsFetchKeyword(keyword){
             results.innerHTML = "";
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div class="event" >`;
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
@@ -200,12 +211,21 @@ function getEventsFetchKeyword(keyword){
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
+                if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
+                    owned = true;
+                }
+                else{
+                    owned = false;
+                }
+                
+                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+                results.innerHTML += `</div>`;
             }
         })
         .catch( err => {
@@ -271,11 +291,11 @@ function getEventsFetchTitle(title){
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> date: ${date2} </div>`;
                 }
                 if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
                     owned = true;
@@ -324,6 +344,7 @@ function getEventsFetchTag(tag){
             results.innerHTML = "";
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div class="event" >`;
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
@@ -356,12 +377,21 @@ function getEventsFetchTag(tag){
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
+                if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
+                    owned = true;
+                }
+                else{
+                    owned = false;
+                }
+                
+                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+                results.innerHTML += `</div>`;
             }
         })
         .catch( err => {
@@ -392,6 +422,7 @@ function getEventsFetchProximity(lat, lng, dist){
             results.innerHTML = "";
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div class="event" >`;
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
@@ -424,19 +455,27 @@ function getEventsFetchProximity(lat, lng, dist){
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
+                if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
+                    owned = true;
+                }
+                else{
+                    owned = false;
+                }
+                
+                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+                results.innerHTML += `</div>`;
             }
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
         });
 }
-
 
 function getEventsFetchDates(date1, date2 ){
     let url = `/event-manager/events-by-dates?date1=${date1}&date2=${date2}`;
@@ -461,6 +500,7 @@ function getEventsFetchDates(date1, date2 ){
             results.innerHTML = "";
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div class="event" >`;
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
@@ -493,12 +533,21 @@ function getEventsFetchDates(date1, date2 ){
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
+                if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
+                    owned = true;
+                }
+                else{
+                    owned = false;
+                }
+                
+                results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+                results.innerHTML += `</div>`;
             }
         })
         .catch( err => {
