@@ -168,6 +168,49 @@ function watchGetEventDataForm(){
         getEventsFetchTitle( title, owned );
 }
 
+function commentCreateFetch(title, content, user, event, date){
+    let url = `/event-manager/add-comment`;
+
+    let data = {
+        title,
+        content, 
+        user, 
+        event,
+        date
+    }
+
+    console.log("The data being sent:");
+    console.log(data);
+
+    let settings = {
+        method : 'POST',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify( data )
+    }
+
+    //let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            
+            console.log("El json:");
+            console.log(responseJSON);
+            //return res.status( 200 ).json( responseJSON )
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
+
 function watchCommentForm(){
     let registerForm = document.querySelector( '.register-form' );
     let results = document.querySelector( '.results' );
@@ -179,6 +222,8 @@ function watchCommentForm(){
         let userId = localStorage.getItem( 'id' );
         let event = localStorage.getItem( 'EventId' );
         let date = new Date().now();
+
+        commentCreateFetch(title, content, userId, event, date);
     })
 }
 
