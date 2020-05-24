@@ -48,7 +48,7 @@
         <div class="container">
             <section id="content">
                 <form action="register" class="register-form">
-                    <h1>Create Event Form</h1>
+                    <h1>Update Event Form</h1>
                     <div>
                         <input type="text" placeholder="Title" required="" id="eventTitle" />
                     </div>
@@ -68,10 +68,10 @@
                         <input type="number" placeholder="Month" id="eventMonth" min="1" max="12" oninput="validity.valid||(value='');"/>
                     </div>
                     <div>
-                        <input type="number" placeholder="Year" required="" id="eventYear" min="1" max="3000" oninput="validity.valid||(value='');"/>
+                        <input type="number" placeholder="Year" id="eventYear" min="1" max="3000" oninput="validity.valid||(value='');"/>
                     </div>
                     <div>
-                        <input type="number" placeholder="Hour" required="" id="eventHour" min="0" max="24" oninput="validity.valid||(value='');"/>
+                        <input type="number" placeholder="Hour" id="eventHour" min="0" max="24" oninput="validity.valid||(value='');"/>
                     </div>
                     <div>
                         <input type="checkbox" class="messageCheckbox" name="private" id="eventPrivate" value="Is private?"/> Is private?
