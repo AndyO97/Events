@@ -80,26 +80,26 @@ const Events = {
                 });
     },
     getEventsByUserId : function( id ){
-        return commentModel
+        return eventModel
                 .find( { creator : id } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
-                .then( comments => {
-                    return comments;
+                .then( events => {
+                    return events;
                 })
                 .catch( err => {
                     throw new Error( err.message );
                 });
     },
     getAllEventsByUserId : function( id ){
-        return commentModel
+        return eventModel
                 .find( {$or:[{creator: id},{participants: id}]})
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
-                .then( comments => {
-                    return comments;
+                .then( events => {
+                    return events;
                 })
                 .catch( err => {
                     throw new Error( err.message );
