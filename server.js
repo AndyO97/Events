@@ -907,15 +907,16 @@ app.get( '/event-manager/users', ( req, res ) => {
 //For comments:
 
 app.post( '/event-manager/add-comment', jsonParser, ( req, res ) => {
-    var { title, content, user, event, date} = req.body;
+    var { title, content, username, user, event, date} = req.body;
 
-    if( !title || !content || !user || !event || !date){
+    if( !title || !content || !username || !user || !event || !date){
         res.statusMessage = "One of these parameters is missing in the request: 'title', 'content', 'UserId', 'event' or 'date'.";
         return res.status( 406 ).end();
     }
     const newComment = {
         title, 
         content,
+        username,
         user,
         event,
         date

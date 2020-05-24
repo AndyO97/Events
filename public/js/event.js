@@ -137,7 +137,7 @@ function getEventsFetchTitle(title, owned){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                     results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
                     results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
-                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user.username} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
