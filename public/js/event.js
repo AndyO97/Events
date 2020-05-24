@@ -353,7 +353,7 @@ function addParticipantFetch(participants, event){
 }
 
 function watchParticipantForm(){
-    let registerForm = document.querySelector( '.participant-form' );
+    let registerForm = document.querySelector( '.participants-form' );
     let results = document.querySelector( '.results' );
 
     registerForm.addEventListener( 'submit' , ( e ) => {
@@ -369,9 +369,7 @@ function watchParticipantForm(){
 
 function init(){
     watchCommentForm();
-    if(owned){
-        watchParticipantForm();
-    }
+    watchParticipantForm();
 }
 
 init();
