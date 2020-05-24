@@ -122,13 +122,13 @@ app.get( '/event-manager/events-by-userId/:userId', ( req, res ) => {
     const userId = req.params.userId;
 
     const { sessiontoken } = req.headers;
-    /*
+    
     jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
         if( err ){
             res.statusMessage = "Session expired!";
             return res.status( 400 ).end();
         }
-    */
+    
         if( !userId ){
             res.statusMessage = "Please send the 'userId' as parameter.";
             return res.status( 406 ).end();
@@ -147,7 +147,7 @@ app.get( '/event-manager/events-by-userId/:userId', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
-    //});
+    });
 });
 
 app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {

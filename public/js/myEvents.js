@@ -78,8 +78,8 @@ window.onclick = function(e) {
 
 
 
-function getEventsFetchUser(username){
-    let url = `/event-manager/events-by-user/${username}`;
+function getEventsFetchUser(userId){
+    let url = `/event-manager/events-by-userId/${userId}`;
 
     let settings = {
         method : 'GET',
@@ -167,6 +167,6 @@ function reply_click(clicked_id, owned)
 }
 
 function watchGetEventsUserForm(){
-        username = localStorage.getItem('username');
-        getEventsFetchUser( username );
+        userId = localStorage.getItem('id');
+        getEventsFetchUser( userId );
 }
