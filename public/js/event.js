@@ -170,7 +170,7 @@ function watchGetEventDataForm(){
         if(!owned){
             //section.innerHTML +=``;
             let participantsForm = document.querySelector('.participants-form');
-            participants.remove();
+            participantsForm.remove();
         }
 }
 
