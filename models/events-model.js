@@ -71,7 +71,7 @@ const Events = {
                 .find()
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','username', 'user' ,'date'] )
+                .populate('comments', ['title', 'content', 'username', 'user' ,'date'] )
                 .then( events => {
                     return events;
                 })
@@ -84,7 +84,7 @@ const Events = {
                 .find( { creator : id } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','username', 'user' ,'date'] )
+                .populate('comments', ['title', 'content', 'username', 'user' ,'date'] )
                 .then( comments => {
                     return comments;
                 })
@@ -97,7 +97,7 @@ const Events = {
                 .findOne( { _id : id } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','username', 'user' ,'date'] )
+                .populate('comments', ['title', 'content', 'username', 'user' ,'date'] )
                 .then( events => {
                     return events;
                 })
@@ -110,8 +110,8 @@ const Events = {
                 .find( { title : title } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','username', 'user' ,'date'] )
-                .populate('user', ['username'] )
+                .populate('comments', ['title', 'content', 'username', 'user' ,'date'] )
+                //.populate('user', ['username'] )
                 .then( events => {
                     return events;
                 })

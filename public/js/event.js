@@ -168,12 +168,13 @@ function watchGetEventDataForm(){
         getEventsFetchTitle( title, owned );
 }
 
-function commentCreateFetch(title, content, user, event, date){
+function commentCreateFetch(title, content, username, user, event, date){
     let url = `/event-manager/add-comment`;
 
     let data = {
         title,
         content, 
+        username,
         user, 
         event,
         date
@@ -263,11 +264,12 @@ function watchCommentForm(){
         e.preventDefault();
         let title = document.getElementById( 'commentTitle' ).value;
         let content = document.getElementById( 'commentContent' ).value;
+        let username = localStorage.getItem( 'username' );
         let userId = localStorage.getItem( 'id' );
         let event = localStorage.getItem( 'EventId' );
         let date = new Date();
 
-        commentCreateFetch(title, content, userId, event, date);
+        commentCreateFetch(title, content, username, userId, event, date);
     })
 }
 
