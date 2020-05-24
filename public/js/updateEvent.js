@@ -288,7 +288,9 @@ function getEventsCheckTitle( title, description, pictures, tags, date, dateIs, 
         .then( responseJSON => {
             console.log("El json del titulo:");
             console.log(responseJSON);
-            if(responseJSON[0].creator == creator){
+            console.log(responseJSON[0].creator._id);
+            console.log(creator);
+            if(responseJSON[0].creator._id == creator){
                 let id = responseJSON[0].creator;
                 console.log("Updating the event");
                 eventUpdateFetch( id, title, description, pictures, tags, date, dateIs, private, latitude, longitude );
