@@ -183,7 +183,7 @@ function getEventsFetchTitle(title){
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -251,7 +251,7 @@ function getEventsCheckTitle( title, description, pictures, tags, date, private,
     let settings = {
         method : 'GET',
         headers : {
-            Authorization : `Bearer ${API_TOKEN}`,
+            sessiontoken : localStorage.getItem( 'token' ),
             'Content-Type' : 'application/json'
         },
     }
@@ -265,8 +265,9 @@ function getEventsCheckTitle( title, description, pictures, tags, date, private,
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
-            if(responseJSON[0],creator == creator){
+            if(responseJSON[0].creator == creator){
                 let id = responseJSON[0]._id;
+                console.log("Updating the event");
                 eventUpdateFetch( id, title, description, pictures, tags, date, private, latitude, longitude );
             }
             else{
