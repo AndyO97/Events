@@ -118,7 +118,7 @@ app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
     });
 });
 
-app.get( '/event-manager/events-by-title/:userId', ( req, res ) => {
+app.get( '/event-manager/events-by-userId/:userId', ( req, res ) => {
     const userId = req.params.userId;
 
     const { sessiontoken } = req.headers;
