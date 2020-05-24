@@ -134,8 +134,8 @@ function getEventsFetch(){
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                     results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
@@ -212,8 +212,8 @@ function getEventsFetchKeyword(keyword){
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                     results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
@@ -292,8 +292,8 @@ function getEventsFetchTitle(title){
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                     results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> date: ${date2} </div>`;
                 }
@@ -378,8 +378,8 @@ function getEventsFetchTag(tag){
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                     results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
@@ -456,8 +456,8 @@ function getEventsFetchProximity(lat, lng, dist){
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                     results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
@@ -534,8 +534,8 @@ function getEventsFetchDates(date1, date2 ){
                 for(let m=0; m<responseJSON[i].comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                     results.innerHTML += `<div> Title: ${responseJSON[i].comments[m].title} </div>`;
-                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON[i].comments[m].username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
