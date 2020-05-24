@@ -127,8 +127,9 @@ function getEventsFetch(){
                   infoWindows[i].open(map);
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
+
                 for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[i].participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
@@ -206,7 +207,7 @@ function getEventsFetchKeyword(keyword){
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[i].participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
@@ -286,7 +287,7 @@ function getEventsFetchTitle(title){
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[i].participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
@@ -372,7 +373,7 @@ function getEventsFetchTag(tag){
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[i].participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
@@ -450,7 +451,7 @@ function getEventsFetchProximity(lat, lng, dist){
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[i].participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
@@ -528,7 +529,7 @@ function getEventsFetchDates(date1, date2 ){
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
                 for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[i].participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){

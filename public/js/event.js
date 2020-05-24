@@ -129,8 +129,9 @@ function getEventsFetchTitle(title, owned){
                   infoWindows[i].open(map);
 
                 results.innerHTML += `<div> Creator: ${responseJSON[i].creator.username} </div>`;
+
                 for(let l=0; l<responseJSON[i].participants.length; l++){
-                    results.innerHTML += `<div> Participants: ${responseJSON[i].participants[l].username} </div>`;
+                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[i].participants[l].username} </div>`;
                 }
                 
                 for(let m=0; m<responseJSON[i].comments.length; m++){
