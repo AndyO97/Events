@@ -4,10 +4,10 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Event Manager</title>
-        <link href="./../css/event.css" rel="stylesheet" type="text/css" />
+        <link href="./../css/home.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
     </head>
-    <body onload="watchGetEventDataForm()">
+    <body onload="watchGetEventsUserForm()">
         <div class="navbar">
             <a href="/pages/home.html">Home</a>
             <a href="#about">About</a>
@@ -36,49 +36,12 @@
                 </div>
             </div> 
           </div>
-        </div>
+        <h1>My Events</h1> 
         <section class="results">
 
         </section>
-
-        <div class="container">
-            <section id="content">
-                <form action="register" class="register-form">
-                    <h1>Add a comment</h1>
-                    <div>
-                        <input type="text" placeholder="Title" required="" id="commentTitle" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Content" required="" id="commentContent" />
-                    </div>
-                    <div>
-                        <button type="submit">
-                        Add
-                        </button> 
-                    </div>
-                </form><!-- form -->  
-                <form action="addParticipant" class="participants-form">
-                    <h1>Add a participant</h1>
-                    <p>If the person does not have a username we can send an invite for you if
-                        you add the email.
-                    </p>
-                    <div>
-                        <input type="text" placeholder="username" id="participantUsername" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="email" id="participantEmail" />
-                    </div>
-                    <div>
-                        <button type="submit">
-                        Add
-                        </button> 
-                    </div>
-                </form>
-            </section><!-- content -->
-        </div><!-- container -->
-
         <div id="map"></div>
-        <script src="./../js/event.js"></script>
+        <script src="./../js/myEvents.js"></script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
         ></script>
