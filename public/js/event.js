@@ -148,9 +148,9 @@ function getEventsFetchTitle(title, owned){
                 else{
                     owned = false;
                 }
-                
-                //results.innerHTML +=`<button id="${responseJSON[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+                results.innerHTML +=`<button id="${responseJSON[i]._id}" onClick="reply_click(this.id)">Add to favorites</button>`;
                 results.innerHTML += `</div>`;
+                //results.innerHTML += `</div>`;
                 localStorage.setItem( 'EventId', responseJSON[i]._id );
             }
         })
@@ -159,7 +159,53 @@ function getEventsFetchTitle(title, owned){
         });
 }
 
+function reply_click(clicked_id)
+{
+    console.log(clicked_id);
+    //clicked id containts the title of the event
+    //function to add to favorites
+    username = localStorage.getItem( 'username' );
+    userUpdateFavoritesFetch( username, clicked_id )
 
+    //window.location.href = "/pages/event.html";
+}
+
+function userUpdateFavoritesFetch( username, favorites ){
+    let url = `/event-manager/update-user/${username}`;
+
+    let data = {
+       favorites
+    }
+
+    let settings = {
+        method : 'PATCH',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify( data )
+    }
+
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            console.log("El json:");
+            console.log(responseJSON);
+            let title = localStorage.getItem( 'event');
+            let owned = localStorage.getItem( 'owned');
+            getEventsFetchTitle( title, owned );
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
 
 function watchGetEventDataForm(){
    
