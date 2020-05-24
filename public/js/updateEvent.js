@@ -79,8 +79,8 @@ window.onclick = function(e) {
         }
 }
 
-function eventUpdateFetch( title, description, pictures, tags, date, private, latitude, longitude ){
-    let url = `/event-manager/create-event`;
+function eventUpdateFetch( id, title, description, pictures, tags, date, private, latitude, longitude ){
+    let url = `/event-manager/update-event/${id}`;
 
     let data = {
 
@@ -266,7 +266,8 @@ function getEventsCheckTitle( title, description, pictures, tags, date, private,
         })
         .then( responseJSON => {
             if(responseJSON[0],creator == creator){
-                eventUpdateFetch( title, description, pictures, tags, date, private, latitude, longitude );
+                let id = responseJSON[0]._id;
+                eventUpdateFetch( id, title, description, pictures, tags, date, private, latitude, longitude );
             }
             else{
                 results.innerHTML = `<div> You are not the owner of these event </div>`;
