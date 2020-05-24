@@ -237,7 +237,7 @@ app.get( '/event-manager/events-by-dates', ( req, res ) => {
     });
 });
 
-app.get( '/blog-post/events-by-user/:username', ( req, res ) => {
+app.get( '/event-manager/events-by-user/:username', ( req, res ) => {
     const username = req.params.username;
 
     const { sessiontoken } = req.headers;

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
-        <title>Create an event</title>
+        <title>Update an event</title>
         <link href="./../css/updateAccount.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
     </head>
@@ -36,10 +36,14 @@
             </div>
         </div> 
       </div>
-        <h1>Create an event</h1>
-        <p>Please fill all the information to build a great event. 
-            If you don't know the location you can leave it blank 
-            and your actual location will be used.
+        <h1>Update an event</h1>
+        <p>Please fill the information that you want to change to the event. 
+            At least you should add the title of the event you want to modify.
+            Pictures and Tags will be added to the event. Remember that for adding 
+            comments or participants, you should enter the events by searching it 
+            on the home page or by accesing it in "View my events" or "View my favorites".
+            If you want to change the hour or the date, please include the day, month year 
+            and hour so it can be correctly updated. 
         </p>
         <div class="container">
             <section id="content">
@@ -49,19 +53,19 @@
                         <input type="text" placeholder="Title" required="" id="eventTitle" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Description" required="" id="eventDescription" />
+                        <input type="text" placeholder="Description" id="eventDescription" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Picture link" required="" id="eventPicture" />
+                        <input type="text" placeholder="Picture link" id="eventPicture" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Tags" required="" id="eventTags" />
+                        <input type="text" placeholder="Tags"  id="eventTags" />
                     </div>
                     <div>
-                        <input type="number" placeholder="Day" required="" id="eventDay" min="1" max="31" oninput="validity.valid||(value='');" />
+                        <input type="number" placeholder="Day"  id="eventDay" min="1" max="31" oninput="validity.valid||(value='');" />
                     </div>
                     <div>
-                        <input type="number" placeholder="Month" required="" id="eventMonth" min="1" max="12" oninput="validity.valid||(value='');"/>
+                        <input type="number" placeholder="Month" id="eventMonth" min="1" max="12" oninput="validity.valid||(value='');"/>
                     </div>
                     <div>
                         <input type="number" placeholder="Year" required="" id="eventYear" min="1" max="3000" oninput="validity.valid||(value='');"/>
@@ -80,14 +84,14 @@
                     </div>
                     <div>
                         <button type="submit">
-                        Create
+                        Update
                         </button>
                     </div>
                 </form><!-- form -->
                 
             </section><!-- content -->
         </div><!-- container -->
-        <p>The event created has the following information: </p>
+        <p>The updated information is the following: </p>
         <section class="results">
 
         </section>
