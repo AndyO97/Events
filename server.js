@@ -118,6 +118,38 @@ app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
     });
 });
 
+app.get( '/event-manager/events-by-title/:userId', ( req, res ) => {
+    const userId = req.params.userId;
+
+    const { sessiontoken } = req.headers;
+    /*
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+    */
+        if( !userId ){
+            res.statusMessage = "Please send the 'userId' as parameter.";
+            return res.status( 406 ).end();
+        }
+
+    Events
+        .getAllEventsByUserId( userId )
+        .then( event => {
+            if( !event ){
+                res.statusMessage = `There are no events with the provided 'userId=${userId}'.`;
+                return res.status( 404 ).end();
+            }
+            return res.status( 200 ).json( event );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+    //});
+});
+
 app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
     const tag = req.params.tag;
 
@@ -237,6 +269,7 @@ app.get( '/event-manager/events-by-dates', ( req, res ) => {
     });
 });
 
+//Not used
 app.get( '/event-manager/events-by-user/:username', ( req, res ) => {
     const username = req.params.username;
 
