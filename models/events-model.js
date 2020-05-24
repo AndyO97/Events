@@ -105,7 +105,7 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
-    getEventsById : function( id ){
+    getEventById : function( id ){
         return eventModel
                 .findOne( { _id : id } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )

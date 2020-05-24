@@ -118,6 +118,37 @@ app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
     });
 });
 
+app.get( '/event-manager/events-by-id/:id', ( req, res ) => {
+    const id = req.params.id;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+        if( !id ){
+            res.statusMessage = "Please send the 'id' as parameter.";
+            return res.status( 406 ).end();
+        }
+
+    Events
+        .getEventById( id )
+        .then( event => {
+            if( !event ){
+                res.statusMessage = `There are no events with the provided 'id=${id}'.`;
+                return res.status( 404 ).end();
+            }
+            return res.status( 200 ).json( event );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+    });
+});
+
 app.get( '/event-manager/events-by-userId/:userId', ( req, res ) => {
     const userId = req.params.userId;
 
