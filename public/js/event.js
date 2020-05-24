@@ -165,7 +165,28 @@ function watchGetEventDataForm(){
         let title = localStorage.getItem( 'event');
         let owned = localStorage.getItem( 'owned');
         
+        let section = document.getElementById('content');
         getEventsFetchTitle( title, owned );
+        if(owned){
+            section.innerHTML +=`
+            <form action="register" class="participants-form">
+            <h1>Add a participant</h1>
+            <p>If the person does not have a username we can send an invite for you if
+                        add the email.
+            </p>
+            <div>
+                <input type="text" placeholder="username" id="participantUsername" />
+            </div>
+            <div>
+                <input type="text" placeholder="email" id="participantEmail" />
+            </div>
+            <div>
+                <button type="submit">
+                Add
+                </button> 
+            </div>
+        </form>`;
+        }
 }
 
 function commentCreateFetch(title, content, username, user, event, date){
