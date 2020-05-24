@@ -58,7 +58,7 @@ const Events = {
                 .create( newEvent )
                 //.populate('creator', ['username', 'email','firstName', 'lastName'] )
                 //.populate('participants', ['username', 'email','firstName', 'lastName'] )
-                //.populate('comments', ['title', 'content','user'] )
+                //.populate('comments', ['title', 'content','user','date'] )
                 .then( event => {
                     return event;
                 })
@@ -71,7 +71,7 @@ const Events = {
                 .find()
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( events => {
                     return events;
                 })
@@ -84,7 +84,7 @@ const Events = {
                 .find( { creator : id } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( comments => {
                     return comments;
                 })
@@ -97,7 +97,7 @@ const Events = {
                 .findOne( { _id : id } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( events => {
                     return events;
                 })
@@ -124,7 +124,7 @@ const Events = {
                 .find( { tags : tag } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( events => {
                     return events;
                 })
@@ -137,7 +137,7 @@ const Events = {
                 .find( { date : date} )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( events => {
                     return events;
                 })
@@ -150,7 +150,7 @@ const Events = {
                 .find( { date : {$gte: date1, $lt: date2} } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( events => {
                     return events;
                 })
@@ -163,7 +163,7 @@ const Events = {
                 .find( {$or:[{title: keyword},{tags: keyword}]} )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( events => {
                     return events;
                 })
@@ -187,7 +187,7 @@ const Events = {
                 
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content','user'] )
+                .populate('comments', ['title', 'content','user','date'] )
                 .then( events => {
                     return events;
                 })
