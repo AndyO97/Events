@@ -149,8 +149,7 @@ function eventUpdateFetch( id, title, description, pictures, tags, date, dateIs,
             results.innerHTML = "";
             
             let infoWindow2;
-            //let i = 0;
-            //for(let i=0; i<responseJSON.length; i++){
+            
                 results.innerHTML += `<h2> The Event updated: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON.title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON.description} </div>`;
@@ -176,7 +175,7 @@ function eventUpdateFetch( id, title, description, pictures, tags, date, dateIs,
                   infoWindow2.setContent(responseJSON.title);
                   infoWindow2.open(map);
 
-                results.innerHTML += `<div> Creator: ${creator} </div>`;
+                results.innerHTML += `<div> Creator: ${responseJSON.creator.username} </div>`;
                 for(let l=0; l<responseJSON.participants.length; l++){
                     results.innerHTML += `<div> Participant ${l+1}: ${responseJSON.participants[l].username} </div>`;
                 }
@@ -189,7 +188,6 @@ function eventUpdateFetch( id, title, description, pictures, tags, date, dateIs,
                     var date2 = new Date(responseJSON.comments[m].date);
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
-            //}
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
