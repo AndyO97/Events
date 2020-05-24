@@ -146,7 +146,6 @@ function eventUpdateFetch( id, title, description, pictures, tags, date, dateIs,
             console.log(responseJSON);
             //return res.status( 200 ).json( responseJSON );
 
-            
             results.innerHTML = "";
             
             let infoWindow2;
@@ -191,7 +190,6 @@ function eventUpdateFetch( id, title, description, pictures, tags, date, dateIs,
                     results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
             //}
-
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
@@ -288,12 +286,12 @@ function getEventsCheckTitle( title, description, pictures, tags, date, dateIs, 
         .then( responseJSON => {
             console.log("El json del titulo:");
             console.log(responseJSON);
-            console.log(responseJSON[0].creator._id);
+            let CreatorId = responseJSON[0].creator._id;
+            console.log(CreatorId);
             console.log(creator);
-            if(responseJSON[0].creator._id == creator){
-                let id = responseJSON[0].creator;
+            if(CreatorId == creator){
                 console.log("Updating the event");
-                eventUpdateFetch( id, title, description, pictures, tags, date, dateIs, private, latitude, longitude );
+                eventUpdateFetch( responseJSON[0]._id, title, description, pictures, tags, date, dateIs, private, latitude, longitude );
             }
             else{
                 results.innerHTML = `<div> You are not the owner of these event </div>`;
