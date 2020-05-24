@@ -81,8 +81,8 @@ const Users = {
         return userModel
                 .find( { username : username } )
                 .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
-                .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
-                .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('eventsInvited', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('favorites', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .then( user => {
                     return user;
                 })
@@ -113,7 +113,7 @@ const Users = {
     },
     getUserById : function( id ){
         return userModel
-                .findOne( { id } )
+                .findOne( { _id : id } )
                 .then( user => {
                     return user;
                 })

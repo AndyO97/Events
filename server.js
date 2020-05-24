@@ -533,6 +533,8 @@ app.get( '/event-manager/user-info/:username', ( req, res ) => {
     });
 });
 
+
+
 app.get( '/event-manager/validate-user', ( req, res ) => {
     const { sessiontoken } = req.headers;
 

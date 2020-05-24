@@ -264,7 +264,7 @@ function addCommentToEventFetch(id, comments){
 
 function watchCommentForm(){
     let registerForm = document.querySelector( '.register-form' );
-    let results = document.querySelector( '.results' );
+    //let results = document.querySelector( '.results' );
 
     registerForm.addEventListener( 'submit' , ( e ) => {
         e.preventDefault();
@@ -279,9 +279,98 @@ function watchCommentForm(){
     })
 }
 
+function getUserIdFetch(user){
+    let url = `/event-manager/user-info/${user}`;
+
+    let settings = {
+        method : 'GET',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+    }
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+
+            if(responseJSON){
+                let event = localStorage.getItem( 'EventId' );
+                addParticipantFetch(responseJSON[i]._id, event);
+            }
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
+
+function addParticipantFetch(participants, event){
+    let url = `/event-manager/update-event/${event}`;
+
+    let data = {
+        participants
+    }
+
+    let settings = {
+        method : 'PATCH',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify( data )
+    }
+
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            
+            console.log("El json:");
+            console.log(responseJSON);
+            //return res.status( 200 ).json( responseJSON )
+            //function to patch event
+            let title = localStorage.getItem( 'event');
+            let owned = localStorage.getItem( 'owned');
+        
+            getEventsFetchTitle( title, owned );
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
+
+function watchParticipantForm(){
+    let registerForm = document.querySelector( '.participant-form' );
+    let results = document.querySelector( '.results' );
+
+    registerForm.addEventListener( 'submit' , ( e ) => {
+        e.preventDefault();
+        let participant = document.getElementById( 'participantUsername' ).value;
+        let email = document.getElementById( 'participantEmail' ).value;
+        //let username = localStorage.getItem( 'username' );
+        //let userId = localStorage.getItem( 'id' );
+    
+        getUserIdFetch(participant);
+    })
+}
 
 function init(){
-    watchCommentForm()
+    watchCommentForm();
+    if(owned){
+        watchParticipantForm();
+    }
 }
 
 init();
