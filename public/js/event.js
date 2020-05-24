@@ -302,7 +302,8 @@ function getUserIdFetch(user){
 
             if(responseJSON){
                 let event = localStorage.getItem( 'EventId' );
-                addParticipantFetch(responseJSON[i]._id, event);
+                console.log("Adding participant");
+                addParticipantFetch(responseJSON[0]._id, event);
             }
         })
         .catch( err => {
@@ -361,7 +362,7 @@ function watchParticipantForm(){
         let email = document.getElementById( 'participantEmail' ).value;
         //let username = localStorage.getItem( 'username' );
         //let userId = localStorage.getItem( 'id' );
-    
+        console.log("received the username");
         getUserIdFetch(participant);
     })
 }
