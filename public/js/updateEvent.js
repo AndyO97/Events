@@ -79,25 +79,46 @@ window.onclick = function(e) {
         }
 }
 
-function eventUpdateFetch( id, title, description, pictures, tags, date, private, latitude, longitude ){
+function eventUpdateFetch( id, title, description, pictures, tags, date, dateIs, private, latitude, longitude ){
     let url = `/event-manager/update-event/${id}`;
 
-    let data = {
+    var data;
+    if(dateIs){
+        data = {
 
-        title,
-        description, 
-        pictures, 
-        tags, 
-        date, 
-        private, 
-        location : {
-            type : "Point",
-            coordinates : [
-                latitude,
-                longitude
-            ]
-        },
+            //title,
+            description, 
+            pictures, 
+            tags, 
+            date, 
+            private, 
+            location : {
+                type : "Point",
+                coordinates : [
+                    latitude,
+                    longitude
+                ]
+            },
+        }
     }
+    else{
+        data = {
+
+            //title,
+            description, 
+            pictures, 
+            tags,  
+            private, 
+            location : {
+                type : "Point",
+                coordinates : [
+                    latitude,
+                    longitude
+                ]
+            },
+        }
+    }
+    
     console.log("The data being sent:");
     console.log(data);
 
@@ -131,7 +152,7 @@ function eventUpdateFetch( id, title, description, pictures, tags, date, private
             let infoWindow2;
             //let i = 0;
             //for(let i=0; i<responseJSON.length; i++){
-                results.innerHTML += `<h2> The Event created: </h2>`;
+                results.innerHTML += `<h2> The Event updated: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON.title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON.description} </div>`;
                 for(let j=0; j<responseJSON.pictures.length; j++){
@@ -245,7 +266,7 @@ function getEventsFetchTitle(title){
         });
 }
 
-function getEventsCheckTitle( title, description, pictures, tags, date, private, latitude, longitude, creator ){
+function getEventsCheckTitle( title, description, pictures, tags, date, dateIs, private, latitude, longitude, creator ){
     let url = `/event-manager/events-by-title/${title}`;
 
     let settings = {
@@ -268,7 +289,7 @@ function getEventsCheckTitle( title, description, pictures, tags, date, private,
             if(responseJSON[0].creator == creator){
                 let id = responseJSON[0]._id;
                 console.log("Updating the event");
-                eventUpdateFetch( id, title, description, pictures, tags, date, private, latitude, longitude );
+                eventUpdateFetch( id, title, description, pictures, tags, date, dateIs, private, latitude, longitude );
             }
             else{
                 results.innerHTML = `<div> You are not the owner of these event </div>`;
@@ -304,9 +325,12 @@ function watchCreateForm(){
         let private = document.querySelector('.messageCheckbox').checked;
         let latitude = Number(document.getElementById( 'eventLatitude' ).value);
         let longitude = Number(document.getElementById( 'eventLongitude' ).value);
+        var dateIs = false;
         if(year&&month&&day&&hour){
             var date = new Date(year, month, day, hour);
+            dateIs = true;
         }
+        
         
         if(!navigator.geolocation) {
             results.innerHTML = "Geolocation is not supported by your browser";
@@ -325,7 +349,7 @@ function watchCreateForm(){
             longitude = userlng;
         }
         
-        getEventsCheckTitle( title, description, pictures, tags, date, private, latitude, longitude, creator );           
+        getEventsCheckTitle( title, description, pictures, tags, date, dateIs, private, latitude, longitude, creator );           
     })
 }
 
