@@ -167,11 +167,11 @@ function userCreateFetch( title, description, pictures, tags, date, private, lat
                 
                 for(let m=0; m<responseJSON.comments.length; m++){
                     results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON.comments[m].title} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON.comments[m].contentent} </div>`;
-                    results.innerHTML += `<div> Participants: ${responseJSON.comments[m].user} </div>`;
+                    results.innerHTML += `<div> Title: ${responseJSON.comments[m].title} </div>`;
+                    results.innerHTML += `<div> Content: ${responseJSON.comments[m].content} </div>`;
+                    results.innerHTML += `<div> User: ${responseJSON.comments[m].user} </div>`;
                     var date2 = new Date(responseJSON.comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
             //}
 

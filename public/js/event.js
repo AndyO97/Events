@@ -139,7 +139,7 @@ function getEventsFetchTitle(title, owned){
                     results.innerHTML += `<div> Content: ${responseJSON[i].comments[m].content} </div>`;
                     results.innerHTML += `<div> User: ${responseJSON[i].comments[m].user.username} </div>`;
                     var date2 = new Date(responseJSON[i].comments[m].date);
-                    results.innerHTML += `<div> Participants: ${date2} </div>`;
+                    results.innerHTML += `<div> Date: ${date2} </div>`;
                 }
                 if(responseJSON[i].creator.username == localStorage.getItem( 'username' )){
                     owned = true;
