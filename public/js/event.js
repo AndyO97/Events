@@ -377,6 +377,7 @@ function addParticipantFetch(participants, event){
     }
 
     let results = document.querySelector( '.results' );
+    console.log("Before the fetch");
 
     fetch( url, settings )
         .then( response => {
