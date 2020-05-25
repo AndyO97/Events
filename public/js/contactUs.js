@@ -28,7 +28,6 @@ window.onclick = function(e) {
 }
 
 
-
 function watchContactForm(){
     let registerForm = document.querySelector( '.register-form' );
 
