@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>About</title>
+        <link href="./../css/home.css" rel="stylesheet" type="text/css" />
+        <script src ="./../js/general.js"></script>
+    </head>
+    <body>
+        <div class="navbar">
+            <a href="/pages/home.html">Home</a>
+            <a href="/pages/about.html">About</a>
+            <a href="/pages/contactUs.html">Contact Us</a>
+            <div class="dropdown">
+                <button class="dropbtn-Events" onclick="myFunctionEvents()">Events
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdownEvents">
+                    <a href="/pages/myEvents.html">View my events</a>
+                    <a href="/pages/myFavorites.html">View my favorites</a>
+                    <a href="/pages/createEvent.html">Create an event</a>
+                    <a href="/pages/updateEvent.html">Modify an event</a>
+                    <a href="/pages/deleteEvent.html">Delete an event</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <button class="dropbtn-Account" onclick="myFunctionAccount()">Account
+                    <i class="fa fa-caret-down"></i>
+                </button>
+                <div class="dropdown-content" id="myDropdownAccount">
+                    <a href="/pages/account.html">View my account</a>
+                    <a href="/pages/updateAccount.html">Change my information</a>
+                    <a href="/pages/LoggedOut.html">Sign Out</a>
+                    <a href="/pages/deleteAccount.html">Delete my account</a>
+                </div>
+            </div> 
+        </div>
+        <h1>My About</h1>
+        <p>Thank you for entereing to our webpage and trusting us with your events. 
+            This webpage started as a project for a class and continued.
+        </p> 
+        
+        <script src="./../js/about.js"></script>
+        
+    </body>
+</html>
