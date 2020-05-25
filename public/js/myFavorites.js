@@ -98,7 +98,7 @@ function getEventsFetchUser(username, n){
         .then( responseJSON => {
             for(let cont=0; i<responseJSON.favorites.length; cont++){
                 results.innerHTML = "";
-                getEventsFetchId(responseJSON.favorites[cont], i);
+                getEventsFetchId(responseJSON.favorites[cont], cont);
             }
             
         })
