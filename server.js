@@ -10,6 +10,7 @@ const { Users } = require( './models/users-model' );
 const { Comments } = require( './models/comments-model' );
 const { Events } = require( './models/events-model' );
 const { DATABASE_URL, PORT, TOKEN } = require( './config' );
+const nodemailer = require('nodemailer');
 
 
 const app = express();
@@ -1041,6 +1042,37 @@ app.get( '/event-manager/comments-by-user/:username', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
+});
+
+
+//For sending emails
+app.post( '/event-manager/send-email', jsonParser, ( req, res ) => {
+    var {receiver, subject, text} = req.body;
+
+        var transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+              user: 'eventmanagerz123@gmail.com',
+              pass: 'loti1234'
+            }
+        });
+          
+        var mailOptions = {
+            from: 'eventmanagerz123@gmail.com',
+            to: receiver,
+            subject: subject,
+            text: text
+        };  
+          
+        transporter.sendMail(mailOptions, function(error, info){
+            if (error) {
+              console.log(error);
+              return res.status( 400 ).end();
+            } else {
+              console.log('Email sent: ' + info.response);
+              return res.status( 200 ).end();
+            }
+        });     
 });
 
 app.listen( PORT, () =>{
