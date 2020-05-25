@@ -440,34 +440,6 @@ function watchParticipantForm(){
             }
         }
         
-            /*
-            var transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                  user: 'eventmanagerz123@gmail.com',
-                  pass: 'loti1234'
-                }
-            });
-              
-            var mailOptions = {
-                from: 'eventmanagerz123@gmail.com',
-                to: email,
-                subject: `You have received an invite from ${username}`,
-                text: `You have received an invite from ${username} to the event
-                ${event}. Please go to https://frozen-falls-96496.herokuapp.com/index.html 
-                an create an account.`
-            };  
-              
-            transporter.sendMail(mailOptions, function(error, info){
-                if (error) {
-                    console.log(error);
-                } else {
-                    console.log('Email sent: ' + info.response);
-                }
-            });
-            */     
-        
-        
     })
 }
 

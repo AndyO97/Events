@@ -6,6 +6,7 @@
         <title>Create an event</title>
         <link href="./../css/updateAccount.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
+        <script src="https://smtpjs.com/v3/smtp.js"></script> 
     </head>
     <body>
       <div class="navbar">
@@ -36,66 +37,39 @@
             </div>
         </div> 
       </div>
-        <h1>Create an event</h1>
-        <p>Please fill all the information to build a great event. 
-            If you don't know the location you can leave it blank 
-            and your actual location will be used.
+        <h1>Contact Us</h1>
+        <p>Please fill the form if you want to contact us or leave 
+             us your feedback. We will try to reply as promptly as 
+             possible. 
         </p>
         <div class="container">
             <section id="content">
                 <form action="register" class="register-form">
-                    <h1>Create Event Form</h1>
+                    <h1>Contact Us Form</h1>
                     <div>
-                        <input type="text" placeholder="Title" required="" id="eventTitle" />
+                        <input type="text" placeholder="First Name" required="" id="formFirstName" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Description" required="" id="eventDescription" />
+                        <input type="text" placeholder="Last Name" required="" id="formLastName" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Picture link" required="" id="eventPicture" />
+                        <input type="text" placeholder="Subject" required="" id="formSubject" />
                     </div>
                     <div>
-                        <input type="text" placeholder="Tags" required="" id="eventTags" />
+                        <input type="text" placeholder="email" required="" id="formEmail" />
                     </div>
                     <div>
-                        <input type="number" placeholder="Day" required="" id="eventDay" min="1" max="31" oninput="validity.valid||(value='');" />
-                    </div>
-                    <div>
-                        <input type="number" placeholder="Month" required="" id="eventMonth" min="1" max="12" oninput="validity.valid||(value='');"/>
-                    </div>
-                    <div>
-                        <input type="number" placeholder="Year" required="" id="eventYear" min="1" max="3000" oninput="validity.valid||(value='');"/>
-                    </div>
-                    <div>
-                        <input type="number" placeholder="Hour" required="" id="eventHour" min="0" max="24" oninput="validity.valid||(value='');"/>
-                    </div>
-                    <div>
-                        <input type="checkbox" class="messageCheckbox" name="private" id="eventPrivate" value="Is private?"/> Is private?
-                    </div>
-                    <div>
-                        <input type="number" placeholder="latitude" id="eventLatitude" />
-                    </div>
-                    <div>
-                        <input type="number" placeholder="longitude" id="eventLongitude" />
+                        <input type="text" placeholder="Content" required="" id="formContent" />
                     </div>
                     <div>
                         <button type="submit">
-                        Create
+                        Submit
                         </button>
                     </div>
                 </form><!-- form -->
                 
             </section><!-- content -->
         </div><!-- container -->
-        <p>The event created has the following information: </p>
-        <section class="results">
-
-        </section>
-        <p>The location of the event is: </p>
-        <div id="map"></div>
-        <script src="./../js/createEvent.js"></script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
-        ></script>
+        <script src="./../js/contactUs.js"></script>
     </body>
 </html>
