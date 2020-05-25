@@ -97,7 +97,7 @@ function getEventsFetchUser(username){
         })
         .then( responseJSON => {
             console.log("Json of user:");
-            console.log(responseJSON);
+            console.log(responseJSON[0]);
             /*
             for(let cont=0; cont<responseJSON[0].favorites.length; cont++){
                 results.innerHTML = "";
@@ -110,54 +110,54 @@ function getEventsFetchUser(username){
            
            infoWindows = [];
 
-           for(let i=0; i<responseJSON.favorites.length; i++){
+           for(let i=0; i<responseJSON[0].favorites.length; i++){
                results.innerHTML += `<div class="event" >`;
                results.innerHTML += `<h2> Event ${i+1}: </h2>`;
-               results.innerHTML += `<h3> Title: ${responseJSON.favorites[i].title} </h3>`;
-               results.innerHTML += `<div> Description: ${responseJSON.favorites[i].description} </div>`;
-               for(let j=0; j<responseJSON.favorites[i].pictures.length; j++){
-                   results.innerHTML += `<img src="${responseJSON.favorites[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
+               results.innerHTML += `<h3> Title: ${responseJSON[0].favorites[i].title} </h3>`;
+               results.innerHTML += `<div> Description: ${responseJSON[0].favorites[i].description} </div>`;
+               for(let j=0; j<responseJSON[0].favorites[i].pictures.length; j++){
+                   results.innerHTML += `<img src="${responseJSON[0].favorites[i].pictures[j]}" alt="Picture ${j+1} of event ${i+1}"/>`;
                }
                results.innerHTML += `<div> Tags:`;
-               for(let k=0; k<responseJSON.favorites[i].tags.length; k++){
-                   results.innerHTML += `${responseJSON.favorites[i].tags[k]},`;
+               for(let k=0; k<responseJSON[0].favorites[i].tags.length; k++){
+                   results.innerHTML += `${responseJSON[0].favorites[i].tags[k]},`;
                }
                results.innerHTML += `</div>`;
-               var date = new Date(responseJSON.favorites[i].date);
+               var date = new Date(responseJSON[0].favorites[i].date);
                results.innerHTML += `<div> Date: ${date} </div>`;
 
                infoWindows[i] = new google.maps.InfoWindow;
 
                var position = {
-                   lat: responseJSON.favorites[i].location.coordinates[0],
-                   lng: responseJSON.favorites[i].location.coordinates[1]
+                   lat: responseJSON[0].favorites[i].location.coordinates[0],
+                   lng: responseJSON[0].favorites[i].location.coordinates[1]
                  };
        
                  infoWindows[i].setPosition(position);
-                 infoWindows[i].setContent(responseJSON.favorites[i].title);
+                 infoWindows[i].setContent(responseJSON[0].favorites[i].title);
                  infoWindows[i].open(map);
 
-               results.innerHTML += `<div> Creator: ${responseJSON.favorites[i].creator.username} </div>`;
-               for(let l=0; l<responseJSON.favorites[i].participants.length; l++){
-                   results.innerHTML += `<div> Participant ${l+1}: ${responseJSON.favorites[i].participants[l].username} </div>`;
+               results.innerHTML += `<div> Creator: ${responseJSON[0].favorites[i].creator.username} </div>`;
+               for(let l=0; l<responseJSON[0].favorites[i].participants.length; l++){
+                   results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[0].favorites[i].participants[l].username} </div>`;
                }
                
-               for(let m=0; m<responseJSON.favorites[i].comments.length; m++){
+               for(let m=0; m<responseJSON[0].favorites[i].comments.length; m++){
                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
-                   results.innerHTML += `<div> Title: ${responseJSON.favorites[i].comments[m].title} </div>`;
-                   results.innerHTML += `<div> Content: ${responseJSON.favorites[i].comments[m].content} </div>`;
-                   results.innerHTML += `<div> User: ${responseJSON.favorites[i].comments[m].username} </div>`;
-                   var date2 = new Date(responseJSON.favorites[i].comments[m].date);
+                   results.innerHTML += `<div> Title: ${responseJSON[0].favorites[i].comments[m].title} </div>`;
+                   results.innerHTML += `<div> Content: ${responseJSON[0].favorites[i].comments[m].content} </div>`;
+                   results.innerHTML += `<div> User: ${responseJSON[0].favorites[i].comments[m].username} </div>`;
+                   var date2 = new Date(responseJSON[0].favorites[i].comments[m].date);
                    results.innerHTML += `<div> date: ${date2} </div>`;
                }
-               if(responseJSON.favorites[i].creator.username == localStorage.getItem( 'username' )){
+               if(responseJSON[0].favorites[i].creator.username == localStorage.getItem( 'username' )){
                    owned = true;
                }
                else{
                    owned = false;
                }
                
-               results.innerHTML +=`<button id="${responseJSON.favorites[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+               results.innerHTML +=`<button id="${responseJSON[0].favorites[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
                results.innerHTML += `</div>`;
            }
 
