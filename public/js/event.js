@@ -415,12 +415,12 @@ function watchParticipantForm(){
         //let username = localStorage.getItem( 'username' );
         //let userId = localStorage.getItem( 'id' );
         console.log("received the username");
-        //if(participant){
+        if(participant){
             console.log("Adding participant...");
             getUserIdFetch(participant);
-        //}
+        }
         
-        /*
+        
         if(!participant && email){
             console.log("Sending email...");
 
@@ -438,7 +438,7 @@ function watchParticipantForm(){
                     message => alert("mail sent successfully")
                 );
         }
-        */
+        
             /*
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
