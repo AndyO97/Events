@@ -101,9 +101,11 @@ function getEventsFetchUser(userId){
             console.log(responseJSON.length);
             results.innerHTML = "";
             //let i=0;
-            results.innerHTML += `<div class="event" >`;
+            
             infoWindows = [];
+
             for(let i=0; i<responseJSON.length; i++){
+                results.innerHTML += `<div class="event" >`;
                 results.innerHTML += `<h2> Event ${i+1}: </h2>`;
                 results.innerHTML += `<h3> Title: ${responseJSON[i].title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON[i].description} </div>`;
