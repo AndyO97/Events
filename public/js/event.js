@@ -414,10 +414,12 @@ function watchParticipantForm(){
         //let userId = localStorage.getItem( 'id' );
         console.log("received the username");
         if(participant){
+            console.log("Adding participant...");
             getUserIdFetch(participant);
         }
         
         if(!participant && email){
+            console.log("Sending email...");
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
