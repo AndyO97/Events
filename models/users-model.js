@@ -70,6 +70,9 @@ const Users = {
     getAllUsers : function(){
         return userModel
                 .find()
+                .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('eventsInvited', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('favorites', ['_id', 'title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .then( users => {
                     return users;
                 })
@@ -114,6 +117,9 @@ const Users = {
     getUserById : function( id ){
         return userModel
                 .findOne( { _id : id } )
+                .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('eventsInvited', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('favorites', ['_id', 'title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .then( user => {
                     return user;
                 })
