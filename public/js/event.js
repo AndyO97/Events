@@ -420,6 +420,22 @@ function watchParticipantForm(){
         
         if(!participant && email){
             console.log("Sending email...");
+
+            Email.send({
+                Host: "smtp.gmail.com",
+                Username : "eventmanagerz123@gmail.com",
+                Password : "loti1234",
+                To : email,
+                From : "eventmanagerz123@gmail.com",
+                Subject : `You have received an invite from ${username}`,
+                Body : `You have received an invite from ${username} to the event
+                ${event}. Please go to https://frozen-falls-96496.herokuapp.com/index.html 
+                an create an account.`,
+                }).then(
+                    message => alert("mail sent successfully")
+                );
+
+            /*
             var transporter = nodemailer.createTransport({
                 service: 'gmail',
                 auth: {
@@ -443,7 +459,8 @@ function watchParticipantForm(){
                 } else {
                     console.log('Email sent: ' + info.response);
                 }
-            });     
+            });
+            */     
         }
         
     })
