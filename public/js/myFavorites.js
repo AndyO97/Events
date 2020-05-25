@@ -98,9 +98,9 @@ function getEventsFetchUser(username){
         .then( responseJSON => {
             console.log("Json of user:");
             console.log(responseJSON);
-            for(let cont=0; cont<responseJSON.favorites.length; cont++){
+            for(let cont=0; cont<responseJSON[0].favorites.length; cont++){
                 results.innerHTML = "";
-                getEventsFetchId(responseJSON.favorites[cont], cont);
+                getEventsFetchId(responseJSON[0].favorites[cont], cont);
             }
             
         })
