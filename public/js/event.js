@@ -350,7 +350,7 @@ function getUserIdFetch(user){
 
             if(responseJSON){
                 let event = localStorage.getItem( 'EventId' );
-                console.log(responseJSON);
+                console.log(responseJSON[0]._id);
                 console.log("Adding participant");
                 addParticipantFetch(responseJSON[0]._id, event);
             }
