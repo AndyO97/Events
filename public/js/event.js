@@ -415,7 +415,8 @@ function watchParticipantForm(){
         //let username = localStorage.getItem( 'username' );
         //let userId = localStorage.getItem( 'id' );
         console.log("received the username");
-        if(participant){
+        if(participant!=null){
+            console.log(participant);
             console.log("Adding participant...");
             getUserIdFetch(participant);
         }
