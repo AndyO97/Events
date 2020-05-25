@@ -10,7 +10,7 @@ const { Users } = require( './models/users-model' );
 const { Comments } = require( './models/comments-model' );
 const { Events } = require( './models/events-model' );
 const { DATABASE_URL, PORT, TOKEN } = require( './config' );
-const nodemailer = require('nodemailer');
+//const nodemailer = require('nodemailer');
 
 
 const app = express();
@@ -526,7 +526,7 @@ app.patch( '/event-manager/update-event/:id', jsonParser, ( req, res ) => {
             return res.status( 406 ).end();
         }
         Events
-        .getEventsById( id )
+        .getEventById( id )
         .then( result => {
             if( !result){
                 res.statusMessage = `There are no events with the provided 'id=${id}'.`+
@@ -1046,6 +1046,7 @@ app.get( '/event-manager/comments-by-user/:username', ( req, res ) => {
 
 
 //For sending emails
+/*
 app.post( '/event-manager/send-email', jsonParser, ( req, res ) => {
     var {receiver, subject, text} = req.body;
 
@@ -1074,6 +1075,7 @@ app.post( '/event-manager/send-email', jsonParser, ( req, res ) => {
             }
         });     
 });
+*/
 
 app.listen( PORT, () =>{
     console.log( "This server is running on port 8080" );
