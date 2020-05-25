@@ -415,15 +415,14 @@ function watchParticipantForm(){
         //let username = localStorage.getItem( 'username' );
         //let userId = localStorage.getItem( 'id' );
         console.log("received the username");
-        if(participant!=null){
+        if(participant!==""){
             console.log(participant);
             console.log("Adding participant...");
             getUserIdFetch(participant);
         }
-        
-        
-        if(!participant && email){
-            console.log("Sending email...");
+        else{
+            if(email!==""){
+                console.log("Sending email...");
 
             Email.send({
                 Host: "smtp.gmail.com",
@@ -438,6 +437,7 @@ function watchParticipantForm(){
                 }).then(
                     message => alert("mail sent successfully")
                 );
+            }
         }
         
             /*
