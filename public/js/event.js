@@ -1,6 +1,7 @@
 const API_TOKEN = '2abbf7c3-245b-404f-9473-ade729ed4653';
 var map, infoWindow;
 var userlat, userlng;
+const nodemailer = require('nodemailer');
 
 //For the map and the location
 function initMap() {
@@ -407,10 +408,40 @@ function watchParticipantForm(){
         e.preventDefault();
         let participant = document.getElementById( 'participantUsername' ).value;
         let email = document.getElementById( 'participantEmail' ).value;
+        let username = localStorage.getItem( 'username' );
+        let event = localStorage.getItem( 'event' );
         //let username = localStorage.getItem( 'username' );
         //let userId = localStorage.getItem( 'id' );
         console.log("received the username");
         getUserIdFetch(participant);
+
+        if(!participant && email){
+            var transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                  user: 'eventmanagerz123@gmail.com',
+                  pass: 'loti1234'
+                }
+            });
+              
+            var mailOptions = {
+                from: 'eventmanagerz123@gmail.com',
+                to: email,
+                subject: `You have received an invite from ${username}`,
+                text: `You have received an invite from ${username} to the event
+                ${event}. Please go to https://frozen-falls-96496.herokuapp.com/index.html 
+                an create an account.`
+            };  
+              
+            transporter.sendMail(mailOptions, function(error, info){
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });     
+        }
+        
     })
 }
 

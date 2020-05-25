@@ -1066,11 +1066,11 @@ app.post( '/event-manager/send-email', jsonParser, ( req, res ) => {
           
         transporter.sendMail(mailOptions, function(error, info){
             if (error) {
-              console.log(error);
-              return res.status( 400 ).end();
+                console.log(error);
+                return res.status( 400 ).end();
             } else {
-              console.log('Email sent: ' + info.response);
-              return res.status( 200 ).end();
+                console.log('Email sent: ' + info.response);
+                return res.status( 200 ).end();
             }
         });     
 });
