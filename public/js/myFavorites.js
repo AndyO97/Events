@@ -96,7 +96,7 @@ function getEventsFetchUser(username){
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
-            for(let cont=0; i<responseJSON.favorites.length; cont++){
+            for(let cont=0; cont<responseJSON.favorites.length; cont++){
                 results.innerHTML = "";
                 getEventsFetchId(responseJSON.favorites[cont], cont);
             }
