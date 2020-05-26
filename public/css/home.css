@@ -19,6 +19,14 @@
   align-items: center;
   flex-wrap: wrap;
 }
+
+.all-event-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
 .leftSide{
   flex-direction: column;
 }
@@ -127,11 +135,6 @@
 
   .leftSide{
     width: 30%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    flex-wrap: wrap;
   }
   .middle{
     width: 30%;
