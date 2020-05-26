@@ -8,7 +8,7 @@
 
  .navbar {
    display: flex;
-   justify-content: center;
+   justify-content: space-evenly;
    overflow: hidden;
    background-color: #333;
    font-family: Arial, Helvetica, sans-serif;
