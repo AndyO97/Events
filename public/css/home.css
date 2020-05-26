@@ -126,11 +126,6 @@
 
  @media (min-width:991px){
 
-  .hamburger{
-    display: none;
-  }
-  
-
   .mainContainer{
     display: flex;
     flex-direction: row;
