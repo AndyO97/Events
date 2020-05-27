@@ -136,29 +136,31 @@ function getEventsFetchUser(username){
                  infoWindows[i].setPosition(position);
                  infoWindows[i].setContent(responseJSON[0].favorites[i].title);
                  infoWindows[i].open(map);
-
-               results.innerHTML += `<div> Creator: ${responseJSON[0].favorites[i].creator.username} </div>`;
-               for(let l=0; l<responseJSON[0].favorites[i].participants.length; l++){
+                
+                 /*
+                results.innerHTML += `<div> Creator: ${responseJSON[0].favorites[i].creator.username} </div>`;
+                for(let l=0; l<responseJSON[0].favorites[i].participants.length; l++){
                    results.innerHTML += `<div> Participant ${l+1}: ${responseJSON[0].favorites[i].participants[l].username} </div>`;
-               }
+                }
                
-               for(let m=0; m<responseJSON[0].favorites[i].comments.length; m++){
+                for(let m=0; m<responseJSON[0].favorites[i].comments.length; m++){
                    results.innerHTML += `<h4> Comment ${m+1}: </h4>`;
                    results.innerHTML += `<div> Title: ${responseJSON[0].favorites[i].comments[m].title} </div>`;
                    results.innerHTML += `<div> Content: ${responseJSON[0].favorites[i].comments[m].content} </div>`;
                    results.innerHTML += `<div> User: ${responseJSON[0].favorites[i].comments[m].username} </div>`;
                    var date2 = new Date(responseJSON[0].favorites[i].comments[m].date);
                    results.innerHTML += `<div> date: ${date2} </div>`;
-               }
-               if(responseJSON[0].favorites[i].creator.username == localStorage.getItem( 'username' )){
+                }
+                */
+                if(responseJSON[0].favorites[i].creator.username == localStorage.getItem( 'username' )){
                    owned = true;
-               }
-               else{
+                }
+                else{
                    owned = false;
-               }
+                }
                
-               results.innerHTML +=`<button id="${responseJSON[0].favorites[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
-               results.innerHTML += `</div>`;
+                results.innerHTML +=`<button id="${responseJSON[0].favorites[i].title}" onClick="reply_click(this.id, owned)">See event</button>`;
+                results.innerHTML += `</div>`;
            }
 
             
