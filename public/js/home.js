@@ -676,9 +676,9 @@ function getUserDataAndFavorites(user){
         });
 }
 
-watchGetEventsTagFormOnLoad(){
+function watchGetEventsTagFormOnLoad(){
     let user = localStorage.getItem('username');
-    getUserDataAndFavorites(user)
+    getUserDataAndFavorites(user);
 }
 
 function init(){
