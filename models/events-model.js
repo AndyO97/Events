@@ -212,9 +212,10 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
-    getEventsBetweenDates2 : function( date1, date2, id ){
+    getEventsBetweenDates2 : function( startDate, endDate, id ){
         return eventModel
-                .find( {$or:[{date : {$gte: date1, $lt: date2}, creator: id}, {date : {$gte: date1, $lt: date2}, private: false}]})
+                //.find( {$or:[{date : {$gte: date1, $lt: date2}, creator: id}, {date : {$gte: date1, $lt: date2}, private: false}]})
+                .find( {$or:[{date : {$gte: new Date(new Date(startDate).setHours(00, 00, 00)), $lt: new Date(new Date(endDate).setHours(23, 59, 59))}, creator: id}, {date : {$gte: new Date(new Date(startDate).setHours(00, 00, 00)), $lt: new Date(new Date(endDate).setHours(23, 59, 59))}, private: false}]})
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
