@@ -99,11 +99,17 @@ const Users = {
                 .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .populate('eventsInvited', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .populate('favorites', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
-                .populate('creator', ['username', 'email','firstName', 'lastName'] )
-                .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
                 .then( user => {
-                    return user;
+                    return user
+                    .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                    .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                    .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
+                    .then( user => {
+                        return user;
+                    })
+                    .catch( err => {
+                        throw new Error( err.message );
+                    }); 
                 })
                 .catch( err => {
                     throw new Error( err.message );
