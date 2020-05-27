@@ -671,7 +671,7 @@ function getUserDataAndFavorites(user){
         .then( responseJSON => {
             console.log("El json:");
             console.log(responseJSON);
-            getEventsFetchTag( responseJSON[0].tag[0] );
+            getEventsFetchTag( responseJSON[0].tags );
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
