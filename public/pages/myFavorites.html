@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>Event Manager</title>
-        <link href="./../css/home.css" rel="stylesheet" type="text/css" />
+        <link href="./../css/myEvents.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
     </head>
     <body onload="watchGetEventsUserForm()">
@@ -36,11 +36,19 @@
                 </div>
             </div> 
           </div>
-        <h1>My Favorites</h1> 
-        <section class="results">
-
-        </section>
-        <div id="map"></div>
+        <main>
+            <div class="mainContainer">
+                <div class="leftSide inbox">
+                    <h1>My Favorites</h1> 
+                    <section class="results">
+            
+                    </section>
+                </div>
+                <div class="rightSide inbox">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </main>
         <script src="./../js/myFavorites.js"></script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
