@@ -79,7 +79,7 @@ app.get( '/event-manager/events/:CreatorId', ( req, res ) => {
 });
 
 app.get( '/event-manager/events-by-keyword', ( req, res ) => {
-    let id = req.query.creatorId;
+    let creatorId = req.query.creatorId;
     let keyword = req.query.keyword;
     /*
     const { sessiontoken } = req.headers;
