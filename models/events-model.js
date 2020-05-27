@@ -79,6 +79,19 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
+    getAllEvents2 : function(id){
+        return eventModel
+                .find({$or:[{creator: id},{private: false}]})
+                .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
+                .then( events => {
+                    return events;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                });
+    },
     getEventsByUserId : function( id ){
         return eventModel
                 .find( { creator : id } )

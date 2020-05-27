@@ -56,6 +56,28 @@ app.get( '/event-manager/events', ( req, res ) => {
     });
 });
 
+app.get( '/event-manager/events/:CreatorId', ( req, res ) => {
+    const { sessiontoken } = req.headers;
+
+    const id = req.params.CreatorId;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+    Events
+        .getAllEvents(id)
+        .then( events => {
+            return res.status( 200 ).json( events );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+    });
+});
+
 app.get( '/event-manager/events-by-keyword/:keyword', ( req, res ) => {
     const keyword = req.params.keyword;
 

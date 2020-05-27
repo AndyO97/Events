@@ -77,7 +77,8 @@ window.onclick = function(e) {
 //for events
 
 function getEventsFetch(){
-    let url = `/event-manager/events`;
+    let id = localStorage.getItem('id');
+    let url = `/event-manager/events/${id}`;
 
     let settings = {
         method : 'GET',
