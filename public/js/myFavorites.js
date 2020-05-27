@@ -116,7 +116,7 @@ function getEventsFetchUser(username){
                results.innerHTML += `<h3> Title: ${responseJSON[0].favorites[i].title} </h3>`;
                results.innerHTML += `<div> Description: ${responseJSON[0].favorites[i].description} </div>`;
                for(let j=0; j<responseJSON[0].favorites[i].pictures.length; j++){
-                    results.innerHTML += `<img src="${responseJSON[0].pictures[j]}" alt="Picture ${j+1} of event ${responseJSON[0].favorites[i].title}" width="400" height="200">`;
+                    results.innerHTML += `<img src="${responseJSON[0].favorites[i].pictures[j]}" alt="Picture ${j+1} of event ${responseJSON[0].favorites[i].title}" width="400" height="200">`;
             }
                results.innerHTML += `<div> Tags:`;
                for(let k=0; k<responseJSON[0].favorites[i].tags.length; k++){
