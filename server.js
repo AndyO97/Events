@@ -116,6 +116,37 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
     });
 });
 
+app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
+    let title = req.params.title;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+        if( !title ){
+            res.statusMessage = "Please send the 'title' as parameter.";
+            return res.status( 406 ).end();
+        }
+
+    Events
+        .getEventsByTitle( title)
+        .then( event => {
+            if( !event ){
+                res.statusMessage = `There are no events with the provided 'title=${title}'.`;
+                return res.status( 404 ).end();
+            }
+            return res.status( 200 ).json( event );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+    });
+});
+
 app.get( '/event-manager/events-by-title', ( req, res ) => {
     let creatorId = req.query.creatorId;
     let title = req.query.title;
@@ -216,7 +247,8 @@ app.get( '/event-manager/events-by-userId/:userId', ( req, res ) => {
 });
 
 app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
-    const tag = req.params.tag;
+
+    let tag = req.params.tag;
 
     const { sessiontoken } = req.headers;
 
@@ -233,6 +265,46 @@ app.get( '/event-manager/events-by-tag/:tag', ( req, res ) => {
 
     Events
         .getEventsByTag( tag )
+        .then( event => {
+
+            if( !event ){
+                res.statusMessage = `There are no events with the provided 'tag=${tag}'.`;
+                return res.status( 404 ).end();
+            }
+
+            return res.status( 200 ).json( event );
+        })
+        .catch( err => {
+            res.statusMessage = err.message;
+            return res.status( 400 ).end();
+        });
+    });
+});
+
+app.get( '/event-manager/events-by-tag', ( req, res ) => {
+    let creatorId = req.query.creatorId;
+    let tag = req.query.tags;
+
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }    
+
+        if( !tag ){
+            res.statusMessage = "Please send the 'tag' as parameter.";
+            return res.status( 406 ).end();
+        }
+
+        if( !creatorId ){
+            res.statusMessage = "Please send the 'creatorId' as parameter.";
+            return res.status( 406 ).end();
+        }
+
+    Events
+        .getEventsByTag2( tag, creatorId )
         .then( event => {
 
             if( !event ){

@@ -172,6 +172,20 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
+    getEventsByTag2 : function( tags, id ){
+        return eventModel
+                .find( { tags : tags } )
+                .find( {$or:[{tags: tags, creator: id}, {tags: tags, private: false}]})
+                .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
+                .then( events => {
+                    return events;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                });
+    },
     getEventsByDate : function( date ){
         return eventModel
                 .find( { date : date} )
