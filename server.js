@@ -78,9 +78,10 @@ app.get( '/event-manager/events/:CreatorId', ( req, res ) => {
     });
 });
 
-app.get( '/event-manager/events-by-keyword/:keyword', ( req, res ) => {
-    const keyword = req.params.keyword;
-
+app.get( '/event-manager/events-by-keyword', ( req, res ) => {
+    let id = req.query.CreatorId;
+    let keyword = req.query.keyword;
+    
     const { sessiontoken } = req.headers;
 
     jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
@@ -95,7 +96,7 @@ app.get( '/event-manager/events-by-keyword/:keyword', ( req, res ) => {
         }
 
     Events
-        .getEventsByKeyword( keyword )
+        .getEventsByKeyword2( keyword, id )
         .then( event => {
             if( !event ){
                 res.statusMessage = `There are no events with the provided 'keyword=${keyword}'.`;

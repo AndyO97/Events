@@ -197,6 +197,19 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
+    getEventsByKeyword : function( keyword, id ){
+        return eventModel
+                .find( {$and:[{$or:[{title: keyword},{tags: keyword}]}, {$or:[{creator: id},{private: false}]}]} )
+                .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
+                .then( events => {
+                    return events;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                });
+    },
     getEventsByProximity : function( lat, lng, dist ){
         lat = Number(lat);
         lng = Number(lng);

@@ -158,7 +158,8 @@ function getEventsFetch(){
 }
 
 function getEventsFetchKeyword(keyword){
-    let url = `/event-manager/events-by-keyword/${keyword}`;
+    let id = localStorage.getItem('id');
+    let url = `/event-manager/events-by-keyword?CreatorId=${keyword}&keyword=${id}`;
 
     let settings = {
         method : 'GET',
