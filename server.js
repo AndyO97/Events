@@ -304,7 +304,7 @@ app.get( '/event-manager/events-by-tag', ( req, res ) => {
         }
 
     Events
-        .getEventsByTag2( tag, creatorId )
+        .getEventsByTag( tag )
         .then( event => {
 
             if( !event ){
