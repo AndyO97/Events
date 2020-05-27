@@ -342,6 +342,8 @@ function getEventsFetchTag(tag){
             throw new Error( response.statusText );
         })
         .then( responseJSON => {
+            console.log("Tag Results:");
+            console.log(responseJSON);
             results.innerHTML = "";
             infoWindows = [];
             for(let i=0; i<responseJSON.length; i++){
@@ -669,7 +671,7 @@ function getUserDataAndFavorites(user){
         .then( responseJSON => {
             console.log("El json:");
             console.log(responseJSON);
-            getEventsFetchTag( responseJSON[0].tag );
+            getEventsFetchTag( responseJSON[0].tag[0] );
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
