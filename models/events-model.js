@@ -201,7 +201,7 @@ const Events = {
     },
     getEventsBetweenDates : function( date1, date2 ){
         return eventModel
-                .find( {$or:[{date : {$gte: date1, $lt: date2}, creator: id}, {date : {$gte: date1, $lt: date2}, private: false}]})
+                .find( { date : {$gte: date1, $lt: date2} } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
@@ -214,7 +214,7 @@ const Events = {
     },
     getEventsBetweenDates2 : function( date1, date2, id ){
         return eventModel
-                .find( { date : {$gte: date1, $lt: date2} } )
+                .find( {$or:[{date : {$gte: date1, $lt: date2}, creator: id}, {date : {$gte: date1, $lt: date2}, private: false}]})
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
