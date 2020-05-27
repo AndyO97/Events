@@ -81,7 +81,7 @@ app.get( '/event-manager/events/:CreatorId', ( req, res ) => {
 app.get( '/event-manager/events-by-keyword', ( req, res ) => {
     let creatorId = req.query.creatorId;
     let keyword = req.query.keyword;
-    /*
+    
     const { sessiontoken } = req.headers;
     
     jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
@@ -89,7 +89,7 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
             res.statusMessage = "Session expired!";
             return res.status( 400 ).end();
         }
-    */
+    
         if( !creatorId ){
             res.statusMessage = "Please send the 'creatorId' as parameter.";
             return res.status( 406 ).end();
@@ -113,7 +113,7 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
-    //});
+    });
 });
 
 app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
