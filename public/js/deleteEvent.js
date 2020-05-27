@@ -61,7 +61,7 @@ function userDeleteFetch( title, id ){
                 results.innerHTML += `<h3> Title: ${responseJSON.title} </h3>`;
                 results.innerHTML += `<div> Description: ${responseJSON.description} </div>`;
                 for(let j=0; j<responseJSON.pictures.length; j++){
-                    results.innerHTML += `<img src="${responseJSON.pictures[j]}" alt="Picture ${j+1} of event: ${responseJSON.title}"/>`;
+                    results.innerHTML += `<img src="${responseJSON.pictures[j]}" alt="Picture ${j+1} of event ${responseJSON.title}" width="400" height="200">`;
                 }
                 results.innerHTML += `<div> Tags:`;
                 for(let k=0; k<responseJSON.tags.length; k++){

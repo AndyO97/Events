@@ -40,7 +40,7 @@ function userRegisterFetch( username, password, email, firstName, lastName, age,
         .then( responseJSON => {
             alert("Account created succesfully");
             localStorage.setItem( 'token', responseJSON.token );
-            window.location.href = "/pages/home.html";
+            window.location.href = "./../index.html";
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
