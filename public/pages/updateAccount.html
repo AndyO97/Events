@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>My account</title>
-        <link href="./../css/updateAccount.css" rel="stylesheet" type="text/css" />
+        <link href="./../css/event.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
     </head>
     <body>
@@ -36,48 +36,58 @@
             </div>
         </div> 
       </div>
-        <h1>Update your profile</h1>
-        <p>Only add the information that you want to update.</p>
-        <div class="container">
-            <section id="content">
-                <form action="register" class="register-form">
-                    <h1>Update Profile Form</h1>
-                    <div>
-                        <input type="text" placeholder="Username" id="userUsername" />
-                    </div>
-                    <div>
-                        <input type="password" placeholder="Password" id="userPassword" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Email" id="userEmail" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="First name" id="userFirstName" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Last name" id="userLastName" />
-                    </div>
-                    <div>
-                        <input type="number" placeholder="age" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
-                    </div>
-                    <div>
-                        <input type="text" placeholder="One tag that you like (you can add more later)" id="userTags" />
-                    </div>
-                    <div>
-                        <button type="submit">
-                        Update
-                        </button>
-                    </div>
-                </form><!-- form -->
-                
-            </section><!-- content -->
-        </div><!-- container -->
-        <p>The previous information we had about you is the following: </p>
-        <section class="results">
+      <main>
+        <div class="mainContainer">
+            <div class="leftSide inbox">
+                <h1>Update your profile</h1>
+                <p>Only add the information that you want to update.</p>
+                <div class="container">
+                    <section id="content">
+                        <form action="register" class="register-form">
+                            <h1>Update Profile Form</h1>
+                            <div>
+                                <input type="text" placeholder="Username" id="userUsername" />
+                            </div>
+                            <div>
+                                <input type="password" placeholder="Password" id="userPassword" />
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Email" id="userEmail" />
+                            </div>
+                            <div>
+                                <input type="text" placeholder="First name" id="userFirstName" />
+                            </div>
+                            <div>
+                                <input type="text" placeholder="Last name" id="userLastName" />
+                            </div>
+                            <div>
+                                <input type="number" placeholder="age" id="userAge" min="1" max=200 oninput="validity.valid||(value='');" />
+                            </div>
+                            <div>
+                                <input type="text" placeholder="One tag that you like (you can add more later)" id="userTags" />
+                            </div>
+                            <div>
+                                <button type="submit">
+                                Update
+                                </button>
+                            </div>
+                        </form><!-- form -->
+                        
+                    </section><!-- content -->
+                </div><!-- container -->
+            </div>
+            <div class="middle inbox">
+                <p>The location stored is: </p>
+                <div id="map"></div>
+            </div>
+            <div class="rightSide inbox">
+                <p>The previous information we had about you is the following: </p>
+                <section class="results">
 
-        </section>
-        <p>The location stored is: </p>
-        <div id="map"></div>
+                </section>
+            </div>
+        </div>
+      </main>
         <script src="./../js/updateAccount.js"></script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
