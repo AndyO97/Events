@@ -131,7 +131,12 @@ function userUpdateFetch( username2, username, password, email, firstName, lastN
             console.log("El json:");
             console.log(responseJSON);
             //return res.status( 200 ).json( responseJSON );
-
+                if(username){
+                    getUserData(username);
+                }
+                else{
+                    getUserData(username2);
+                }
             /*
             results.innerHTML = "";
             
@@ -201,12 +206,12 @@ function watchUpdateForm(){
                 //.then(result => {
                     console.log("Dentro de la 2da funcion");
                     //console.log(result);
-                    if(username){
-                        getUserData(username);
-                    }
-                    else{
-                        getUserData(username2);
-                    }
+                    //if(username){
+                    //    getUserData(username);
+                    //}
+                    //else{
+                    //    getUserData(username2);
+                    //}
                 //});    
         console.log("User Updated");
         //results.innerHTML += `<div> Your information is being updated... </div>`;
