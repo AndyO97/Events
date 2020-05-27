@@ -79,11 +79,11 @@ app.get( '/event-manager/events/:CreatorId', ( req, res ) => {
 });
 
 app.get( '/event-manager/events-by-keyword', ( req, res ) => {
-    let id = req.query.CreatorId;
+    let id = req.query.creatorId;
     let keyword = req.query.keyword;
-    
-    const { sessiontoken } = req.headers;
     /*
+    const { sessiontoken } = req.headers;
+    
     jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
         if( err ){
             res.statusMessage = "Session expired!";
