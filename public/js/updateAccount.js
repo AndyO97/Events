@@ -218,6 +218,11 @@ function watchUpdateForm(){
     })
 }
 
+function getUserFetch(){
+    let username = localStorage.getItem( 'username' );
+    getUserData(username);
+}
+
 function validateUser(){
     let url = "/event-manager/validate-user";
 let settings = {
