@@ -67,7 +67,7 @@ app.get( '/event-manager/events/:CreatorId', ( req, res ) => {
             return res.status( 400 ).end();
         }
     Events
-        .getAllEvents(id)
+        .getAllEvents2(id)
         .then( events => {
             return res.status( 200 ).json( events );
         })
