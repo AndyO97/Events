@@ -100,7 +100,7 @@ const Users = {
                 .populate('eventsInvited', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .populate('favorites', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .then( user => {
-                    return user
+                    user
                     .populate('creator', ['username', 'email','firstName', 'lastName'] )
                     .populate('participants', ['username', 'email','firstName', 'lastName'] )
                     .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
