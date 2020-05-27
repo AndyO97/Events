@@ -77,7 +77,7 @@ window.onclick = function(e) {
 //for events
 
 function getEventsFetchUser(username){
-    let url = `/event-manager/user-info/${username}`;
+    let url = `/event-manager/user-info2/${username}`;
 
     let settings = {
         method : 'GET',
