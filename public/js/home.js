@@ -407,7 +407,8 @@ function getEventsFetchTag(tag){
 }
 
 function getEventsFetchProximity(lat, lng, dist){
-    let url = `/event-manager/events-by-proximity?lat=${lat}&lng=${lng}&dist=${dist}`;
+    let id = localStorage.getItem('id');
+    let url = `/event-manager/events-by-proximity?lat=${lat}&lng=${lng}&dist=${dist}&creatorId=${id}`;
 
     let settings = {
         method : 'GET',

@@ -252,6 +252,30 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
+    getEventsByProximity2 : function( lat, lng, dist, id ){
+        lat = Number(lat);
+        lng = Number(lng);
+        dist = Number(dist)/111; //an aprox number
+        let coordinates1 = [lat+dist, lng+dist];
+        let coordinates2 = [lat, lng+dist];
+        let coordinates3 = [lat+dist, lng];
+        let coordinates4 = [lat-dist, lng-dist];
+
+        return eventModel
+                //.find( { 'location.coordinates[0]' : {$gte: (lat-dist), $lt: (lat+dist) }, 'location.coordinates[1]' : {$gte: (lng-dist), $lt: (lng+dist)}} )
+                //.find( { 'location.coordinates[0]' : lat, 'location.coordinates[1]' : long} )
+                .find( {$or:[{"location.coordinates" :{$lt: coordinates1, $lt: coordinates2, $lt: coordinates3, $gte: coordinates4}, creator: id}, {"location.coordinates" :{$lt: coordinates1, $lt: coordinates2, $lt: coordinates3, $gte: coordinates4}, private: false}]} )
+                
+                .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                .populate('comments', ['title', 'content','username', 'user', 'date'] )
+                .then( events => {
+                    return events;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                });
+    },
     getEventsByProximity : function( lat, lng, dist ){
         lat = Number(lat);
         lng = Number(lng);

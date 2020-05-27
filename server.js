@@ -326,6 +326,7 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
     let lat = req.query.lat;
     let lng = req.query.lng;
     let dist = req.query.dist;
+    let creatorId = req.query.creatorId;
 
     const { sessiontoken } = req.headers;
 
@@ -347,10 +348,14 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
         res.statusMessage = "Please send the 'longitude' as parameter.";
         return res.status( 406 ).end();
     }
+    if( !creatorId ){
+        res.statusMessage = "Please send the 'creatorId' as parameter.";
+        return res.status( 406 ).end();
+    }
     
 
     Events
-        .getEventsByProximity( lat, lng, dist )
+        .getEventsByProximity2( lat, lng, dist, creatorId )
         .then( event => {
 
             if( !event ){
