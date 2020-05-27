@@ -647,6 +647,40 @@ function watchGetEventsDatesForm(){
     })
 }
 
+function getUserDataAndFavorites(user){
+    let url = `/event-manager/user-info/${user}`;
+
+    let settings = {
+        method : 'GET',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+    }
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            console.log("El json:");
+            console.log(responseJSON);
+            getEventsFetchTag( responseJSON[0].tag );
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
+
+watchGetEventsTagFormOnLoad(){
+    let user = localStorage.getItem('username');
+    getUserDataAndFavorites(user)
+}
+
 function init(){
     watchGetEventsKeywordForm();
     watchGetEventsTitleForm();
@@ -654,6 +688,7 @@ function init(){
     watchGetEventsDatesForm();
     watchGetEventsForm();
     watchGetEventsProximityForm();
+    watchGetEventsTagFormOnLoad();
     //getEvent();
 }
 
