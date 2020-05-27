@@ -1,0 +1,146 @@
+* {
+  box-sizing: border-box;
+}
+
+ #map {
+    border: 2px solid black;
+    width: 100%;
+    height: 200px;
+    background-color: grey;
+ }
+
+ body{
+  text-align: center;
+  background-image: url('./../images/background.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+  color: #333;
+}
+.maincontainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.all-event-form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.leftSide{
+  flex-direction: column;
+}
+.rightSide{
+  flex-direction: column;
+}
+
+ .navbar {
+   display: flex;
+   justify-content: space-evenly;
+   overflow: hidden;
+   background-color: #333;
+   font-family: Arial, Helvetica, sans-serif;
+ }
+ 
+ .navbar a {
+   float: left;
+   font-size: 16px;
+   color: white;
+   text-align: center;
+   padding: 14px 16px;
+   text-decoration: none;
+ }
+ 
+ .dropdown {
+   float: left;
+   overflow: hidden;
+ }
+ 
+ .dropdown .dropbtn-Events {
+   cursor: pointer;
+   font-size: 16px;  
+   border: none;
+   outline: none;
+   color: white;
+   padding: 14px 16px;
+   background-color: inherit;
+   font-family: inherit;
+   margin: 0;
+ }
+ 
+ 
+ .navbar a:hover, .dropdown:hover .dropbtn-Events, .dropbtn-Events:focus {
+   background-color: red;
+ }
+
+ .dropdown .dropbtn-Account {
+   cursor: pointer;
+   font-size: 16px;  
+   border: none;
+   outline: none;
+   color: white;
+   padding: 14px 16px;
+   background-color: inherit;
+   font-family: inherit;
+   margin: 0;
+ }
+ 
+ .navbar a:hover, .dropdown:hover .dropbtn-Account, .dropbtn-Account:focus {
+   background-color: red;
+ }
+ 
+ .dropdown-content {
+   display: none;
+   position: absolute;
+   background-color: #f9f9f9;
+   min-width: 160px;
+   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+   z-index: 1;
+ }
+ 
+ .dropdown-content a {
+   float: none;
+   color: black;
+   padding: 12px 16px;
+   text-decoration: none;
+   display: block;
+   text-align: left;
+ }
+ 
+ .dropdown-content a:hover {
+   background-color: #ddd;
+ }
+ 
+ .show {
+   display: block;
+ }
+
+ @media (min-width:991px){
+
+  .mainContainer{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: flex-start;
+    flex-wrap: wrap;
+  }
+
+  .leftSide{
+    width: 50%;
+  }
+  .rightSide{
+    width: 50%; 
+  }
+  #map {
+    border: 2px solid black;
+    width: 100%;
+    height: 600px;
+    background-color: grey;
+ }
+}
