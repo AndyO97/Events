@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>My account</title>
-        <link href="./../css/account.css" rel="stylesheet" type="text/css" />
+        <link href="./../css/myEvents.css" rel="stylesheet" type="text/css" />
         <script src ="./../js/general.js"></script>
     </head>
     <body onload="watchGetUserDataForm()">
@@ -36,13 +36,21 @@
             </div>
         </div> 
       </div>
-        <h1>My profile</h1>
-        <p>This is the information that we have in our database:</p>
-        <section class="results">
+        <main>
+            <div class="mainContainer">
+                <div class="leftSide inbox">
+                    <h1>My profile</h1>
+                    <p>This is the information that we have in our database:</p>
+                    <section class="results">
 
-        </section>
-        <p>The location stored is: </p>
-        <div id="map"></div>
+                    </section>
+                    <p>The location stored is: </p>
+                </div>
+                <div class="rightSide inbox">
+                    <div id="map"></div>
+                </div>
+            </div>
+        </main>
         <script src="./../js/account.js"></script>
         <script async defer
                 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB_0RhAelM884DrtyaY3NX5FkmOZaODwIc&callback=initMap"
