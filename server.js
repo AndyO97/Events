@@ -90,7 +90,7 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
             return res.status( 400 ).end();
         }
     */
-        if( !CreatorId ){
+        if( !creatorId ){
             res.statusMessage = "Please send the 'keyword' as parameter.";
             return res.status( 406 ).end();
         }
