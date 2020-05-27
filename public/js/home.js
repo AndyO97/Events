@@ -327,7 +327,7 @@ function reply_click(clicked_id, owned)
 
 function getEventsFetchTag(tag){
     let id = localStorage.getItem('id');
-    let url = `/event-manager/events-by-tag/tags=${tag}&creatorId=${id}`;
+    let url = `/event-manager/events-by-tag?tags=${tag}&creatorId=${id}`;
 
     let settings = {
         method : 'GET',
