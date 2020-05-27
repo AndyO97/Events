@@ -89,7 +89,12 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
             res.statusMessage = "Session expired!";
             return res.status( 400 ).end();
         }
-    
+        
+        if( !CreatorId ){
+            res.statusMessage = "Please send the 'keyword' as parameter.";
+            return res.status( 406 ).end();
+        }
+
         if( !keyword ){
             res.statusMessage = "Please send the 'keyword' as parameter.";
             return res.status( 406 ).end();
