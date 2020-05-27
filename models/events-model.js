@@ -175,7 +175,7 @@ const Events = {
     getEventsByTag2 : function( tags, id ){
         return eventModel
                 .find( { tags : tags } )
-                .find( {$or:[{tags: { $elemMatch: tags }, creator: id}, {tags: { $elemMatch: tags }, private: false}]})
+                .find( {$or:[{tags: tags, creator: id}, {tags: tags, private: false}]})
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
