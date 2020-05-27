@@ -199,8 +199,7 @@ const Events = {
     },
     getEventsByKeyword2 : function( keyword, id ){
         return eventModel
-                .find( {$or:[{title: keyword},{tags: keyword}]} )
-                //.find( {$or:[{title: keyword, creator: id}, {title: keyword, private: false}, {tags: keyword, creator: id}, {tags: keyword, private: false}]})
+                .find( {$or:[{title: keyword, creator: id}, {title: keyword, private: false}, {tags: keyword, creator: id}, {tags: keyword, private: false}]})
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )

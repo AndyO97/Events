@@ -91,7 +91,7 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
         }
     */
         if( !creatorId ){
-            res.statusMessage = "Please send the 'keyword' as parameter.";
+            res.statusMessage = "Please send the 'creatorId' as parameter.";
             return res.status( 406 ).end();
         }
 
@@ -101,8 +101,7 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
         }
 
     Events
-        //.getEventsByKeyword2( keyword, id )
-        .getEventsByKeyword( keyword)
+        .getEventsByKeyword2( keyword, id )
         .then( event => {
             if( !event ){
                 res.statusMessage = `There are no events with the provided 'keyword=${keyword}'.`;
