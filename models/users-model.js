@@ -93,23 +93,17 @@ const Users = {
                     throw new Error( err.message );
                 }); 
     },
-    getUserByUsername2 : function( username ){
+    getUserByUsername3 : function( username ){
         return userModel
                 .find( { username : username } )
                 .populate('eventsOwned', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .populate('eventsInvited', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
                 .populate('favorites', ['title', 'description','pictures', 'tags', 'date', 'private', 'location', 'creator', 'participants', 'comments'] )
+                .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
                 .then( user => {
-                    user
-                    .populate('creator', ['username', 'email','firstName', 'lastName'] )
-                    .populate('participants', ['username', 'email','firstName', 'lastName'] )
-                    .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
-                    .then( user => {
-                        return user;
-                    })
-                    .catch( err => {
-                        throw new Error( err.message );
-                    }); 
+                    return user;
                 })
                 .catch( err => {
                     throw new Error( err.message );

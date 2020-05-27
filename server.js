@@ -723,7 +723,7 @@ app.get( '/event-manager/user-info2/:username', ( req, res ) => {
             return res.status( 400 ).end();
         }
         Users
-        .getUserByUsername(username)
+        .getUserByUsername3(username)
         .then( user => {
             return res.status( 200 ).json( user );
         })
