@@ -485,7 +485,8 @@ function getEventsFetchProximity(lat, lng, dist){
 }
 
 function getEventsFetchDates(date1, date2 ){
-    let url = `/event-manager/events-by-dates?date1=${date1}&date2=${date2}`;
+    let id = localStorage.getItem('id');
+    let url = `/event-manager/events-by-dates?date1=${date1}&date2=${date2}&creatorId=${id}`;
 
     let settings = {
         method : 'GET',

@@ -370,6 +370,7 @@ app.get( '/event-manager/events-by-proximity', ( req, res ) => {
 app.get( '/event-manager/events-by-dates', ( req, res ) => {
     let date1 = req.query.date1;
     let date2 = req.query.date2;
+    let creatorId = req.query.creatorId;
 
     const { sessiontoken } = req.headers;
 
@@ -387,9 +388,13 @@ app.get( '/event-manager/events-by-dates', ( req, res ) => {
         res.statusMessage = "Please send the 'date2' as parameter.";
         return res.status( 406 ).end();
     }
+    if( !creatorId ){
+        res.statusMessage = "Please send the 'creatorId' as parameter.";
+        return res.status( 406 ).end();
+    }
 
     Events
-        .getEventsBetweenDates( date1, date2 )
+        .getEventsBetweenDates2( date1, date2, creatorId )
         .then( event => {
 
             if( !event ){
