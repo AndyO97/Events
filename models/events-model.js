@@ -145,9 +145,23 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
-    getEventsByTag : function( tag ){
+    getEventsByTitle2 : function( title, id ){
         return eventModel
-                .find( { tags : tag } )
+                .find( {$or:[{title: title, creator: id}, {title: title, private: false}]})
+                .populate('creator', ['username', 'email','firstName', 'lastName'] )
+                .populate('participants', ['username', 'email','firstName', 'lastName'] )
+                .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
+                //.populate('user', ['username'] )
+                .then( events => {
+                    return events;
+                })
+                .catch( err => {
+                    throw new Error( err.message );
+                });
+    },
+    getEventsByTag : function( tags ){
+        return eventModel
+                .find( { tags : tags } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )

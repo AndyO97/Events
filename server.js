@@ -116,8 +116,9 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
     });
 });
 
-app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
-    const title = req.params.title;
+app.get( '/event-manager/events-by-title', ( req, res ) => {
+    let creatorId = req.query.creatorId;
+    let title = req.query.title;
 
     const { sessiontoken } = req.headers;
 
@@ -130,9 +131,13 @@ app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
             res.statusMessage = "Please send the 'title' as parameter.";
             return res.status( 406 ).end();
         }
+        if( !creatorId ){
+            res.statusMessage = "Please send the 'creatorId' as parameter.";
+            return res.status( 406 ).end();
+        }
 
     Events
-        .getEventsByTitle( title )
+        .getEventsByTitle2( title, creatorId )
         .then( event => {
             if( !event ){
                 res.statusMessage = `There are no events with the provided 'title=${title}'.`;
