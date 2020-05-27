@@ -101,7 +101,7 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
         }
 
     Events
-        .getEventsByKeyword2( keyword, id )
+        .getEventsByKeyword2( keyword, creatorId )
         .then( event => {
             if( !event ){
                 res.statusMessage = `There are no events with the provided 'keyword=${keyword}'.`;
