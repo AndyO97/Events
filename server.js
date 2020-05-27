@@ -83,13 +83,13 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
     let keyword = req.query.keyword;
     
     const { sessiontoken } = req.headers;
-
+    /*
     jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
         if( err ){
             res.statusMessage = "Session expired!";
             return res.status( 400 ).end();
         }
-        
+    */
         if( !CreatorId ){
             res.statusMessage = "Please send the 'keyword' as parameter.";
             return res.status( 406 ).end();
@@ -113,7 +113,7 @@ app.get( '/event-manager/events-by-keyword', ( req, res ) => {
             res.statusMessage = err.message;
             return res.status( 400 ).end();
         });
-    });
+    //});
 });
 
 app.get( '/event-manager/events-by-title/:title', ( req, res ) => {
