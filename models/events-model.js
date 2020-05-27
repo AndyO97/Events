@@ -159,9 +159,9 @@ const Events = {
                     throw new Error( err.message );
                 });
     },
-    getEventsByTag : function( tags ){
+    getEventsByTag : function( tag ){
         return eventModel
-                .find( { tags : tags } )
+                .find( { tags : tag } )
                 .populate('creator', ['username', 'email','firstName', 'lastName'] )
                 .populate('participants', ['username', 'email','firstName', 'lastName'] )
                 .populate('comments', ['title', 'content', 'username', 'user', 'date'] )
