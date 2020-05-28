@@ -11,7 +11,11 @@ search by date interval and search by proximity. After a search is done and afte
 "see event" that appears below each event information. It is important to mention that all this searches will only be valid for public events or private events owned by the user. Private events can only be accessed by other users if they are invited and can be found in "My events section."</p>
 <h3>Events</h3>
 <p>Once the users enters an specific event, he or she will be able to add comments, and if he or she is the owner, he or she will be able to invite other users.
-The top menu on the section "Events" also offers 5 options to interact with events: "View my events", "View my favorites", "Create an event", "Modify an event" and "Delete an event". In a similar fashion as accounts, events can be created freely. </p>
+The top menu on the section "Events" also offers 5 options to interact with events: "View my events", "View my favorites", "Create an event", "Modify an event" and "Delete an event". In a similar fashion as accounts, events can be created freely, and they can be deleted or modified at any time. If the person that should be invited doesn't have an account, the email address can be introduced and a email will be send with some information of the event. </p>
+<h3>About us</h3>
+<p>This a simple page that relates the origin of this project </p>
+<h3>Contact us</h3>
+<p>In this page users can send any inquery, comment or report by filling the information and a email will be directly sent to an email account dedicated for the webpage. </p>
 <h2>Back End</h2>
 <p>The back End of this webpage is composed of three databases: one for the users, other for the events 
 and one for the comments. An user can have multiple events and events also have comments.</p>
