@@ -401,7 +401,7 @@ function addParticipantFetch(participants, event, username){
 }
 
 function userUpdateFetch( username, eventsInvited ){
-    let url = `/event-manager/update-user/${username}`;
+    let url = `/event-manager/update-user2/${username}`;
 
     let data = {
         eventsInvited: eventsInvited

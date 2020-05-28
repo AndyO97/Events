@@ -892,13 +892,13 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
     let username2 = req.params.username;
     const { sessiontoken } = req.headers;
 
-    /*
+    
     jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
         if( err ){
             res.statusMessage = "Session expired!";
             return res.status( 400 ).end();
         }
-        */
+        
         if( !(username || password || email || firstName || lastName || age ||tags || location || eventsOwned || eventsInvited || favorites) ){
             res.statusMessage = "At least an element should be send to be modified.";
             return res.status( 406 ).end();
@@ -990,8 +990,75 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
             return res.status( 400 ).end();
         });            
                 
-    //});
+    });
 
+});
+
+app.patch( '/event-manager/update-user2/:username', jsonParser, ( req, res ) => {
+    var { username, email, firstName, lastName, age, tags, location, eventsOwned, eventsInvited, favorites } = req.body;
+    let IsPassword = false;
+    let username2 = req.params.username;
+    const { sessiontoken } = req.headers;
+
+    jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
+        if( err ){
+            res.statusMessage = "Session expired!";
+            return res.status( 400 ).end();
+        }
+        if( !(username || email || firstName || lastName || age ||tags || location || eventsOwned || eventsInvited || favorites) ){
+            res.statusMessage = "At least an element should be send to be modified.";
+            return res.status( 406 ).end();
+        }
+
+        Users
+                .getUserByUsername2( username2 )
+                .then( result => {
+                    if( !result){
+                        res.statusMessage = `There are no users with the provided 'username=${username2}'.`+
+                                            result.errmsg;
+                        return res.status( 404 ).end();
+                    }
+
+                    if(username){
+                        result.username = username;
+                    }
+                    if(email){
+                        result.email = email;
+                    }
+                    if(firstName){
+                        result.firstName = firstName;
+                    }
+                    if(lastName){
+                        result.lastName = lastName;
+                    }
+                    if(age){
+                        result.age = age;
+                    }
+                    if(tags){
+                        result.tags.push(tags);
+                    }
+                    if(location){
+                        result.location = location;
+                    }
+                    if(eventsOwned){
+                        result.eventsOwned.push(eventsOwned);
+                    }
+                    if(eventsInvited){
+                        result.eventsInvited.push(eventsInvited);
+                    }
+                    if(favorites){
+                        result.favorites.push(favorites);
+                    }
+                    result.save();
+                    console.log(result);
+                        
+                    return res.status( 200 ).json( result );
+                })
+                .catch( err => {
+                    res.statusMessage = err.message;
+                    return res.status( 404 ).end();
+                });                             
+    });
 });
 
 app.delete( '/event-manager/delete-user/:username', ( req, res ) => {
