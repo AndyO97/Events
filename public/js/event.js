@@ -404,7 +404,7 @@ function userUpdateFetch( username, eventsInvited ){
     let url = `/event-manager/update-user/${username}`;
 
     let data = {
-        eventsInvited
+        eventsInvited: eventsInvited
     }
 
     let settings = {

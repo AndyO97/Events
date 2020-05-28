@@ -892,12 +892,13 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
     let username2 = req.params.username;
     const { sessiontoken } = req.headers;
 
+    /*
     jsonwebtoken.verify( sessiontoken, TOKEN, ( err, decoded ) => {
         if( err ){
             res.statusMessage = "Session expired!";
             return res.status( 400 ).end();
         }
-
+        */
         if( !(username || password || email || firstName || lastName || age ||tags || location || eventsOwned || eventsInvited || favorites) ){
             res.statusMessage = "At least an element should be send to be modified.";
             return res.status( 406 ).end();
@@ -989,7 +990,7 @@ app.patch( '/event-manager/update-user/:username', jsonParser, ( req, res ) => {
             return res.status( 400 ).end();
         });            
                 
-    });
+    //});
 
 });
 
