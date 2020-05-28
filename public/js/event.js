@@ -352,7 +352,7 @@ function getUserIdFetch(user){
                 let event = localStorage.getItem( 'EventId' );
                 console.log(responseJSON[0]._id);
                 console.log("Adding participant");
-                addParticipantFetch(responseJSON[0]._id, event);
+                addParticipantFetch(responseJSON[0]._id, event, user);
             }
         })
         .catch( err => {
@@ -360,7 +360,7 @@ function getUserIdFetch(user){
         });
 }
 
-function addParticipantFetch(participants, event){
+function addParticipantFetch(participants, event, username){
     let url = `/event-manager/update-event/${event}`;
 
     let data = {
@@ -382,6 +382,7 @@ function addParticipantFetch(participants, event){
     fetch( url, settings )
         .then( response => {
             if( response.ok ){
+
                 return response.json();
             }
             throw new Error( response.statusText );
@@ -392,10 +393,48 @@ function addParticipantFetch(participants, event){
             console.log(responseJSON);
             //return res.status( 200 ).json( responseJSON )
             //function to patch event
+            userUpdateFetch( username, event);
+        })
+        .catch( err => {
+            results.innerHTML = `<div> ${err.message} </div>`;
+        });
+}
+
+function userUpdateFetch( username, eventsInvited ){
+    let url = `/event-manager/update-user/${username}`;
+
+    let data = {
+        eventsInvited
+    }
+
+    let settings = {
+        method : 'PATCH',
+        headers : {
+            sessiontoken : localStorage.getItem( 'token' ),
+            'Content-Type' : 'application/json'
+        },
+        body : JSON.stringify( data )
+    }
+
+    let results = document.querySelector( '.results' );
+
+    fetch( url, settings )
+        .then( response => {
+            if( response.ok ){
+                return response.json();
+            }
+            throw new Error( response.statusText );
+        })
+        .then( responseJSON => {
+            
+            console.log("El json del user actualizado:");
+            console.log(responseJSON);
+            //return res.status( 200 ).json( responseJSON );
             let title = localStorage.getItem( 'event');
             let owned = localStorage.getItem( 'owned');
         
             getEventsFetchTitle( title, owned );
+                
         })
         .catch( err => {
             results.innerHTML = `<div> ${err.message} </div>`;
